@@ -5,7 +5,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.bas
 
 interface MainContract {
 
-    interface View : BaseView<Presenter>
+    interface View : BaseView
 
     interface Presenter : BasePresenter
 }

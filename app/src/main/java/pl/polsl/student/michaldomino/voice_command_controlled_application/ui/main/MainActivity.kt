@@ -12,7 +12,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.mai
 
 class MainActivity : AppCompatActivity(), View {
 
-    override lateinit var presenter: Presenter
+    private lateinit var presenter: Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
