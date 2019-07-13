@@ -7,5 +7,7 @@ interface MainContract {
 
     interface View : BaseView
 
-    interface Presenter : BasePresenter
+    interface Presenter : BasePresenter {
+        fun a()
+    }
 }
