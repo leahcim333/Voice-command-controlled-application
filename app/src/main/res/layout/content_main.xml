@@ -15,7 +15,6 @@
             android:orientation="vertical">
 
         <ScrollView
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/clickableScreenView">
@@ -27,8 +26,8 @@
                     android:orientation="vertical">
 
             </LinearLayout>
-        </ScrollView>
 
+        </ScrollView>
 
     </LinearLayout>
 

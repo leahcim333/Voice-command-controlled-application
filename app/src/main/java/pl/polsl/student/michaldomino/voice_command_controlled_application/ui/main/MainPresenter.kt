@@ -7,10 +7,6 @@ class MainPresenter(_view: View) : Presenter {
 
     private var view: View = _view
 
-    override fun a() {
-        view.showMessage("abc")
-    }
-
     override fun onDoubleTap() {
         view.addRow("abc")
     }
