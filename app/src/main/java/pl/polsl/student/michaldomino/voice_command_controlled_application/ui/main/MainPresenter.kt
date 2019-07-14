@@ -10,4 +10,8 @@ class MainPresenter(_view: View) : Presenter {
     override fun a() {
         view.showMessage("abc")
     }
+
+    override fun onDoubleTap() {
+        view.addRow("abc")
+    }
 }

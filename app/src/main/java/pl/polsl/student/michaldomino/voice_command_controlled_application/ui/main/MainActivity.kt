@@ -10,11 +10,13 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.main.MainContract.Presenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.main.MainContract.View
 
 class MainActivity : AppCompatActivity(), View {
+
 
     private lateinit var presenter: Presenter
 
@@ -32,11 +34,8 @@ class MainActivity : AppCompatActivity(), View {
         }
 
         mDetector = GestureDetectorCompat(this, MyGestureListener(presenter))
-    }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        mDetector.onTouchEvent(event)
-        return super.onTouchEvent(event)
+        clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -59,6 +58,10 @@ class MainActivity : AppCompatActivity(), View {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    override fun addRow(text: CharSequence) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     private class MyGestureListener(_presenter: Presenter) : GestureDetector.SimpleOnGestureListener() {
 
         private var presenter: Presenter = _presenter
@@ -67,27 +70,6 @@ class MainActivity : AppCompatActivity(), View {
             presenter.a()
             return true
         }
-
-        override fun onLongPress(e: MotionEvent?) {
-            var f = 3
-        }
-//        override fun onDown(e: MotionEvent?): Boolean {
-//            return true
-//        }
-
-//        override fun onDown(event: MotionEvent): Boolean {
-//            return true
-//        }
-
-//        override fun onFling(
-//            event1: MotionEvent,
-//            event2: MotionEvent,
-//            velocityX: Float,
-//            velocityY: Float
-//        ): Boolean {
-//            Log.d(DEBUG_TAG, "onFling: $event1 $event2")
-//            return true
-//        }
     }
 
 }
