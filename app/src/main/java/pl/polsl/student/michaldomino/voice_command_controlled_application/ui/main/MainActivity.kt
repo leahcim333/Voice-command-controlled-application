@@ -1,6 +1,10 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.main
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GestureDetectorCompat
 import android.support.v7.app.AppCompatActivity
@@ -19,6 +23,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     private lateinit var mDetector: GestureDetectorCompat
 
     private lateinit var parentLinearLayout: LinearLayout
+
+    private val RESULT_CODE_SPEECH_RECOGNIZER = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +60,33 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
 
-    override fun showMessage(message: CharSequence) {
+    override fun showToast(message: String?) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun startCommandRecognizer() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+        )
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, resources.getString(R.string.command_recognizer_message))
+        try {
+            startActivityForResult(intent, RESULT_CODE_SPEECH_RECOGNIZER)
+        } catch (e: ActivityNotFoundException) {
+            showToast(e.message)
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && null != data) {
+            when (requestCode) {
+                RESULT_CODE_SPEECH_RECOGNIZER -> presenter.runCommand(data)
+                else -> {
+                }
+            }
+        }
     }
 
     override fun addRow(text: CharSequence) {
