@@ -10,12 +10,12 @@ class MainPresenter(_view: View) : Presenter {
     private var view: View = _view
 
     override fun onDoubleTap() {
-        view.addRow("abc")
+        view.startCommandRecognizer()
     }
 
     override fun runCommand(data: Intent) {
         val possibleMatches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
         val command = possibleMatches[0]
-
+        view.speak(command)
     }
 }
