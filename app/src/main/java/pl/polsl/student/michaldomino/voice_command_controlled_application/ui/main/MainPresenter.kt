@@ -18,4 +18,8 @@ class MainPresenter(private val view: MainContract.View) : MainContract.Presente
         val command = possibleMatches[0]
         view.speak(command)
     }
+
+    override fun getString(resId: Int): String {
+        return view.getString()
+    }
 }
