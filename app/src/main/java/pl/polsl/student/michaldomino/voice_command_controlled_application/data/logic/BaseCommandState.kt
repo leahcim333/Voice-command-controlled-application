@@ -1,3 +1,0 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic
-
-class BaseCommandState

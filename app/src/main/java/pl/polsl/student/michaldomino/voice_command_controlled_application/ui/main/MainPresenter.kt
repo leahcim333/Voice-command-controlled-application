@@ -2,12 +2,12 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.ma
 
 import android.content.Intent
 import android.speech.RecognizerIntent
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.main.MainContract.Presenter
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.main.MainContract.View
 
-class MainPresenter(_view: View) : Presenter {
+class MainPresenter(private val view: MainContract.View) : MainContract.Presenter {
 
-    private var view: View = _view
+    override fun start() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun onDoubleTap() {
         view.startCommandRecognizer()

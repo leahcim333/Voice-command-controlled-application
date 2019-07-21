@@ -111,7 +111,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         parentLinearLayout.addView(rowView, parentLinearLayout.childCount)
     }
 
-    private class MyGestureListener(val presenter: MainContract.Presenter) : GestureDetector.SimpleOnGestureListener() {
+    private class MyGestureListener(private val presenter: MainContract.Presenter) :
+        GestureDetector.SimpleOnGestureListener() {
 
         override fun onDoubleTap(e: MotionEvent?): Boolean {
             presenter.onDoubleTap()
