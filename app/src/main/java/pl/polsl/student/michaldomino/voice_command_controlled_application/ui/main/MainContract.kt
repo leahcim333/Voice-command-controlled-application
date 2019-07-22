@@ -7,8 +7,7 @@ interface MainContract {
 
     interface View : BaseView {
         fun addRow(text: CharSequence)
-        fun startCommandRecognizer()
-        fun speak(command: String?)
+
     }
 
     interface Presenter : BasePresenter

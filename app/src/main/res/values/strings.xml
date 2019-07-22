@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Voice command-controlled application</string>
-    <string name="action_settings">Settings</string>
-    <string name="command_recognizer_message">Tell command…</string>
-    <string name="add_element">add element</string>
     <string name="title_activity_shopping_list">ShoppingListActivity</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Commands-->
+    <!--===================================================================-->
+    <string name="add_element">add element</string>
+    <string name="edit_element">edit element</string>
+    <string name="tell_command">Tell command</string>
+    <!--===================================================================-->
 </resources>

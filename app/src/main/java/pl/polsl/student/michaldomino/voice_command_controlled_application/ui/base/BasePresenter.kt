@@ -7,11 +7,19 @@ interface BasePresenter {
 
     var currentState: BaseCommandState
 
+    val view: BaseView
+
+//    protected abstract val view : BaseView
+
     fun start()
 
-    fun getString(resId: Int): String
+    fun getString(resId: Int): String {
+        return view.getString(resId)
+    }
 
-    fun onDoubleTap()
+    fun onDoubleTap() {
+        view.startCommandRecognizer()
+    }
 
     fun runCommand(data: Intent)
 }

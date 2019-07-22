@@ -10,5 +10,8 @@ abstract class BaseCommandState(open val presenter: BasePresenter) {
 
     abstract fun performCommand(command: String?)
 
-    abstract fun setState(newState: BaseCommandState)
+    fun setState(newState: BaseCommandState) {
+
+
+    }
 }

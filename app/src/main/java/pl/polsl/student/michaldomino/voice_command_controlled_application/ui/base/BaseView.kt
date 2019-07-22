@@ -9,4 +9,6 @@ interface BaseView {
     fun showToast(message: String?)
 
     fun getString(resId: Int): String
+
+    fun startCommandRecognizer()
 }

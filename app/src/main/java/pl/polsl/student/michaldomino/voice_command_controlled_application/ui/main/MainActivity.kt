@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.speech.tts.TextToSpeech
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GestureDetectorCompat
 import android.support.v7.app.AppCompatActivity
@@ -20,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
-import java.util.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
@@ -29,8 +27,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     private lateinit var mDetector: GestureDetectorCompat
 
     private lateinit var parentLinearLayout: LinearLayout
-
-    private lateinit var mTTS: TextToSpeech
 
     private val RESULT_CODE_SPEECH_RECOGNIZER = 0
 
@@ -50,13 +46,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
 
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
-
-        mTTS = TextToSpeech(applicationContext, TextToSpeech.OnInitListener { status ->
-            if (status != TextToSpeech.ERROR) {
-                //if there is no error then set language
-                mTTS.language = Locale.getDefault()
-            }
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -85,7 +74,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
             RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
         )
-//        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, resources.getString(R.string.command_recognizer_message))
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, resources.getString(R.string.tell_command))
         try {
             startActivityForResult(intent, RESULT_CODE_SPEECH_RECOGNIZER)
         } catch (e: ActivityNotFoundException) {
@@ -102,10 +91,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 }
             }
         }
-    }
-
-    override fun speak(command: String?) {
-        mTTS.speak(command, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
     override fun addRow(text: CharSequence) {

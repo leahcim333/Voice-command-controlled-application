@@ -7,7 +7,7 @@ class ShoppingListInitialCS(override val presenter: BasePresenter) : BaseCommand
 
     override var responseMap: Map<Int, Unit> = mapOf(
         R.string.add_element to setState(AddShoppingListElementCS(presenter)),
-        R.string.command_recognizer_message to performCommand("abc")
+        R.string.edit_element to setState()
     )
 
     override fun setState(newState: BaseCommandState) {

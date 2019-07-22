@@ -10,7 +10,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.l
 //private val BaseView.applicationContext: Context
 //    get() {}
 
-class MainPresenter(private val view: MainContract.View) : MainContract.Presenter {
+class MainPresenter(override val view: MainContract.View) : MainContract.Presenter {
 
     override var currentState: BaseCommandState = InitialCS(this)
 
@@ -20,15 +20,10 @@ class MainPresenter(private val view: MainContract.View) : MainContract.Presente
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onDoubleTap() {
-//        view.addRow("abc")
-        view.startCommandRecognizer()
-    }
-
     override fun runCommand(data: Intent) {
         val possibleMatches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
         val command = possibleMatches[0]
-        view.speak(command)
+        speaker.speak(command)
     }
 
     override fun getString(resId: Int): String {
