@@ -19,7 +19,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.gesture_listener.CommandActivatorGestureListener
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
 import java.util.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
             RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
         )
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, resources.getString(R.string.command_recognizer_message))
+//        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, resources.getString(R.string.command_recognizer_message))
         try {
             startActivityForResult(intent, RESULT_CODE_SPEECH_RECOGNIZER)
         } catch (e: ActivityNotFoundException) {

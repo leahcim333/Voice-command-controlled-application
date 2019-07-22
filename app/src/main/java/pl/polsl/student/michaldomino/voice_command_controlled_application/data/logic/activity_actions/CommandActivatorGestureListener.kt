@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.gesture_listener
+package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions
 
 import android.view.GestureDetector
 import android.view.MotionEvent
