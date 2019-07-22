@@ -1,15 +1,13 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base
 
 import android.content.Intent
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.BaseCommandState
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.BaseCommandState as BaseCommandState1
 
 interface BasePresenter {
 
-    var currentState: BaseCommandState
-
     val view: BaseView
 
-//    protected abstract val view : BaseView
+    var currentState: BaseCommandState1
 
     fun start()
 

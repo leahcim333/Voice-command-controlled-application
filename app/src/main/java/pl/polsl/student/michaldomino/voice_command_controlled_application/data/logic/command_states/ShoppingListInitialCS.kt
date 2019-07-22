@@ -1,22 +1,25 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states
 
-import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.Command
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 
 class ShoppingListInitialCS(override val presenter: BasePresenter) : BaseCommandState(presenter) {
 
-    override var responseMap: Map<Int, Unit> = mapOf(
-        R.string.add_element to setState(AddShoppingListElementCS(presenter)),
-        R.string.edit_element to setState()
-    )
+    override fun performCommand(userInput: String) {
+        val command = Command(userInput)
+        when {
+            command.similarTo("abc") -> {
 
-    override fun setState(newState: BaseCommandState) {
-        val a = newState
+            }
+            command.similarTo("bcd") -> {
+
+            }
+            command.similarTo("xyz") -> {
+
+            }
+            else -> {
+
+            }
+        }
     }
-
-
-    override fun performCommand(command: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 }
