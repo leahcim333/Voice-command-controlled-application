@@ -2,7 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 
-class AddShoppingListElement(override val presenter: BasePresenter) : BaseCommandState(presenter) {
+class AddShoppingListElementCS(override val presenter: BasePresenter) : BaseCommandState(presenter) {
     override var responseMap: Map<Int, Unit>
         get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
         set(value) {}

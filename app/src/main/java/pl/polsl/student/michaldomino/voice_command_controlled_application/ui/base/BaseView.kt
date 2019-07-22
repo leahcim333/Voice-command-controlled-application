@@ -3,5 +3,5 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.ba
 interface BaseView {
     fun showToast(message: String?)
 
-    fun getString(): String
+    fun getString(resId: Int): String
 }

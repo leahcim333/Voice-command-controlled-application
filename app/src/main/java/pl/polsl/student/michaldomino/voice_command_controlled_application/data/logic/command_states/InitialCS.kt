@@ -2,12 +2,12 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 
-class InitialCommandState(override val presenter: BasePresenter) : BaseCommandState(presenter) {
-    override var responseMap: Map<Int, Unit> =
+class InitialCS(override val presenter: BasePresenter) : BaseCommandState(presenter) {
+    override val responseMap: Map<Int, Unit>
+        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+//    override var responseMap: Map<Int, Unit>
 
-        override
-
-    fun setState(newState: BaseCommandState) {
+    override fun setState(newState: BaseCommandState) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 //
