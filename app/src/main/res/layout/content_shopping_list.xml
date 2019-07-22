@@ -9,4 +9,6 @@
         tools:showIn="@layout/activity_shopping_list"
         tools:context=".ui.shopping_list.ShoppingListActivity">
 
+    <include layout="@layout/content_parent"/>
+
 </android.support.constraint.ConstraintLayout>

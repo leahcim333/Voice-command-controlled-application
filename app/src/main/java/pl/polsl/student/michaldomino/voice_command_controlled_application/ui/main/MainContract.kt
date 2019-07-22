@@ -1,6 +1,5 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.main
 
-import android.content.Intent
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
 
@@ -12,8 +11,5 @@ interface MainContract {
         fun speak(command: String?)
     }
 
-    interface Presenter : BasePresenter {
-        fun onDoubleTap()
-        fun runCommand(data: Intent)
-    }
+    interface Presenter : BasePresenter
 }

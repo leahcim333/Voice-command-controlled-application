@@ -5,6 +5,10 @@ import android.speech.RecognizerIntent
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.InitialCS
 
+
+//private val BaseView.applicationContext: Context
+//    get() {}
+
 class MainPresenter(private val view: MainContract.View) : MainContract.Presenter {
 
     override var currentState: BaseCommandState = InitialCS(this)
@@ -14,7 +18,8 @@ class MainPresenter(private val view: MainContract.View) : MainContract.Presente
     }
 
     override fun onDoubleTap() {
-        view.startCommandRecognizer()
+        view.addRow("abc")
+//        view.startCommandRecognizer()
     }
 
     override fun runCommand(data: Intent) {

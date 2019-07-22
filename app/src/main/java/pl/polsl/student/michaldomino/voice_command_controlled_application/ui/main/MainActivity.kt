@@ -9,13 +9,17 @@ import android.speech.tts.TextToSpeech
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GestureDetectorCompat
 import android.support.v7.app.AppCompatActivity
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.gesture_listener.CommandActivatorGestureListener
 import java.util.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -41,7 +45,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 .setAction("Action", null).show()
         }
 
-        mDetector = GestureDetectorCompat(this, MyGestureListener(presenter))
+        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
 
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
 
@@ -109,15 +113,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         val rowView: View = inflater.inflate(R.layout.check_list_row, null)
         rowView.findViewById<TextView>(R.id.row_text).text = text
         parentLinearLayout.addView(rowView, parentLinearLayout.childCount)
-    }
-
-    private class MyGestureListener(private val presenter: MainContract.Presenter) :
-        GestureDetector.SimpleOnGestureListener() {
-
-        override fun onDoubleTap(e: MotionEvent?): Boolean {
-            presenter.onDoubleTap()
-            return true
-        }
     }
 
 }
