@@ -2,7 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 
-abstract class BaseCommandState(open val presenter: BasePresenter) {
+abstract class BaseCommandState(protected open val presenter: BasePresenter) {
 
 //    protected open val presenter : BasePresenter = _presenter
 

@@ -11,13 +11,11 @@ interface BasePresenter {
 
     fun start()
 
+    fun runCommand(data: Intent, requestCode: Int)
+
+    fun onDoubleTap()
+
     fun getString(resId: Int): String {
         return view.getString(resId)
     }
-
-    fun onDoubleTap() {
-        view.startCommandRecognizer()
-    }
-
-    fun runCommand(data: Intent)
 }

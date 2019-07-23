@@ -5,7 +5,11 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.bas
 
 interface ShoppingListContract {
 
-    interface View : BaseView
+    interface View : BaseView {
+        fun addRow(text: CharSequence)
+    }
 
-    interface Presenter : BasePresenter
+    interface Presenter : BasePresenter {
+        fun initializeAddingElements()
+    }
 }
