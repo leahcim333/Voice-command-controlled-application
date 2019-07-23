@@ -23,6 +23,11 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
 
     override fun onDoubleTap() {
         speaker.speak(getString(R.string.tell_command))
+//        var a = speaker.isSpeaking
+//        val f = 0
+//        var b = speaker.isSpeaking
+        while (speaker.isSpeaking) {
+        }
         view.startCommandRecognizer(REQUEST_CODE_COMMAND_RECOGNITION, R.string.tell_command)
     }
 
@@ -31,7 +36,7 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
         val userInput = possibleMatches[0]
         when (requestCode) {
             REQUEST_CODE_COMMAND_RECOGNITION -> {
-                currentState.performCommand(userInput)
+                currentState.performCommand(possibleMatches)
             }
             REQUEST_CODE_LIST_ELEMENTS_TO_ADD -> {
                 addElements(userInput)
@@ -57,6 +62,8 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
 
     override fun initializeAddingElements() {
         speaker.speak(view.getString(R.string.list_elements))
+        while (speaker.isSpeaking) {
+        }
         view.startCommandRecognizer(REQUEST_CODE_LIST_ELEMENTS_TO_ADD, R.string.list_elements)
     }
 

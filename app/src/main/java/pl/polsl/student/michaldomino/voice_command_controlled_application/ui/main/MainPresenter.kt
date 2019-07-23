@@ -31,7 +31,7 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
         val command = possibleMatches[0]
         when (requestCode) {
             REQUEST_CODE_COMMAND_RECOGNITION -> {
-                currentState.performCommand(command)
+                currentState.performCommand(possibleMatches)
             }
             else -> {
             }
