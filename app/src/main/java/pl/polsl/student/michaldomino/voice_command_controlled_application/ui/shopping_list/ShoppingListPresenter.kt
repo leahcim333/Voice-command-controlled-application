@@ -18,11 +18,12 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
     private val speaker: Speaker = Speaker(view.getApplicationContext())
 
     override fun start() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onDoubleTap() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        speaker.speak(getString(R.string.tell_command))
+        view.startCommandRecognizer(REQUEST_CODE_COMMAND_RECOGNITION, R.string.tell_command)
     }
 
     override fun runCommand(data: Intent, requestCode: Int) {
@@ -42,9 +43,9 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
     }
 
     private fun addElements(userInput: String) {
-        val delimiterBuilder = StringBuilder()
-        val delimiter = delimiterBuilder.append(" ").append(R.string.elements_delimiter).append(" ").toString()
-        val elements: List<String> = userInput.split(delimiter)
+        val resourceDelimiter = getString(R.string.elements_delimiter)
+        val fullDelimiter = " $resourceDelimiter "
+        val elements: List<String> = userInput.split(fullDelimiter)
         for (element in elements) {
             view.addRow(element)
         }
