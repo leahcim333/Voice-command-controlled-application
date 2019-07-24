@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states
+package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.model.base
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 
@@ -8,7 +8,7 @@ abstract class BaseCommandState(protected open val presenter: BasePresenter) {
 
 //    protected abstract val responseMap: Map<Int, Unit>
 
-//    abstract fun performCommand(userInput: String)
+    abstract fun processInput(userInput: String)
 
-    abstract fun performCommand(userInput: String)
+
 }

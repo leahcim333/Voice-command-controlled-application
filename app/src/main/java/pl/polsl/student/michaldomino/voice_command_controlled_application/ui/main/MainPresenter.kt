@@ -4,8 +4,8 @@ import android.content.Intent
 import android.speech.RecognizerIntent
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.InitialCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.model.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListActivity
 
 
@@ -31,7 +31,7 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
         val userInput = possibleMatches[0]
         when (requestCode) {
             REQUEST_CODE_COMMAND_RECOGNITION -> {
-                currentState.performCommand(userInput)
+                currentState.processInput(userInput)
             }
             else -> {
             }
