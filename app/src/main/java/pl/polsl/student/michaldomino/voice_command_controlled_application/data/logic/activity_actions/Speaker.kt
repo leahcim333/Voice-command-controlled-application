@@ -17,13 +17,9 @@ class Speaker(applicationContext: Context) {
         })
     }
 
-    val isSpeaking: Boolean
-        get() {
-            return mTextToSpeech.isSpeaking
-        }
-
-
-    fun speak(message: CharSequence?) {
+    fun speakInForeground(message: CharSequence?) {
         mTextToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, null)
+        while (mTextToSpeech.isSpeaking) {
+        }
     }
 }

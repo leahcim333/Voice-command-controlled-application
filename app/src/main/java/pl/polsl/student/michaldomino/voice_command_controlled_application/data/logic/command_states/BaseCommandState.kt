@@ -1,7 +1,6 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
-import java.util.*
 
 abstract class BaseCommandState(protected open val presenter: BasePresenter) {
 
@@ -11,5 +10,5 @@ abstract class BaseCommandState(protected open val presenter: BasePresenter) {
 
 //    abstract fun performCommand(userInput: String)
 
-    abstract fun performCommand(possibleMatches: ArrayList<String>?)
+    abstract fun performCommand(userInput: String)
 }

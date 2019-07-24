@@ -7,7 +7,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.l
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.ShoppingListInitialCS
 
-class ShoppingListPresenter(override val view: ShoppingListContract.View) : ShoppingListContract.Presenter {
+class ShoppingListPresenter(override val view: ShoppingListContract.View) : ShoppingListContract.Presenter(view) {
 
     private val REQUEST_CODE_COMMAND_RECOGNITION = 0
 
@@ -22,12 +22,8 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
     }
 
     override fun onDoubleTap() {
-        speaker.speak(getString(R.string.tell_command))
-//        var a = speaker.isSpeaking
-//        val f = 0
-//        var b = speaker.isSpeaking
-        while (speaker.isSpeaking) {
-        }
+        currentState = ShoppingListInitialCS(this)
+        speaker.speakInForeground(getString(R.string.tell_command))
         view.startCommandRecognizer(REQUEST_CODE_COMMAND_RECOGNITION, R.string.tell_command)
     }
 
@@ -36,7 +32,7 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
         val userInput = possibleMatches[0]
         when (requestCode) {
             REQUEST_CODE_COMMAND_RECOGNITION -> {
-                currentState.performCommand(possibleMatches)
+                currentState.performCommand(userInput)
             }
             REQUEST_CODE_LIST_ELEMENTS_TO_ADD -> {
                 addElements(userInput)
@@ -44,7 +40,6 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
             else -> {
             }
         }
-//        speaker.speak(command)
     }
 
     private fun addElements(userInput: String) {
@@ -56,14 +51,8 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
         }
     }
 
-    override fun getString(resId: Int): String {
-        return view.getString(resId)
-    }
-
     override fun initializeAddingElements() {
-        speaker.speak(view.getString(R.string.list_elements))
-        while (speaker.isSpeaking) {
-        }
+        speaker.speakInForeground(view.getString(R.string.list_elements))
         view.startCommandRecognizer(REQUEST_CODE_LIST_ELEMENTS_TO_ADD, R.string.list_elements)
     }
 

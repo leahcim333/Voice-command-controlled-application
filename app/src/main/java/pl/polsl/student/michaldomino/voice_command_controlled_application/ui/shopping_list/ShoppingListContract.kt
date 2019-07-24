@@ -9,7 +9,7 @@ interface ShoppingListContract {
         fun addRow(text: CharSequence)
     }
 
-    interface Presenter : BasePresenter {
-        fun initializeAddingElements()
+    abstract class Presenter(view: View) : BasePresenter(view) {
+        abstract fun initializeAddingElements()
     }
 }

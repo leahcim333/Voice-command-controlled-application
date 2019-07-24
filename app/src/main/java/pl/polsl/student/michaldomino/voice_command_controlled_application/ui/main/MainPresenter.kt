@@ -9,7 +9,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.l
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListActivity
 
 
-class MainPresenter(override val view: MainContract.View) : MainContract.Presenter {
+class MainPresenter(override val view: MainContract.View) : MainContract.Presenter(view) {
 
     private val REQUEST_CODE_COMMAND_RECOGNITION = 0
 
@@ -22,20 +22,20 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
     }
 
     override fun onDoubleTap() {
-        speaker.speak(getString(R.string.tell_command))
+        speaker.speakInForeground(getString(R.string.tell_command))
         view.startCommandRecognizer(REQUEST_CODE_COMMAND_RECOGNITION, R.string.tell_command)
     }
 
     override fun runCommand(data: Intent, requestCode: Int) {
         val possibleMatches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-        val command = possibleMatches[0]
+        val userInput = possibleMatches[0]
         when (requestCode) {
             REQUEST_CODE_COMMAND_RECOGNITION -> {
-                currentState.performCommand(possibleMatches)
+                currentState.performCommand(userInput)
             }
             else -> {
             }
         }
-//        speaker.speak(command)
+//        speaker.speakInForeground(command)
     }
 }

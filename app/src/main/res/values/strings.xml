@@ -5,8 +5,8 @@
 
     <!--Commands-->
     <!--===================================================================-->
-    <string name="add_elements">add elements</string>
-    <string name="edit_element">edit element</string>
+    <string name="add_items">add items</string>
+    <string name="edit_item">edit item</string>
     <string name="tell_command">Tell command</string>
     <string name="list_elements">list elements</string>
     <string name="elements_delimiter">and</string>

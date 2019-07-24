@@ -1,6 +1,6 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic
 
-class Command(private val possibleMatches: ArrayList<String>?) {
+class Command(private val value: String) {
 
     private val DEFAULT_THRESHOLD = 80.0
 
@@ -34,14 +34,6 @@ class Command(private val possibleMatches: ArrayList<String>?) {
     }
 
     fun similarTo(string: String, threshold: Double = DEFAULT_THRESHOLD): Boolean {
-        val a = possibleMatches!!.any { levenshtein(it, string) >= threshold }
-        val b = possibleMatches.firstOrNull { levenshtein(it, string) >= threshold }
-        val c = possibleMatches.filter { levenshtein(it, string) >= threshold }
-        var d: ArrayList<Double> = arrayListOf()
-        for (it in possibleMatches) {
-            d.add(d.lastIndex, levenshtein(it, string))
-        }
-        val f = 0
-        return false
+        return levenshtein(value, string) >= threshold
     }
 }

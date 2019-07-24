@@ -3,12 +3,11 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.Command
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListPresenter
-import java.util.*
 
 class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : BaseCommandState(presenter) {
 
-    override fun performCommand(possibleMatches: ArrayList<String>?) {
-        val command = Command(possibleMatches)
+    override fun performCommand(userInput: String) {
+        val command = Command(userInput)
         when {
             isAddElement(command) -> {
                 presenter.currentState = AddShoppingListElementCS(presenter)
@@ -24,11 +23,11 @@ class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : Bas
 
     private fun isAddElement(command: Command): Boolean {
 //        possibleMatches.firstOrNull {  }
-        return isSimilar(command, R.string.add_elements)
+        return isSimilar(command, R.string.add_items)
     }
 
     private fun isEditElement(command: Command): Boolean {
-        return isSimilar(command, R.string.edit_element)
+        return isSimilar(command, R.string.edit_item)
     }
 
     private fun isSimilar(command: Command, resId: Int): Boolean {

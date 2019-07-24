@@ -10,5 +10,5 @@ interface MainContract {
 
     }
 
-    interface Presenter : BasePresenter
+    abstract class Presenter(view: View) : BasePresenter(view)
 }

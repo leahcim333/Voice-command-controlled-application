@@ -1,19 +1,17 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base
 
 import android.content.Intent
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.BaseCommandState as BaseCommandState1
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.BaseCommandState
 
-interface BasePresenter {
+abstract class BasePresenter(protected open val view: BaseView) {
 
-    val view: BaseView
+    abstract var currentState: BaseCommandState
 
-    var currentState: BaseCommandState1
+    abstract fun start()
 
-    fun start()
+    abstract fun runCommand(data: Intent, requestCode: Int)
 
-    fun runCommand(data: Intent, requestCode: Int)
-
-    fun onDoubleTap()
+    abstract fun onDoubleTap()
 
     fun getString(resId: Int): String {
         return view.getString(resId)
