@@ -12,7 +12,7 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
 
     private val REQUEST_CODE_LIST_ELEMENTS_TO_ADD = 1
 
-    private var currentState =
+    override var currentState =
         ShoppingListInitialCS(
             this
         )

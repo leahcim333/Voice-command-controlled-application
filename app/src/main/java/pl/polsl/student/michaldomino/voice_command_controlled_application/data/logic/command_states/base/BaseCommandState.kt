@@ -6,6 +6,8 @@ abstract class BaseCommandState(protected open val presenter: BasePresenter) {
 
     protected abstract val messageToSpeak: String
 
+    abstract val commandName: String?
+
 //    protected open val presenter : BasePresenter = _presenter
 
 //    protected abstract val responseMap: Map<Int, Unit>

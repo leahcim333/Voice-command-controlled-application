@@ -8,9 +8,9 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.sho
 
 class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : CSRoot(presenter) {
 
-    val ADD_ITEMS = AddShoppingListElementCS(presenter)
+    private val ADD_ITEMS = AddShoppingListElementCS(presenter)
 
-    val EDIT_ITEM_SELECT = EditShoppingListElementCS(presenter)
+    private val EDIT_ITEM_SELECT = EditShoppingListElementCS(presenter)
 
     override val messageToSpeak: String = presenter.getString(R.string.tell_command)
 
@@ -18,7 +18,8 @@ class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : CSR
 
     override fun processInput(userInput: String) {
         val command = Command(userInput)
-        when {
+        val foundCommandState: BaseCommandState? = availableCommands.firstOrNull { command.similarTo(it.commandName!!) }
+        presenter.when {
             isAddElement(command) -> {
                 presenter.currentState =
                     AddShoppingListElementCS(
