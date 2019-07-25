@@ -18,37 +18,13 @@ class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : CSR
 
     override fun processInput(userInput: String) {
         val command = Command(userInput)
-        val foundCommandState: BaseCommandState? = availableCommands.firstOrNull { command.similarTo(it.commandName!!) }
-        presenter.when {
-            isAddElement(command) -> {
-                presenter.currentState =
-                    AddShoppingListElementCS(
-                        presenter
-                    )
-            }
-            isEditElement(command) -> {
-                presenter.currentState =
-                    EditShoppingListElementCS(
-                        presenter
-                    )
-            }
-            else -> {
-
-            }
+        val matchingCommandState: BaseCommandState? =
+            availableCommands.firstOrNull { command.similarTo(it.commandName!!) }
+        if (matchingCommandState != null) {
+            presenter.currentState = matchingCommandState
+            matchingCommandState.initialize()
+        } else {
+            // command unrecognized
         }
-    }
-
-    private fun isAddElement(command: Command): Boolean {
-//        possibleMatches.firstOrNull {  }
-        return isSimilar(command, R.string.add_items)
-    }
-
-    private fun isEditElement(command: Command): Boolean {
-        return isSimilar(command, R.string.edit_item)
-    }
-
-    private fun isSimilar(command: Command, resId: Int): Boolean {
-        val stringCommand = presenter.getString(resId)
-        return command.similarTo(stringCommand)
     }
 }

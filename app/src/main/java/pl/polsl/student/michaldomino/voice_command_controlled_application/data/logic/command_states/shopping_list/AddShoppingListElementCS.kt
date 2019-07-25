@@ -1,11 +1,16 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list
 
+import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSLeaf
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListPresenter
 
 class AddShoppingListElementCS(override val presenter: ShoppingListPresenter) : CSLeaf(presenter) {
 
-    init {
-        presenter.initializeAddingElements()
+    override val messageToSpeak: String = presenter.getString(R.string.list_elements)
+
+    override val commandName: String? = presenter.getString(R.string.add_items)
+
+    override fun processInput(userInput: String) {
+        presenter.addItems(userInput)
     }
 }

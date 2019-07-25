@@ -10,6 +10,6 @@ interface ShoppingListContract {
     }
 
     abstract class Presenter(view: View) : BasePresenter(view) {
-        abstract fun initializeAddingElements()
+        abstract fun addItems(userInput: String)
     }
 }

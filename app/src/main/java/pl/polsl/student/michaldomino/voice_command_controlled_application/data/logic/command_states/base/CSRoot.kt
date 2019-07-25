@@ -6,7 +6,4 @@ abstract class CSRoot(override val presenter: BasePresenter) : CSStaticNode(pres
 
     override val commandName: String? = null
 
-    fun initialize() {
-        presenter.askForInput(messageToSpeak)
-    }
 }

@@ -52,7 +52,7 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && null != data) {
-            presenter.processInput(data, requestCode)
+            presenter.processInput(data)
         }
     }
 

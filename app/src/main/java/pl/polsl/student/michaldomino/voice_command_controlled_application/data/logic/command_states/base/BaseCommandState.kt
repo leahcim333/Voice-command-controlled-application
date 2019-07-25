@@ -14,5 +14,7 @@ abstract class BaseCommandState(protected open val presenter: BasePresenter) {
 
     abstract fun processInput(userInput: String)
 
-
+    fun initialize() {
+        presenter.askForInput(messageToSpeak)
+    }
 }
