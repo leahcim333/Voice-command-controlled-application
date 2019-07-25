@@ -36,13 +36,13 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
         presenter.start()
     }
 
-    override fun startCommandRecognizer(requestCode: Int, promptId: Int) {
+    override fun startSpeechRecognizer(requestCode: Int, message: String?) {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         intent.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
             RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
         )
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, resources.getString(promptId))
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, message)
         try {
             startActivityForResult(intent, requestCode)
         } catch (e: ActivityNotFoundException) {
@@ -52,7 +52,7 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && null != data) {
-            presenter.runCommand(data, requestCode)
+            presenter.processInput(data, requestCode)
         }
     }
 

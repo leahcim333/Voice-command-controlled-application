@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.model.base
+package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 

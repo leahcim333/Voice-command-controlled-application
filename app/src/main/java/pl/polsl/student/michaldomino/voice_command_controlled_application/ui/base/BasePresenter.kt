@@ -8,9 +8,11 @@ abstract class BasePresenter(protected open val view: BaseView) {
 
     abstract fun start()
 
-    abstract fun runCommand(data: Intent, requestCode: Int)
+    abstract fun processInput(data: Intent)
 
     abstract fun onDoubleTap()
+
+    abstract fun askForInput(message: String?)
 
     fun getString(resId: Int): String {
         return view.getString(resId)

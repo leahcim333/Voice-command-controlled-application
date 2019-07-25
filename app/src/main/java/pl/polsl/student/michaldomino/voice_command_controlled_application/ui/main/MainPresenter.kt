@@ -5,7 +5,7 @@ import android.speech.RecognizerIntent
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.InitialCS
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.model.base.BaseCommandState
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListActivity
 
 
@@ -23,10 +23,10 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
 
     override fun onDoubleTap() {
         speaker.speakInForeground(getString(R.string.tell_command))
-        view.startCommandRecognizer(REQUEST_CODE_COMMAND_RECOGNITION, R.string.tell_command)
+        view.startSpeechRecognizer(REQUEST_CODE_COMMAND_RECOGNITION, R.string.tell_command)
     }
 
-    override fun runCommand(data: Intent, requestCode: Int) {
+    override fun processInput(data: Intent, requestCode: Int) {
         val possibleMatches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
         val userInput = possibleMatches[0]
         when (requestCode) {

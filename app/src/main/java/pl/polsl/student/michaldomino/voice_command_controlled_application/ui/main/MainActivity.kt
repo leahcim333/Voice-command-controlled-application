@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
 
-    override fun startCommandRecognizer(requestCode: Int, promptId: Int) {
+    override fun startSpeechRecognizer(requestCode: Int, promptId: Int) {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         intent.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && null != data) {
-            presenter.runCommand(data, requestCode)
+            presenter.processInput(data, requestCode)
         }
     }
 
