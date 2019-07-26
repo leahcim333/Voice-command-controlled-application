@@ -7,6 +7,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.l
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list.ShoppingListInitialCS
+import java.util.*
 
 class ShoppingListPresenter(override val view: ShoppingListContract.View) : ShoppingListContract.Presenter(view) {
 
@@ -45,5 +46,9 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
         for (element in elements) {
             view.addRow(element)
         }
+    }
+
+    override fun getItems(): ArrayList<String> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

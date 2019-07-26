@@ -8,13 +8,12 @@ import android.speech.RecognizerIntent
 import android.support.v4.view.GestureDetectorCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
-import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_shopping_list.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItem
 
 class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
@@ -23,6 +22,8 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
     private lateinit var mDetector: GestureDetectorCompat
 
     private lateinit var parentLinearLayout: LinearLayout
+
+//    private val rows:ArrayList<RowItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +59,12 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
     override fun addRow(text: CharSequence) {
         val inflater: LayoutInflater = layoutInflater
-        val rowView: View = inflater.inflate(R.layout.check_list_row, null)
-        rowView.findViewById<TextView>(R.id.row_text).text = text
-        parentLinearLayout.addView(rowView, parentLinearLayout.childCount)
+        val row = RowItem(inflater)
+        row.setText(text)
+        row.setChecked(false)
+//        val rowView: View = inflater.inflate(R.layout.check_list_row, null)
+//        rowView.findViewById<TextView>(R.id.row_text).text = text
+        parentLinearLayout.addView(row.getView(), parentLinearLayout.childCount)
     }
 
 }

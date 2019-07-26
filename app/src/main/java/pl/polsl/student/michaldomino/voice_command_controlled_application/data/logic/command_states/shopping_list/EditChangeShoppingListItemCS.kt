@@ -1,0 +1,3 @@
+package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list
+
+class EditChangeShoppingListItemCS

@@ -2,6 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.sh
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
+import java.util.*
 
 interface ShoppingListContract {
 
@@ -11,5 +12,6 @@ interface ShoppingListContract {
 
     abstract class Presenter(view: View) : BasePresenter(view) {
         abstract fun addItems(userInput: String)
+        abstract fun getItems(): ArrayList<String>
     }
 }
