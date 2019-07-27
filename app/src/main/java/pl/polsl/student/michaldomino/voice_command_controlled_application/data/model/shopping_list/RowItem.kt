@@ -14,9 +14,9 @@ class RowItem(inflater: LayoutInflater) {
 
     private var checkBox: CheckBox = rowView.findViewById(R.id.row_checkbox)
 
-    val text: CharSequence
+    val text: String
         get() {
-            return textView.text
+            return textView.text.toString()
         }
 
     val checked: Boolean

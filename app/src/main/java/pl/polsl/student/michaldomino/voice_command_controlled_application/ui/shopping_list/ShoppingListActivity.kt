@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_shopping_list.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItemsManager
 
 class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
@@ -32,6 +33,12 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         rowItemsManager = RowItemsManager(layoutInflater, parentLinearLayout)
+
+        rowItemsManager.addRow("one")
+        rowItemsManager.addRow("two")
+        rowItemsManager.addRow("elephant")
+        rowItemsManager.addRow("dog")
+
         presenter = ShoppingListPresenter(this)
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
@@ -60,9 +67,13 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
     override fun addRow(text: CharSequence) {
         rowItemsManager.addRow(text)
-//        val inflater: LayoutInflater = layoutInflater
-//        val row = RowItem(inflater).setText(text).setChecked(false)
-//        parentLinearLayout.addView(row.getView(), parentLinearLayout.childCount)
     }
 
+    override fun getItems(): MutableList<RowItem> {
+        return rowItemsManager.items
+    }
+
+    override fun setNewItemName(item: RowItem, newName: String) {
+        item.setText(newName)
+    }
 }

@@ -49,6 +49,10 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
     }
 
     override fun getItems(): MutableList<RowItem> {
-        TODO()
+        return view.getItems()
+    }
+
+    override fun setNewItemName(item: RowItem, newName: String) {
+        view.setNewItemName(item, newName)
     }
 }

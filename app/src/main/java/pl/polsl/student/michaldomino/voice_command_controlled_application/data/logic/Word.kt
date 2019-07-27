@@ -1,6 +1,8 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic
 
-class Command(private val value: String) {
+import java.util.*
+
+class Word(private val value: String) {
 
     private val DEFAULT_THRESHOLD = 80.0
 
@@ -33,7 +35,11 @@ class Command(private val value: String) {
         return (1.0 - cost[lhsLength].toDouble() / lhsLength.toDouble()) * 100.0
     }
 
-    fun similarTo(string: String, threshold: Double = DEFAULT_THRESHOLD): Boolean {
-        return levenshtein(value, string) >= threshold
+    fun similarityWith(other: String): Double {
+        return levenshtein(value.toLowerCase(Locale.getDefault()), other.toLowerCase(Locale.getDefault()))
+    }
+
+    fun similarTo(other: String, threshold: Double = DEFAULT_THRESHOLD): Boolean {
+        return similarityWith(other) >= threshold
     }
 }

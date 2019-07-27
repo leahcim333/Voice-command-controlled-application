@@ -8,10 +8,13 @@ interface ShoppingListContract {
 
     interface View : BaseView {
         fun addRow(text: CharSequence)
+        fun getItems(): MutableList<RowItem>
+        fun setNewItemName(item: RowItem, newName: String)
     }
 
     abstract class Presenter(view: View) : BasePresenter(view) {
         abstract fun addItems(userInput: String)
         abstract fun getItems(): MutableList<RowItem>
+        abstract fun setNewItemName(item: RowItem, newName: String)
     }
 }

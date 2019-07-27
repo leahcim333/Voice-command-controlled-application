@@ -10,5 +10,7 @@
     <string name="tell_command">Tell command</string>
     <string name="list_items">List items</string>
     <string name="elements_delimiter">and</string>
+    <string name="select_item">Select item</string>
+    <string name="tell_new_name">Tell new name</string>
     <!--===================================================================-->
 </resources>
