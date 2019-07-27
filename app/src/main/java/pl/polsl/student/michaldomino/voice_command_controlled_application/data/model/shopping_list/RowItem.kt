@@ -10,21 +10,31 @@ class RowItem(inflater: LayoutInflater) {
 
     private val rowView: View = inflater.inflate(R.layout.check_list_row, null)
 
-    private var textView = rowView.findViewById<TextView>(R.id.row_text)
+    private var textView: TextView = rowView.findViewById(R.id.row_text)
 
-    private var checkBox = rowView.findViewById<CheckBox>(R.id.row_checkbox)
+    private var checkBox: CheckBox = rowView.findViewById(R.id.row_checkbox)
+
+    val text: CharSequence
+        get() {
+            return textView.text
+        }
+
+    val checked: Boolean
+        get() {
+            return checkBox.isChecked
+        }
 
     fun getView(): View {
         return rowView
     }
 
     fun setText(value: CharSequence): RowItem {
-        textView.text = value
+        this.textView.text = value
         return this
     }
 
     fun setChecked(value: Boolean): RowItem {
-        checkBox.isChecked = value
+        this.checkBox.isChecked = value
         return this
     }
 }

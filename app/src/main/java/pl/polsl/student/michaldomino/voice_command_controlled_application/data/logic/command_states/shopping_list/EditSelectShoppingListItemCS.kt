@@ -9,6 +9,6 @@ class EditSelectShoppingListItemCS(override val presenter: ShoppingListPresenter
     override val commandName: String? = presenter.getString(R.string.edit_item)
 
     override fun processInput(userInput: String) {
-        val a: ArrayList<String> = presenter.getItems()
+//        val a: ArrayList<String> = presenter.getItems()
     }
 }

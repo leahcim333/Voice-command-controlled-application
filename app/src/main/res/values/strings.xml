@@ -8,7 +8,7 @@
     <string name="add_items">add items</string>
     <string name="edit_item">edit item</string>
     <string name="tell_command">Tell command</string>
-    <string name="list_elements">List elements</string>
+    <string name="list_items">List items</string>
     <string name="elements_delimiter">and</string>
     <!--===================================================================-->
 </resources>

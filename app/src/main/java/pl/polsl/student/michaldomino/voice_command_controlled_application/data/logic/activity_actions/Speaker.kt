@@ -19,6 +19,8 @@ class Speaker(applicationContext: Context) {
 
     fun speakInForeground(message: CharSequence?) {
         mTextToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, null)
+        while (!mTextToSpeech.isSpeaking) {
+        }
         while (mTextToSpeech.isSpeaking) {
         }
     }

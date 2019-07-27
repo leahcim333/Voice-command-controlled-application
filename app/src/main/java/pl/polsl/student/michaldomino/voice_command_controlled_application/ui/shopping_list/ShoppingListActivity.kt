@@ -7,13 +7,12 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.support.v4.view.GestureDetectorCompat
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_shopping_list.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItemsManager
 
 class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
@@ -23,16 +22,18 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
     private lateinit var parentLinearLayout: LinearLayout
 
-//    private val rows:ArrayList<RowItem>
+    private lateinit var rowItemsManager: RowItemsManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_list)
         setSupportActionBar(toolbar)
 
+        parentLinearLayout = findViewById(R.id.parent_linear_layout)
+        rowItemsManager = RowItemsManager(layoutInflater, parentLinearLayout)
         presenter = ShoppingListPresenter(this)
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
-        parentLinearLayout = findViewById(R.id.parent_linear_layout)
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.start()
     }
@@ -58,13 +59,10 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
     }
 
     override fun addRow(text: CharSequence) {
-        val inflater: LayoutInflater = layoutInflater
-        val row = RowItem(inflater)
-        row.setText(text)
-        row.setChecked(false)
-//        val rowView: View = inflater.inflate(R.layout.check_list_row, null)
-//        rowView.findViewById<TextView>(R.id.row_text).text = text
-        parentLinearLayout.addView(row.getView(), parentLinearLayout.childCount)
+        rowItemsManager.addRow(text)
+//        val inflater: LayoutInflater = layoutInflater
+//        val row = RowItem(inflater).setText(text).setChecked(false)
+//        parentLinearLayout.addView(row.getView(), parentLinearLayout.childCount)
     }
 
 }

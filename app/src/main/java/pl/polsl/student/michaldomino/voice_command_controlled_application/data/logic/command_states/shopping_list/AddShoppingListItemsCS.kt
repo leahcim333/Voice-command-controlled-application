@@ -6,7 +6,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.sho
 
 class AddShoppingListItemsCS(override val presenter: ShoppingListPresenter) : CSLeaf(presenter) {
 
-    override val messageToSpeak: String = presenter.getString(R.string.list_elements)
+    override val messageToSpeak: String = presenter.getString(R.string.list_items)
 
     override val commandName: String? = presenter.getString(R.string.add_items)
 
