@@ -5,12 +5,14 @@
 
     <!--Commands-->
     <!--===================================================================-->
-    <string name="add_items">add items</string>
-    <string name="edit_item">edit item</string>
+    <string name="add_items">Add items</string>
+    <string name="edit_item">Edit item</string>
     <string name="tell_command">Tell command</string>
     <string name="list_items">List items</string>
     <string name="elements_delimiter">and</string>
     <string name="select_item">Select item</string>
     <string name="tell_new_name">Tell new name</string>
+    <string name="available_commands">Available commands</string>
+    <string name="available_commands_are">Available commands are</string>
     <!--===================================================================-->
 </resources>
