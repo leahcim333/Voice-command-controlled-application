@@ -41,12 +41,11 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
     }
 
     override fun addItems(userInput: String) {
-        val resourceDelimiter = getString(R.string.elements_delimiter)
+        val resourceDelimiter: String = getString(R.string.elements_delimiter)
         val fullDelimiter = " $resourceDelimiter "
         val elements: List<String> = userInput.split(fullDelimiter)
-        for (element in elements) {
-            view.addRow(element)
-        }
+        val existingItems: List<String> = view.getItems().map { it.text }
+        elements.filter { it !in existingItems }.forEach { view.addRow(it) }
     }
 
     override fun getItems(): MutableList<RowItem> {
@@ -54,7 +53,11 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
     }
 
     override fun setNewItemName(item: RowItem, newName: String) {
-        view.setNewItemName(item, newName)
+        val existingItems: List<String> = view.getItems().map { it.text }
+        if (newName !in existingItems)
+            view.setNewItemName(item, newName)
+        else
+            speaker.speakInForeground(getString(R.string.item_already_exists))
     }
 
     override fun speak(message: String) {

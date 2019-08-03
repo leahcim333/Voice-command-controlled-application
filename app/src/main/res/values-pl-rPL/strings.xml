@@ -11,4 +11,5 @@
     <string name="tell_new_name">Podaj nową nazwę</string>
     <string name="available_commands">Dostępne komendy</string>
     <string name="available_commands_are">Dostępne komendy to</string>
+    <string name="item_already_exists">Element już istnieje</string>
 </resources>
