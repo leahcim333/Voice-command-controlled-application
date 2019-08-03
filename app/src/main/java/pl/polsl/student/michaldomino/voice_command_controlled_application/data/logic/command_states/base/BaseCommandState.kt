@@ -4,17 +4,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.bas
 
 abstract class BaseCommandState(protected open val presenter: BasePresenter) {
 
-    protected abstract val messageToSpeak: String
-
     abstract val commandName: String?
 
-//    protected open val presenter : BasePresenter = _presenter
-
-//    protected abstract val responseMap: Map<Int, Unit>
-
-    abstract fun processInput(userInput: String)
-
-    fun initialize() {
-        presenter.askForInput(messageToSpeak)
-    }
+    abstract fun initialize()
 }

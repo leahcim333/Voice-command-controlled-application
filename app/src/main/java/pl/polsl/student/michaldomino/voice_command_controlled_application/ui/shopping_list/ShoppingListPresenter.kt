@@ -5,6 +5,7 @@ import android.speech.RecognizerIntent
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSNode
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list.ShoppingListInitialCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItem
@@ -15,7 +16,7 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
 
     override val initialState: CSRoot = ShoppingListInitialCS(this)
 
-    override var currentState: BaseCommandState = initialState
+    override var currentState: CSNode = initialState
 
     private val speaker: Speaker = Speaker(view.getApplicationContext())
 
@@ -54,5 +55,9 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
 
     override fun setNewItemName(item: RowItem, newName: String) {
         view.setNewItemName(item, newName)
+    }
+
+    override fun speak(message: String) {
+        speaker.speakInForeground(message)
     }
 }
