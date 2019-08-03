@@ -8,7 +8,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.sho
 class EditItemChangeCS(override val presenter: ShoppingListPresenter, private val selectedItem: RowItem) :
     CSDynamicNode(presenter) {
 
-    override val messageToSpeak: String = presenter.getString(R.string.tell_new_name)
+    override val messageToSpeakId: Int = R.string.tell_new_name
 
     override val commandName: String? = null
 

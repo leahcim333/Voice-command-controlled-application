@@ -16,7 +16,7 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun askForInput(message: String?) {
+    override fun askForInput(messageId: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

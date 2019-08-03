@@ -7,7 +7,9 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.m
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListPresenter
 
 class EditItemSelectCS(override val presenter: ShoppingListPresenter) : CSDynamicNode(presenter) {
-    override val messageToSpeak: String = presenter.getString(R.string.select_item)
+
+    override val messageToSpeakId: Int = R.string.select_item
+
     override val commandName: String? = presenter.getString(R.string.edit_item)
 
     override fun processInput(userInput: String) {

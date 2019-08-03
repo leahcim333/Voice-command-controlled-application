@@ -16,7 +16,7 @@ abstract class BasePresenter(protected open val view: BaseView) {
 
     abstract fun onDoubleTap()
 
-    abstract fun askForInput(message: String?)
+    abstract fun askForInput(messageId: Int)
 
     fun getString(resId: Int): String {
         return view.getString(resId)

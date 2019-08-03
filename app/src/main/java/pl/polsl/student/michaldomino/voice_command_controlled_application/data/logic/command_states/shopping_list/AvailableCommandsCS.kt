@@ -12,9 +12,9 @@ class AvailableCommandsCS(override val presenter: ShoppingListPresenter) : CSLea
     override val commandName: String? = presenter.getString(R.string.available_commands)
 
     override fun initialize() {
-        val availableCommands: List<String> = CommandsModel(presenter).availableCommands
+        val availableCommands: MutableList<Int> = CommandsModel.availableCommands
         val messageBuilder = StringBuilder().append(presenter.getString(R.string.available_commands_are))
-        availableCommands.forEach { messageBuilder.append(it).append(ITEM_DELIMITER) }
+        availableCommands.forEach { messageBuilder.append(presenter.getString(it)).append(ITEM_DELIMITER) }
         presenter.speak(messageBuilder.toString())
     }
 

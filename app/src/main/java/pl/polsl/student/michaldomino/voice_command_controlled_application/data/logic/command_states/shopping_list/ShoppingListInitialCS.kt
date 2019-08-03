@@ -9,11 +9,6 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.sho
 
 class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : CSRoot(presenter) {
 
-    private val commandsModel =
-        CommandsModel(
-            presenter
-        )
-
     private val ADD_ITEMS = AddItemsCS(presenter)
 
     private val AVAILABLE_COMMANDS = AvailableCommandsCS(presenter)
@@ -22,7 +17,7 @@ class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : CSR
 
     private val LIST_ITEMS = ListItemsCS(presenter)
 
-    override val messageToSpeak: String = presenter.getString(R.string.tell_command)
+    override val messageToSpeakId: Int = R.string.tell_command
 
     override val availableCommands: Array<BaseCommandState> = arrayOf(ADD_ITEMS, AVAILABLE_COMMANDS, EDIT_ITEM_SELECT, LIST_ITEMS)
 

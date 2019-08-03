@@ -23,9 +23,10 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
 
     }
 
-    override fun askForInput(message: String?) {
+    override fun askForInput(messageId: Int) {
+        val message: String = view.getString(messageId)
         speaker.speakInForeground(message)
-        view.startSpeechRecognizer(REQUEST_CODE_SPEECH_RECOGNIZRER, message)
+        view.startSpeechRecognizer(REQUEST_CODE_SPEECH_RECOGNIZRER, messageId)
     }
 
     override fun onDoubleTap() {

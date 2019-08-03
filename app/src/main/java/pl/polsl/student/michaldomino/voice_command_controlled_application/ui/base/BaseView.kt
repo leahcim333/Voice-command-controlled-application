@@ -10,7 +10,7 @@ interface BaseView {
 
     fun getString(resId: Int): String
 
-    fun startSpeechRecognizer(requestCode: Int, message: String?)
+    fun startSpeechRecognizer(requestCode: Int, messageId: Int)
 
     fun startActivity(intent: Intent)
 

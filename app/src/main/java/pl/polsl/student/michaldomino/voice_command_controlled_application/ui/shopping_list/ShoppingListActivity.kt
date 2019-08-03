@@ -45,13 +45,13 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
         presenter.start()
     }
 
-    override fun startSpeechRecognizer(requestCode: Int, message: String?) {
+    override fun startSpeechRecognizer(requestCode: Int, messageId: Int) {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         intent.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
             RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
         )
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, message)
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, resources.getString(messageId))
         try {
             startActivityForResult(intent, requestCode)
         } catch (e: ActivityNotFoundException) {

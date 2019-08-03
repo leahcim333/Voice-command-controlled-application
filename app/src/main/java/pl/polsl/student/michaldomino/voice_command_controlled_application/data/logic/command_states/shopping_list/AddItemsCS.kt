@@ -7,7 +7,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.sho
 
 class AddItemsCS(override val presenter: ShoppingListPresenter) : CSDynamicNode(presenter) {
 
-    override val messageToSpeak: String = presenter.getString(R.string.list_items)
+    override val messageToSpeakId: Int = R.string.list_items
 
     override val commandName: String? = presenter.getString(R.string.add_items)
 
