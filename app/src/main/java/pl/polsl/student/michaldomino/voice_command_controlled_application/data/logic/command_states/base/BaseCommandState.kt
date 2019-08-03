@@ -4,7 +4,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.bas
 
 abstract class BaseCommandState(protected open val presenter: BasePresenter) {
 
-    abstract val commandName: String?
+    abstract val commandNameId: Int?
 
     abstract fun initialize()
 

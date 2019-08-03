@@ -4,7 +4,6 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.Word
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list.model.CommandsModel
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListPresenter
 
 class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : CSRoot(presenter) {
@@ -24,7 +23,7 @@ class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : CSR
     override fun processInput(userInput: String) {
         val command = Word(userInput)
         val matchingCommandState: BaseCommandState? =
-            availableCommands.firstOrNull { command.similarTo(it.commandName!!) }
+            availableCommands.firstOrNull { command.similarTo(presenter.getString(it.commandNameId!!)) }
         if (matchingCommandState != null) {
             presenter.currentState = matchingCommandState
             matchingCommandState.initialize()

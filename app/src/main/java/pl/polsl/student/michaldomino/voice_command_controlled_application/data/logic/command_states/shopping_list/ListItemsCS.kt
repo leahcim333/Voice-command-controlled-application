@@ -2,6 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSLeaf
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list.model.CommandsModel
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListPresenter
 
@@ -9,7 +10,7 @@ class ListItemsCS(override val presenter: ShoppingListPresenter) : CSLeaf(presen
 
     private val ITEM_DELIMITER = ", "
 
-    override val commandName: String? = presenter.getString(R.string.list_items)
+    override val commandNameId: Int? = CommandsModel.LIST_ITEMS_COMMAND
 
     override fun initialize() {
         val itmes: MutableList<RowItem> = presenter.getItems()

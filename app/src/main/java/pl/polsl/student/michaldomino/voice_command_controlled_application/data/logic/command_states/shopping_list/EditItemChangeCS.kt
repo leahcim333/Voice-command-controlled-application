@@ -10,7 +10,7 @@ class EditItemChangeCS(override val presenter: ShoppingListPresenter, private va
 
     override val messageToSpeakId: Int = R.string.tell_new_name
 
-    override val commandName: String? = null
+    override val commandNameId: Int? = null
 
     override fun processInput(userInput: String) {
         presenter.setNewItemName(selectedItem, userInput)

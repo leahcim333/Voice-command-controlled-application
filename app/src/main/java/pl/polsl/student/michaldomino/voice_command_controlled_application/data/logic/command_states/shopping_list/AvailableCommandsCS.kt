@@ -9,7 +9,7 @@ class AvailableCommandsCS(override val presenter: ShoppingListPresenter) : CSLea
 
     private val ITEM_DELIMITER = ", "
 
-    override val commandName: String? = presenter.getString(R.string.available_commands)
+    override val commandNameId: Int? = CommandsModel.AVAILABLE_COMMANDS_COMMAND
 
     override fun initialize() {
         val availableCommands: MutableList<Int> = CommandsModel.availableCommands

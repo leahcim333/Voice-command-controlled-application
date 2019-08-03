@@ -3,6 +3,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.Word
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSDynamicNode
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list.model.CommandsModel
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListPresenter
 
@@ -10,7 +11,7 @@ class EditItemSelectCS(override val presenter: ShoppingListPresenter) : CSDynami
 
     override val messageToSpeakId: Int = R.string.select_item
 
-    override val commandName: String? = presenter.getString(R.string.edit_item)
+    override val commandNameId: Int? = CommandsModel.EDIT_ITEM_COMMAND
 
     override fun processInput(userInput: String) {
         val items: MutableList<RowItem> = presenter.getItems()
