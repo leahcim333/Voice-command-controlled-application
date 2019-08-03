@@ -7,4 +7,6 @@ abstract class BaseCommandState(protected open val presenter: BasePresenter) {
     abstract val commandName: String?
 
     abstract fun initialize()
+
+    abstract fun processInput(userInput: String)
 }

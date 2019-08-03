@@ -7,12 +7,16 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.sho
 
 class ListItemsCS(override val presenter: ShoppingListPresenter) : CSLeaf(presenter) {
 
+    private val ITEM_DELIMITER = ','
+
     override val commandName: String? = presenter.getString(R.string.list_items)
 
     override fun initialize() {
         val itmes: MutableList<RowItem> = presenter.getItems()
         val messageBuilder = StringBuilder()
-        itmes.forEach { messageBuilder.append(it.text).append(" ") }
+        itmes.forEach { messageBuilder.append(it.text).append(ITEM_DELIMITER).append(" ") }
         presenter.speak(messageBuilder.toString())
     }
+
+    override fun processInput(userInput: String) {}
 }

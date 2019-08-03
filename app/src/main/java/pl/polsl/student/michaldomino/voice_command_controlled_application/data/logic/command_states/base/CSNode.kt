@@ -6,8 +6,6 @@ abstract class CSNode(override val presenter: BasePresenter) : BaseCommandState(
 
     protected abstract val messageToSpeak: String
 
-    abstract fun processInput(userInput: String)
-
     override fun initialize() {
         presenter.askForInput(messageToSpeak)
     }
