@@ -2,10 +2,10 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSNode
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.ShoppingListItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListPresenter
 
-class EditItemChangeCS(override val presenter: ShoppingListPresenter, private val selectedItem: RowItem) :
+class EditItemChangeCS(override val presenter: ShoppingListPresenter, private val selectedItem: ShoppingListItem) :
     CSNode(presenter) {
 
     override val messageToSpeakId: Int = R.string.tell_new_name

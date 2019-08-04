@@ -5,7 +5,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.l
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list.ShoppingListInitialCS
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.ShoppingListItem
 
 class ShoppingListPresenter(override val view: ShoppingListContract.View) : ShoppingListContract.Presenter(view) {
 
@@ -35,11 +35,11 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
         elements.filter { it !in existingItems }.forEach { view.addRow(it) }
     }
 
-    override fun getItems(): MutableList<RowItem> {
+    override fun getItems(): MutableList<ShoppingListItem> {
         return view.getItems()
     }
 
-    override fun setNewItemName(item: RowItem, newName: String) {
+    override fun setNewItemName(item: ShoppingListItem, newName: String) {
         val existingItems: List<String> = view.getItems().map { it.text }
         if (newName !in existingItems)
             view.setNewItemName(item, newName)

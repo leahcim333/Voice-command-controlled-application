@@ -6,11 +6,11 @@ import android.widget.CheckBox
 import android.widget.TextView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 
-class RowItem(inflater: LayoutInflater) {
+class ShoppingListItem(inflater: LayoutInflater) {
 
-    private val rowView: View = inflater.inflate(R.layout.check_list_row, null)
+    private val rowView: View = inflater.inflate(R.layout.shopping_list_row, null)
 
-    private var textView: TextView = rowView.findViewById(R.id.row_text)
+    private var textView: TextView = rowView.findViewById(R.id.item_text)
 
     private var checkBox: CheckBox = rowView.findViewById(R.id.row_checkbox)
 
@@ -28,12 +28,12 @@ class RowItem(inflater: LayoutInflater) {
         return rowView
     }
 
-    fun setText(value: CharSequence): RowItem {
+    fun setText(value: CharSequence): ShoppingListItem {
         this.textView.text = value
         return this
     }
 
-    fun setChecked(value: Boolean): RowItem {
+    fun setChecked(value: Boolean): ShoppingListItem {
         this.checkBox.isChecked = value
         return this
     }

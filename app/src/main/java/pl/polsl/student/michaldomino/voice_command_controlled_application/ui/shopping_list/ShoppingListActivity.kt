@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.activity_shopping_list.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItem
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.RowItemsManager
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.ShoppingListItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.ShoppingListItemsManager
 
 class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
@@ -23,7 +23,7 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
     private lateinit var parentLinearLayout: LinearLayout
 
-    private lateinit var rowItemsManager: RowItemsManager
+    private lateinit var shoppingListItemsManager: ShoppingListItemsManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,12 +32,12 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
         setSupportActionBar(toolbar)
 
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
-        rowItemsManager = RowItemsManager(layoutInflater, parentLinearLayout)
+        shoppingListItemsManager = ShoppingListItemsManager(layoutInflater, parentLinearLayout)
 
-        rowItemsManager.addRow("one")
-        rowItemsManager.addRow("two")
-        rowItemsManager.addRow("elephant")
-        rowItemsManager.addRow("dog")
+        shoppingListItemsManager.addRow("one")
+        shoppingListItemsManager.addRow("two")
+        shoppingListItemsManager.addRow("elephant")
+        shoppingListItemsManager.addRow("dog")
 
         presenter = ShoppingListPresenter(this)
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
@@ -66,14 +66,14 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
     }
 
     override fun addRow(text: CharSequence) {
-        rowItemsManager.addRow(text)
+        shoppingListItemsManager.addRow(text)
     }
 
-    override fun getItems(): MutableList<RowItem> {
-        return rowItemsManager.items
+    override fun getItems(): MutableList<ShoppingListItem> {
+        return shoppingListItemsManager.items
     }
 
-    override fun setNewItemName(item: RowItem, newName: String) {
+    override fun setNewItemName(item: ShoppingListItem, newName: String) {
         item.setText(newName)
     }
 }
