@@ -17,9 +17,4 @@ class ShoppingListItemsManager(private val inflater: LayoutInflater, private val
         container.add(rowItem)
         parentLinearLayout.addView(rowItem.getView(), parentLinearLayout.childCount)
     }
-
-    fun edit(oldValue: CharSequence, newValue: CharSequence) {
-        val editedRow = container.first { it.text == oldValue }
-        editedRow.setText(newValue)
-    }
 }
