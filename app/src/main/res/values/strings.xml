@@ -15,5 +15,6 @@
     <string name="available_commands">Available commands</string>
     <string name="available_commands_are">Available commands are</string>
     <string name="item_already_exists">The item already exists</string>
+    <string name="title_activity_list_selection">ListSelectionActivity</string>
     <!--===================================================================-->
 </resources>

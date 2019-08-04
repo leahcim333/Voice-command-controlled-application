@@ -1,7 +1,5 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list
 
-import android.content.Intent
-import android.speech.RecognizerIntent
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
@@ -27,17 +25,6 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
         val message: String = view.getString(messageId)
         speaker.speakInForeground(message)
         view.startSpeechRecognizer(REQUEST_CODE_SPEECH_RECOGNIZRER, messageId)
-    }
-
-    override fun onDoubleTap() {
-        currentState = initialState
-        currentState.initialize()
-    }
-
-    override fun processInput(data: Intent) {
-        val possibleMatches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-        val userInput = possibleMatches[0]
-        currentState.processInput(userInput)
     }
 
     override fun addItems(userInput: String) {
