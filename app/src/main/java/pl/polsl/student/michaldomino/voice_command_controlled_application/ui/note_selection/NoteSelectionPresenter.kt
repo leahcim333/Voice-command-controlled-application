@@ -1,21 +1,35 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.note_selection.NoteSelectionInititalCS
 
 class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : NoteSelectionContract.Presenter(view) {
 
-    override val initialState: CSRoot
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-    override var currentState: BaseCommandState
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-        set(value) {}
+    private val REQUEST_CODE_SPEECH_RECOGNIZRER = 0
+
+    override val initialState: CSRoot = NoteSelectionInititalCS(this)
+
+    override var currentState: BaseCommandState = initialState
+
+    private val speaker: Speaker = Speaker(view.getApplicationContext())
 
     override fun start() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun askForInput(messageId: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val message: String = view.getString(messageId)
+        speaker.speakInForeground(message)
+        view.startSpeechRecognizer(REQUEST_CODE_SPEECH_RECOGNIZRER, messageId)
+    }
+
+    override fun addShoppingList(userInput: String) {
+
+    }
+
+    override fun speak(message: String) {
+        speaker.speakInForeground(message)
     }
 }

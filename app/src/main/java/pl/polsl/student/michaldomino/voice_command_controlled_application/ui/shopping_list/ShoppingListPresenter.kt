@@ -9,7 +9,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.m
 
 class ShoppingListPresenter(override val view: ShoppingListContract.View) : ShoppingListContract.Presenter(view) {
 
-    private val REQUEST_CODE_SPEECH_RECOGNIZRER = 0
+    private val REQUEST_CODE_SPEECH_RECOGNIZER = 0
 
     override val initialState: CSRoot = ShoppingListInitialCS(this)
 
@@ -24,7 +24,7 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
     override fun askForInput(messageId: Int) {
         val message: String = view.getString(messageId)
         speaker.speakInForeground(message)
-        view.startSpeechRecognizer(REQUEST_CODE_SPEECH_RECOGNIZRER, messageId)
+        view.startSpeechRecognizer(REQUEST_CODE_SPEECH_RECOGNIZER, messageId)
     }
 
     override fun addItems(userInput: String) {
