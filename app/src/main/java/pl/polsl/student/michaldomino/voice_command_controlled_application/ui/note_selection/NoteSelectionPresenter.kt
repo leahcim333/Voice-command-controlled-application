@@ -1,9 +1,9 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.list_selection
+package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
 
-class ListSelectionPresenter(override val view: ListSelectionContract.View) : ListSelectionContract.Presenter(view) {
+class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : NoteSelectionContract.Presenter(view) {
 
     override val initialState: CSRoot
         get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.

@@ -6,7 +6,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_list_selection"
-        tools:context=".ui.list_selection.ListSelectionActivity">
+        tools:showIn="@layout/activity_note_selection"
+        tools:context=".ui.note_selection.NoteSelectionActivity">
+
+    <include layout="@layout/content_parent"/>
 
 </android.support.constraint.ConstraintLayout>

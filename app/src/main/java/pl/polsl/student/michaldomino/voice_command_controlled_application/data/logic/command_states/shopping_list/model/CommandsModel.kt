@@ -13,7 +13,4 @@ object CommandsModel {
     val LIST_ITEMS_COMMAND = R.string.list_items
 
     val availableCommands = mutableListOf(ADD_ITEMS_COMMAND, EDIT_ITEM_COMMAND, LIST_ITEMS_COMMAND)
-
-    val allCommands =
-        mutableListOf(ADD_ITEMS_COMMAND, AVAILABLE_COMMANDS_COMMAND, EDIT_ITEM_COMMAND, LIST_ITEMS_COMMAND)
 }
