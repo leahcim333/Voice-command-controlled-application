@@ -6,11 +6,13 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.l
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection.NoteSelectionPresenter
 
-class NoteSelectionInititalCS(override val presenter: NoteSelectionPresenter) : CSRoot(presenter) {
+class NoteSelectionInitialCS(override val presenter: NoteSelectionPresenter) : CSRoot(presenter) {
 
-    private val ADD_NOTES = CreateShoppingListCS(presenter)
+    private val ADD_NOTE = CreateShoppingListCS(presenter)
 
-    override val availableCommands: Array<BaseCommandState> = arrayOf(ADD_NOTES)
+    private val OPEN_NOTE = OpenNoteCS(presenter)
+
+    override val availableCommands: Array<BaseCommandState> = arrayOf(ADD_NOTE, OPEN_NOTE)
 
     override val messageToSpeakId: Int = R.string.tell_command
 

@@ -3,13 +3,13 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.no
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.note_selection.NoteSelectionInititalCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.note_selection.NoteSelectionInitialCS
 
 class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : NoteSelectionContract.Presenter(view) {
 
     private val REQUEST_CODE_SPEECH_RECOGNIZRER = 0
 
-    override val initialState: CSRoot = NoteSelectionInititalCS(this)
+    override val initialState: CSRoot = NoteSelectionInitialCS(this)
 
     override var currentState: BaseCommandState = initialState
 
@@ -26,6 +26,10 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : No
     }
 
     override fun addShoppingList(userInput: String) {
+
+    }
+
+    override fun openNote(userInput: String) {
 
     }
 

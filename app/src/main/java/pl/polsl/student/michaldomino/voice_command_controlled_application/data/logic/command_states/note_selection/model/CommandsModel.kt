@@ -5,4 +5,6 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 object CommandsModel {
 
     val CREATE_SHOPPING_LIST_COMMAND: Int = R.string.create_shopping_list
+
+    val OPEN_NOTE: Int = R.string.open_note
 }
