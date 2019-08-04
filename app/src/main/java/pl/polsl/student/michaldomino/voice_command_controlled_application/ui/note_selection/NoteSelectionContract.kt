@@ -7,6 +7,7 @@ interface NoteSelectionContract {
 
     interface View : BaseView {
         fun startSpeechRecognizer(requestCode: Int, messageId: Int)
+        fun addNote(name: String, type: String)
     }
 
     abstract class Presenter(override val view: View) : BasePresenter(view) {
