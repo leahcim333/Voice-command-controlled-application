@@ -27,7 +27,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : No
     }
 
     override fun addShoppingList(userInput: String) {
-        view.addNote(userInput, NoteType.SHOPPING_LIST.type)
+        view.addNote(userInput, NoteType.SHOPPING_LIST)
     }
 
     override fun openNote(userInput: String) {

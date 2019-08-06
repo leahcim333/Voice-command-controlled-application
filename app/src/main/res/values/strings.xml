@@ -21,5 +21,6 @@
     <string name="command_unrecognized">Command unrecognized</string>
     <string name="open_note">Open note</string>
     <string name="tell_note_name">Tell note name</string>
+    <string name="title_activity_note">NoteActivity</string>
     <!--===================================================================-->
 </resources>

@@ -12,7 +12,7 @@ class NoteSelectionItemsManager(private val inflater: LayoutInflater, private va
             return container.toMutableList()
         }
 
-    fun addRow(text: CharSequence, type: CharSequence) {
+    fun addRow(text: CharSequence, type: NoteType) {
         val rowItem = NoteSelectionItem(inflater).setText(text).setType(type)
         container.add(rowItem)
         parentLinearLayout.addView(rowItem.getView(), parentLinearLayout.childCount)

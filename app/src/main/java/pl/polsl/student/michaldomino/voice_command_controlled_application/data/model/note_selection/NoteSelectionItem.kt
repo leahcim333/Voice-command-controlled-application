@@ -1,7 +1,9 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.note_selection
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 
@@ -11,16 +13,17 @@ class NoteSelectionItem(inflater: LayoutInflater) {
 
     private val noteNameTextView: TextView = rowView.findViewById(R.id.note_name)
 
-    private val noteTypeTextView: TextView = rowView.findViewById(R.id.note_type)
+    private val noteTypeImageView: ImageView = rowView.findViewById(R.id.note_type)
 
     val name: String
         get() {
             return noteNameTextView.text.toString()
         }
 
-    val type: String
+    val type: Drawable?
         get() {
-            return noteTypeTextView.text.toString()
+            return noteTypeImageView.drawable
+//            return noteTypeImageView.text.toString()
         }
 
     fun getView(): View {
@@ -32,8 +35,8 @@ class NoteSelectionItem(inflater: LayoutInflater) {
         return this
     }
 
-    fun setType(value: CharSequence): NoteSelectionItem {
-        this.noteTypeTextView.text = value
+    fun setType(value: NoteType): NoteSelectionItem {
+        this.noteTypeImageView.setImageResource(android.R.drawable.checkbox_on_background)
         return this
     }
 }

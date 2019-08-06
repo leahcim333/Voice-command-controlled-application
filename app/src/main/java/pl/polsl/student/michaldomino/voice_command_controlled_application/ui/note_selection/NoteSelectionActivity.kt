@@ -34,9 +34,9 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         noteSelectionItemsManager = NoteSelectionItemsManager(layoutInflater, parentLinearLayout)
 
-        noteSelectionItemsManager.addRow("first list", NoteType.SHOPPING_LIST.type)
-        noteSelectionItemsManager.addRow("second list", NoteType.SHOPPING_LIST.type)
-        noteSelectionItemsManager.addRow("third list", NoteType.SHOPPING_LIST.type)
+        noteSelectionItemsManager.addRow("first list", NoteType.SHOPPING_LIST)
+        noteSelectionItemsManager.addRow("second list", NoteType.SHOPPING_LIST)
+        noteSelectionItemsManager.addRow("third list", NoteType.SHOPPING_LIST)
 
         presenter = NoteSelectionPresenter(this)
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
@@ -64,7 +64,7 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         }
     }
 
-    override fun addNote(name: String, type: String) {
+    override fun addNote(name: String, type: NoteType) {
         noteSelectionItemsManager.addRow(name, type)
     }
 
