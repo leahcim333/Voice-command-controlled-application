@@ -3,7 +3,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.ma
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.InitialCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection.NoteSelectionActivity
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note.NoteActivity
 
 
 class MainPresenter(override val view: MainContract.View) : MainContract.Presenter(view) {
@@ -17,7 +17,11 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
     override var currentState: BaseCommandState = InitialCS(this)
 
     override fun start() {
-        view.startActivityFromClass(NoteSelectionActivity::class.java)
+        view.startActivityFromClass(NoteActivity::class.java)
         view.finish()
+    }
+
+    override fun speak(message: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

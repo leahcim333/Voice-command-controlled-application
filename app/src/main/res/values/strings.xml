@@ -22,5 +22,7 @@
     <string name="open_note">Open note</string>
     <string name="tell_note_name">Tell note name</string>
     <string name="title_activity_note">NoteActivity</string>
+    <string name="add_text">add text</string>
+    <string name="tell_text">Tell text</string>
     <!--===================================================================-->
 </resources>

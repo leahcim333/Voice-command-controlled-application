@@ -7,7 +7,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.not
 
 class AddTextCS(override val presenter: NotePresenter) : CSNode(presenter) {
 
-    override val messageToSpeakId: Int = R.string.list_items // temp
+    override val messageToSpeakId: Int = R.string.tell_text
 
     override val commandNameId: Int? = NoteCommandsModel.ADD_TEXT
 
