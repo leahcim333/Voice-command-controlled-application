@@ -60,4 +60,16 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
         }
     }
+
+    override fun startListening() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onCommandRecognizerResults(bundle: Bundle) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun speakInForeground(message: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

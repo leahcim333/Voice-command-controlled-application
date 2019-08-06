@@ -14,21 +14,26 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.l
 
 class NoteActivity : AppCompatActivity(), NoteContract.View {
 
-    private val presenter: NoteContract.Presenter = NotePresenter(this)
+    private lateinit var presenter: NoteContract.Presenter
 
-    private val mDetector: GestureDetectorCompat =
-        GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
+    private lateinit var mDetector: GestureDetectorCompat
 
-    private val parentLinearLayout: LinearLayout = findViewById(R.id.parent_linear_layout)
+    private lateinit var parentLinearLayout: LinearLayout
 
-    private val speaker: Speaker = Speaker(applicationContext)
+    private lateinit var speaker: Speaker
 
-    private val commandRecognizer: CommandRecognizer = CommandRecognizer(this)
+    private lateinit var commandRecognizer: CommandRecognizer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
         setSupportActionBar(toolbar)
+
+        presenter = NotePresenter(this)
+        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
+        parentLinearLayout = findViewById(R.id.parent_linear_layout)
+        speaker = Speaker(applicationContext)
+        commandRecognizer = CommandRecognizer(this)
 
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.start()

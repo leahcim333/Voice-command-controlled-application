@@ -15,23 +15,29 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.m
 
 class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 
-    private val presenter: NoteSelectionContract.Presenter = NoteSelectionPresenter(this)
+    private lateinit var presenter: NoteSelectionContract.Presenter
 
-    private val mDetector: GestureDetectorCompat =
-        GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
+    private lateinit var mDetector: GestureDetectorCompat
 
-    private val parentLinearLayout: LinearLayout = findViewById(R.id.parent_linear_layout)
+    private lateinit var parentLinearLayout: LinearLayout
 
-    private val noteSelectionItemsManager = NoteSelectionItemsManager(layoutInflater, parentLinearLayout)
+    private lateinit var noteSelectionItemsManager: NoteSelectionItemsManager
 
-    private val speaker: Speaker = Speaker(applicationContext)
+    private lateinit var speaker: Speaker
 
-    private val commandRecognizer: CommandRecognizer = CommandRecognizer(this)
+    private lateinit var commandRecognizer: CommandRecognizer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_selection)
         setSupportActionBar(toolbar)
+
+        presenter = NoteSelectionPresenter(this)
+        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
+        parentLinearLayout = findViewById(R.id.parent_linear_layout)
+        noteSelectionItemsManager = NoteSelectionItemsManager(layoutInflater, parentLinearLayout)
+        speaker = Speaker(applicationContext)
+        commandRecognizer = CommandRecognizer(this)
 
         noteSelectionItemsManager.addRow("first list", NoteType.SHOPPING_LIST)
         noteSelectionItemsManager.addRow("second list", NoteType.SHOPPING_LIST)

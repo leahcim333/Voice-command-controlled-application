@@ -16,24 +16,29 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.m
 
 class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
-    private val presenter: ShoppingListContract.Presenter = ShoppingListPresenter(this)
+    private lateinit var presenter: ShoppingListContract.Presenter
 
-    private val mDetector: GestureDetectorCompat =
-        GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
+    private lateinit var mDetector: GestureDetectorCompat
 
-    private val parentLinearLayout: LinearLayout = findViewById(R.id.parent_linear_layout)
+    private lateinit var parentLinearLayout: LinearLayout
 
-    private val shoppingListItemsManager: ShoppingListItemsManager =
-        ShoppingListItemsManager(layoutInflater, parentLinearLayout)
+    private lateinit var shoppingListItemsManager: ShoppingListItemsManager
 
-    private val speaker: Speaker = Speaker(applicationContext)
+    private lateinit var speaker: Speaker
 
-    private val commandRecognizer: CommandRecognizer = CommandRecognizer(this)
+    private lateinit var commandRecognizer: CommandRecognizer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_list)
         setSupportActionBar(toolbar)
+
+        presenter = ShoppingListPresenter(this)
+        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
+        parentLinearLayout = findViewById(R.id.parent_linear_layout)
+        shoppingListItemsManager = ShoppingListItemsManager(layoutInflater, parentLinearLayout)
+        speaker = Speaker(applicationContext)
+        commandRecognizer = CommandRecognizer(this)
 
         shoppingListItemsManager.addRow("one")
         shoppingListItemsManager.addRow("two")

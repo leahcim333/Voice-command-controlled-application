@@ -10,10 +10,6 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
     override val initialState: CSRoot
         get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
 
-    override fun askForInput(messageId: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override var currentState: BaseCommandState = InitialCS(this)
 
     override fun start() {
