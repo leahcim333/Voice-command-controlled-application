@@ -34,7 +34,7 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 
         noteSelectionItemsManager.addRow("first list", NoteType.SHOPPING_LIST)
         noteSelectionItemsManager.addRow("second list", NoteType.SHOPPING_LIST)
-        noteSelectionItemsManager.addRow("third list", NoteType.SHOPPING_LIST)
+        noteSelectionItemsManager.addRow("note", NoteType.NOTE)
 
         presenter = NoteSelectionPresenter(this)
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))

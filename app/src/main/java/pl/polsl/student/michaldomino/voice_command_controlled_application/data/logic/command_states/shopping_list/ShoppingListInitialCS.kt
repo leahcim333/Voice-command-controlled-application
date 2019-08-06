@@ -1,7 +1,5 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list
 
-import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.Word
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListPresenter
@@ -16,19 +14,5 @@ class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : CSR
 
     private val LIST_ITEMS = ListItemsCS(presenter)
 
-    override val messageToSpeakId: Int = R.string.tell_command
-
     override val availableCommands: Array<BaseCommandState> = arrayOf(ADD_ITEMS, AVAILABLE_COMMANDS, EDIT_ITEM_SELECT, LIST_ITEMS)
-
-    override fun processInput(userInput: String) {
-        val command = Word(userInput)
-        val matchingCommandState: BaseCommandState? =
-            availableCommands.firstOrNull { command.similarTo(presenter.getString(it.commandNameId!!)) }
-        if (matchingCommandState != null) {
-            presenter.currentState = matchingCommandState
-            matchingCommandState.initialize()
-        } else {
-            presenter.speak(presenter.getString(R.string.command_unrecognized))
-        }
-    }
 }

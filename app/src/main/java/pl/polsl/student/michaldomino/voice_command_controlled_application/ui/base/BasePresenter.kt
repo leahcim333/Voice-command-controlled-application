@@ -15,6 +15,8 @@ abstract class BasePresenter(protected open val view: BaseView) {
 
     abstract fun askForInput(messageId: Int)
 
+    abstract fun speak(message: String)
+
     fun processInput(data: Intent) {
         val possibleMatches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
         val userInput = possibleMatches[0]

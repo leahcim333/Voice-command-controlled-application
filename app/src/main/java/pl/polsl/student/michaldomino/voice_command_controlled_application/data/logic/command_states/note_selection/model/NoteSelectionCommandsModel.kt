@@ -2,7 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 
-object CommandsModel {
+object NoteSelectionCommandsModel {
 
     val CREATE_SHOPPING_LIST_COMMAND: Int = R.string.create_shopping_list
 

@@ -5,7 +5,11 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.bas
 
 interface NoteContract {
 
-    interface View : BaseView
+    interface View : BaseView {
+        fun addText(text: String)
+    }
 
-    abstract class Presenter(override val view: View) : BasePresenter(view)
+    abstract class Presenter(override val view: View) : BasePresenter(view) {
+        abstract fun addText(text: String)
+    }
 }

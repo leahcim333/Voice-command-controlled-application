@@ -16,6 +16,5 @@ interface ShoppingListContract {
         abstract fun addItems(userInput: String)
         abstract fun getItems(): MutableList<ShoppingListItem>
         abstract fun setNewItemName(item: ShoppingListItem, newName: String)
-        abstract fun speak(message: String)
     }
 }

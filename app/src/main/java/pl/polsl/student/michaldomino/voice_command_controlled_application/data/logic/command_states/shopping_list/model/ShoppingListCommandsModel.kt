@@ -2,7 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 
-object CommandsModel {
+object ShoppingListCommandsModel {
 
     val ADD_ITEMS_COMMAND = R.string.add_items
 
@@ -12,5 +12,9 @@ object CommandsModel {
 
     val LIST_ITEMS_COMMAND = R.string.list_items
 
-    val availableCommands = mutableListOf(ADD_ITEMS_COMMAND, EDIT_ITEM_COMMAND, LIST_ITEMS_COMMAND)
+    val availableCommands = mutableListOf(
+        ADD_ITEMS_COMMAND,
+        EDIT_ITEM_COMMAND,
+        LIST_ITEMS_COMMAND
+    )
 }
