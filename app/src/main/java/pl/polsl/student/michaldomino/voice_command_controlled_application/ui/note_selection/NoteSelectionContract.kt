@@ -7,7 +7,6 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.bas
 interface NoteSelectionContract {
 
     interface View : BaseView {
-        fun startSpeechRecognizer(requestCode: Int, messageId: Int)
         fun addNote(name: String, type: NoteType)
     }
 

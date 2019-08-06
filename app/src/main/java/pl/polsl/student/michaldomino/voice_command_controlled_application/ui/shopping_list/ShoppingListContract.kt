@@ -10,7 +10,6 @@ interface ShoppingListContract {
         fun addRow(text: CharSequence)
         fun getItems(): MutableList<ShoppingListItem>
         fun setNewItemName(item: ShoppingListItem, newName: String)
-        fun startSpeechRecognizer(requestCode: Int, messageId: Int)
     }
 
     abstract class Presenter(override val view: View) : BasePresenter(view) {
