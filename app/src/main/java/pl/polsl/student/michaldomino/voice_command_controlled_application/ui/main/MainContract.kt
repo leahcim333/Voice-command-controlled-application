@@ -6,10 +6,8 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.bas
 interface MainContract {
 
     interface View : BaseView {
-        fun addRow(text: CharSequence)
+        fun finish()
     }
 
-    interface Presenter : BasePresenter {
-        fun onDoubleTap()
-    }
+    abstract class Presenter(view: View) : BasePresenter(view)
 }
