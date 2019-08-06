@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Aplikacja sterowana komendami głosowymi</string>
-    <string name="edit_item">edytuj element</string>
+    <string name="edit_item">Edytuj element</string>
     <string name="action_settings">Ustawienia</string>
     <string name="add_items">Dodaj elementy</string>
     <string name="elements_delimiter">i</string>
@@ -17,4 +17,6 @@
     <string name="open_note">Otwórz notatkę</string>
     <string name="tell_name_of_the_new_list">Podaj nazwę nowej listy</string>
     <string name="tell_note_name">Podaj nazwę notatki</string>
+    <string name="tell_text">Podaj tekst</string>
+    <string name="add_text">Dodaj tekst</string>
 </resources>
