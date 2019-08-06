@@ -1,17 +1,16 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
 import java.util.*
 
-class CommandRecognizer(context: Context, presenter: BasePresenter) {
+class CommandRecognizer(view: BaseView) {
 
-    private val mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(context)
+    private val mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(view.getApplicationContext())
 
     private val mSpeechRecognizerIntent: Intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
 
@@ -37,9 +36,7 @@ class CommandRecognizer(context: Context, presenter: BasePresenter) {
             override fun onError(i: Int) {}
 
             override fun onResults(bundle: Bundle) {
-                val matches = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                if (matches != null)
-                    presenter.processInput(matches)
+                view.onCommandRecognizerResults(bundle)
             }
 
             override fun onPartialResults(bundle: Bundle) {}

@@ -9,29 +9,44 @@ import kotlinx.android.synthetic.main.content_parent.*
 import kotlinx.android.synthetic.main.note_view.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandRecognizer
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
 
 class NoteActivity : AppCompatActivity(), NoteContract.View {
 
-    private lateinit var presenter: NoteContract.Presenter
+    private val presenter: NoteContract.Presenter = NotePresenter(this)
 
-    private lateinit var mDetector: GestureDetectorCompat
+    private val mDetector: GestureDetectorCompat =
+        GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
 
-    private lateinit var parentLinearLayout: LinearLayout
+    private val parentLinearLayout: LinearLayout = findViewById(R.id.parent_linear_layout)
+
+    private val speaker: Speaker = Speaker(applicationContext)
+
+    private val commandRecognizer: CommandRecognizer = CommandRecognizer(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
         setSupportActionBar(toolbar)
 
-        parentLinearLayout = findViewById(R.id.parent_linear_layout)
-
-        presenter = NotePresenter(this)
-        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.start()
 
         val inflater = layoutInflater
         inflater.inflate(R.layout.note_view, parentLinearLayout)
+    }
+
+    override fun startListening() {
+        commandRecognizer.startListening()
+    }
+
+    override fun onCommandRecognizerResults(bundle: Bundle) {
+        presenter.processInput(bundle)
+    }
+
+    override fun speakInForeground(message: String) {
+        speaker.speakInForeground(message)
     }
 
     override fun addText(text: String) {

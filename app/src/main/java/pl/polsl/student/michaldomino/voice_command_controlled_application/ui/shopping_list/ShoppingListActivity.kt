@@ -8,37 +8,52 @@ import kotlinx.android.synthetic.main.activity_shopping_list.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandRecognizer
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.ShoppingListItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.ShoppingListItemsManager
 
 
 class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
-    private lateinit var presenter: ShoppingListContract.Presenter
+    private val presenter: ShoppingListContract.Presenter = ShoppingListPresenter(this)
 
-    private lateinit var mDetector: GestureDetectorCompat
+    private val mDetector: GestureDetectorCompat =
+        GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
 
-    private lateinit var parentLinearLayout: LinearLayout
+    private val parentLinearLayout: LinearLayout = findViewById(R.id.parent_linear_layout)
 
-    private lateinit var shoppingListItemsManager: ShoppingListItemsManager
+    private val shoppingListItemsManager: ShoppingListItemsManager =
+        ShoppingListItemsManager(layoutInflater, parentLinearLayout)
+
+    private val speaker: Speaker = Speaker(applicationContext)
+
+    private val commandRecognizer: CommandRecognizer = CommandRecognizer(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_list)
         setSupportActionBar(toolbar)
 
-        parentLinearLayout = findViewById(R.id.parent_linear_layout)
-        shoppingListItemsManager = ShoppingListItemsManager(layoutInflater, parentLinearLayout)
-
         shoppingListItemsManager.addRow("one")
         shoppingListItemsManager.addRow("two")
         shoppingListItemsManager.addRow("elephant")
         shoppingListItemsManager.addRow("dog")
 
-        presenter = ShoppingListPresenter(this)
-        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.start()
+    }
+
+    override fun startListening() {
+        commandRecognizer.startListening()
+    }
+
+    override fun onCommandRecognizerResults(bundle: Bundle) {
+        presenter.processInput(bundle)
+    }
+
+    override fun speakInForeground(message: String) {
+        speaker.speakInForeground(message)
     }
 
     override fun addRow(text: CharSequence) {

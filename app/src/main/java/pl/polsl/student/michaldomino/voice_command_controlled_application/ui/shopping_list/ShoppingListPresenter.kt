@@ -1,8 +1,6 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandRecognizer
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list.ShoppingListInitialCS
@@ -10,24 +8,12 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.m
 
 class ShoppingListPresenter(override val view: ShoppingListContract.View) : ShoppingListContract.Presenter(view) {
 
-    private val REQUEST_CODE_SPEECH_RECOGNIZER = 0
-
     override val initialState: CSRoot = ShoppingListInitialCS(this)
 
     override var currentState: BaseCommandState = initialState
 
-    private val speaker: Speaker = Speaker(view.getApplicationContext())
-
-    private val commandRecognizer: CommandRecognizer = CommandRecognizer(view.getApplicationContext(), this)
-
     override fun start() {
 
-    }
-
-    override fun askForInput(messageId: Int) {
-        val message: String = view.getString(messageId)
-        speaker.speakInForeground(message)
-        commandRecognizer.startListening()
     }
 
     override fun addItems(userInput: String) {
@@ -47,10 +33,10 @@ class ShoppingListPresenter(override val view: ShoppingListContract.View) : Shop
         if (newName !in existingItems)
             view.setNewItemName(item, newName)
         else
-            speaker.speakInForeground(getString(R.string.item_already_exists))
+            speak(getString(R.string.item_already_exists))
     }
 
     override fun speak(message: String) {
-        speaker.speakInForeground(message)
+        view.speakInForeground(message)
     }
 }
