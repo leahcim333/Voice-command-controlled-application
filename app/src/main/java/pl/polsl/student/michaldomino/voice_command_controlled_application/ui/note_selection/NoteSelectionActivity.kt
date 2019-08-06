@@ -1,7 +1,5 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.view.GestureDetectorCompat
 import android.support.v7.app.AppCompatActivity
@@ -40,12 +38,6 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.start()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK && null != data) {
-            presenter.processInput(data)
-        }
     }
 
     override fun addNote(name: String, type: NoteType) {

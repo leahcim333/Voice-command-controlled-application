@@ -1,9 +1,8 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base
 
-import android.content.Intent
-import android.speech.RecognizerIntent
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
+import java.util.*
 
 abstract class BasePresenter(protected open val view: BaseView) {
 
@@ -17,8 +16,7 @@ abstract class BasePresenter(protected open val view: BaseView) {
 
     abstract fun speak(message: String)
 
-    fun processInput(data: Intent) {
-        val possibleMatches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+    fun processInput(possibleMatches: ArrayList<String>) {
         val userInput = possibleMatches[0]
         currentState.processInput(userInput)
     }

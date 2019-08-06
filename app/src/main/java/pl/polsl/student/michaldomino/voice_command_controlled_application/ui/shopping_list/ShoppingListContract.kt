@@ -10,7 +10,6 @@ interface ShoppingListContract {
         fun addRow(text: CharSequence)
         fun getItems(): MutableList<ShoppingListItem>
         fun setNewItemName(item: ShoppingListItem, newName: String)
-        fun onDoubleTap()
     }
 
     abstract class Presenter(override val view: View) : BasePresenter(view) {

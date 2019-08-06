@@ -1,7 +1,5 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.view.GestureDetectorCompat
 import android.support.v7.app.AppCompatActivity
@@ -34,12 +32,6 @@ class NoteActivity : AppCompatActivity(), NoteContract.View {
 
         val inflater = layoutInflater
         inflater.inflate(R.layout.note_view, parentLinearLayout)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK && null != data) {
-            presenter.processInput(data)
-        }
     }
 
     override fun addText(text: String) {
