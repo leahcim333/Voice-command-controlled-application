@@ -23,7 +23,7 @@ abstract class BasePresenter(protected open val view: BaseView) {
         currentState.processInput(userInput)
     }
 
-    fun onDoubleTap() {
+    open fun onDoubleTap() {
         currentState = initialState
         currentState.initialize()
     }
