@@ -11,7 +11,7 @@ interface NoteSelectionContract {
     }
 
     abstract class Presenter(override val view: View) : BasePresenter(view) {
-        abstract fun addShoppingList(userInput: String)
+        abstract fun addTaskList(userInput: String)
         abstract fun openNote(userInput: String)
     }
 }

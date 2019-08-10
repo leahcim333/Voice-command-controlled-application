@@ -1,10 +1,10 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list
+package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.task_list
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list.ShoppingListPresenter
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list.TaskListPresenter
 
-class ShoppingListInitialCS(override val presenter: ShoppingListPresenter) : CSRoot(presenter) {
+class TaskListInitialCS(override val presenter: TaskListPresenter) : CSRoot(presenter) {
 
     private val ADD_ITEMS = AddItemsCS(presenter)
 

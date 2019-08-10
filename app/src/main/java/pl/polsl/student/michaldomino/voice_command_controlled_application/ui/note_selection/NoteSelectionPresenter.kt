@@ -8,8 +8,6 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.m
 
 class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : NoteSelectionContract.Presenter(view) {
 
-    private val REQUEST_CODE_SPEECH_RECOGNIZRER = 0
-
     override val initialState: CSRoot = NoteSelectionInitialCS(this)
 
     override var currentState: BaseCommandState = initialState
@@ -20,14 +18,8 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : No
 
     }
 
-    override fun askForInput(messageId: Int) {
-        val message: String = view.getString(messageId)
-        speaker.speakInForeground(message)
-        view.startSpeechRecognizer(REQUEST_CODE_SPEECH_RECOGNIZRER, messageId)
-    }
-
-    override fun addShoppingList(userInput: String) {
-        view.addNote(userInput, NoteType.SHOPPING_LIST)
+    override fun addTaskList(userInput: String) {
+        view.addNote(userInput, NoteType.TASK_LIST)
     }
 
     override fun openNote(userInput: String) {

@@ -13,7 +13,7 @@
     <string name="available_commands_are">Dostępne komendy to</string>
     <string name="item_already_exists">Element już istnieje</string>
     <string name="command_unrecognized">Komenda nierozpoznana</string>
-    <string name="create_shopping_list">Stwórz listę zakupów</string>
+    <string name="create_task_list">Stwórz listę zakupów</string>
     <string name="open_note">Otwórz notatkę</string>
     <string name="tell_name_of_the_new_list">Podaj nazwę nowej listy</string>
     <string name="tell_note_name">Podaj nazwę notatki</string>
