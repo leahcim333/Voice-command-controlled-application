@@ -1,8 +1,8 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.note.model
+package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.text_note.model
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 
-object NoteCommandsModel {
+object TextNoteCommandsModel {
 
     val ADD_TEXT = R.string.add_text
 

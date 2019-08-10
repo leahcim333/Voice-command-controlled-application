@@ -6,8 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_note"
-        tools:context=".ui.note.NoteActivity">
+        tools:showIn="@layout/activity_text_note"
+        tools:context=".ui.text_note.TextNoteActivity">
 
     <include layout="@layout/content_parent"/>
 

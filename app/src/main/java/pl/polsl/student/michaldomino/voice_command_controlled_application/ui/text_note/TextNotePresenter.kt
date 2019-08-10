@@ -1,12 +1,12 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note
+package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.text_note
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.note.NoteInitialCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.text_note.TextNoteInitialCS
 
-class NotePresenter(override val view: NoteContract.View) : NoteContract.Presenter(view) {
+class TextNotePresenter(override val view: TextNoteContract.View) : TextNoteContract.Presenter(view) {
 
-    override val initialState: CSRoot = NoteInitialCS(this)
+    override val initialState: CSRoot = TextNoteInitialCS(this)
 
     override var currentState: BaseCommandState = initialState
 
