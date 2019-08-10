@@ -39,8 +39,8 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         speaker = Speaker(applicationContext)
         commandRecognizer = CommandRecognizer(this)
 
-        noteSelectionItemsManager.addRow("first list", NoteType.SHOPPING_LIST)
-        noteSelectionItemsManager.addRow("second list", NoteType.SHOPPING_LIST)
+        noteSelectionItemsManager.addRow("first list", NoteType.TASK_LIST)
+        noteSelectionItemsManager.addRow("second list", NoteType.TASK_LIST)
         noteSelectionItemsManager.addRow("note", NoteType.NOTE)
 
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }

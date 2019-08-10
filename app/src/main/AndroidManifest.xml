@@ -22,8 +22,8 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name=".ui.shopping_list.ShoppingListActivity"
-                android:label="@string/title_activity_shopping_list"
+                android:name=".ui.task_list.TaskListActivity"
+                android:label="@string/title_activity_task_list"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>

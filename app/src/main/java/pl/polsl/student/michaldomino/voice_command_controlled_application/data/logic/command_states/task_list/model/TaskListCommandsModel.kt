@@ -1,8 +1,8 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.shopping_list.model
+package pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.task_list.model
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 
-object ShoppingListCommandsModel {
+object TaskListCommandsModel {
 
     val ADD_ITEMS_COMMAND = R.string.add_items
 

@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list
+package pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.task_list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,9 @@ import android.widget.CheckBox
 import android.widget.TextView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 
-class ShoppingListItem(inflater: LayoutInflater) {
+class TaskListItem(inflater: LayoutInflater) {
 
-    private val rowView: View = inflater.inflate(R.layout.shopping_list_row, null)
+    private val rowView: View = inflater.inflate(R.layout.task_list_row, null)
 
     private var textView: TextView = rowView.findViewById(R.id.item_text)
 
@@ -28,12 +28,12 @@ class ShoppingListItem(inflater: LayoutInflater) {
         return rowView
     }
 
-    fun setText(value: CharSequence): ShoppingListItem {
+    fun setText(value: CharSequence): TaskListItem {
         this.textView.text = value
         return this
     }
 
-    fun setChecked(value: Boolean): ShoppingListItem {
+    fun setChecked(value: Boolean): TaskListItem {
         this.checkBox.isChecked = value
         return this
     }

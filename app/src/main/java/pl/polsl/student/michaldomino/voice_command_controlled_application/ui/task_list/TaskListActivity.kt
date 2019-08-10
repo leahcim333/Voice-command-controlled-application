@@ -1,28 +1,28 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.shopping_list
+package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list
 
 import android.os.Bundle
 import android.support.v4.view.GestureDetectorCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.LinearLayout
-import kotlinx.android.synthetic.main.activity_shopping_list.*
+import kotlinx.android.synthetic.main.activity_task_list.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.ShoppingListItem
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.shopping_list.ShoppingListItemsManager
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.task_list.TaskListItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.task_list.TaskListItemsManager
 
 
-class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
+class TaskListActivity : AppCompatActivity(), TaskListContract.View {
 
-    private lateinit var presenter: ShoppingListContract.Presenter
+    private lateinit var presenter: TaskListContract.Presenter
 
     private lateinit var mDetector: GestureDetectorCompat
 
     private lateinit var parentLinearLayout: LinearLayout
 
-    private lateinit var shoppingListItemsManager: ShoppingListItemsManager
+    private lateinit var taskListItemsManager: TaskListItemsManager
 
     private lateinit var speaker: Speaker
 
@@ -30,20 +30,20 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shopping_list)
+        setContentView(R.layout.activity_task_list)
         setSupportActionBar(toolbar)
 
-        presenter = ShoppingListPresenter(this)
+        presenter = TaskListPresenter(this)
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
-        shoppingListItemsManager = ShoppingListItemsManager(layoutInflater, parentLinearLayout)
+        taskListItemsManager = TaskListItemsManager(layoutInflater, parentLinearLayout)
         speaker = Speaker(applicationContext)
         commandRecognizer = CommandRecognizer(this)
 
-        shoppingListItemsManager.addRow("one")
-        shoppingListItemsManager.addRow("two")
-        shoppingListItemsManager.addRow("elephant")
-        shoppingListItemsManager.addRow("dog")
+        taskListItemsManager.addRow("one")
+        taskListItemsManager.addRow("two")
+        taskListItemsManager.addRow("elephant")
+        taskListItemsManager.addRow("dog")
 
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.start()
@@ -62,14 +62,14 @@ class ShoppingListActivity : AppCompatActivity(), ShoppingListContract.View {
     }
 
     override fun addRow(text: CharSequence) {
-        shoppingListItemsManager.addRow(text)
+        taskListItemsManager.addRow(text)
     }
 
-    override fun getItems(): MutableList<ShoppingListItem> {
-        return shoppingListItemsManager.items
+    override fun getItems(): MutableList<TaskListItem> {
+        return taskListItemsManager.items
     }
 
-    override fun setNewItemName(item: ShoppingListItem, newName: String) {
+    override fun setNewItemName(item: TaskListItem, newName: String) {
         item.setText(newName)
     }
 }

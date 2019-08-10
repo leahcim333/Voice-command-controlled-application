@@ -6,9 +6,9 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.not
 
 class NoteSelectionInitialCS(override val presenter: NoteSelectionPresenter) : CSRoot(presenter) {
 
-    private val CREATE_SHOPPING_LIST = CreateShoppingListCS(presenter)
+    private val CREATE_TASK_LIST = CreateTaskListCS(presenter)
 
     private val OPEN_NOTE = OpenNoteCS(presenter)
 
-    override val availableCommands: Array<BaseCommandState> = arrayOf(CREATE_SHOPPING_LIST, OPEN_NOTE)
+    override val availableCommands: Array<BaseCommandState> = arrayOf(CREATE_TASK_LIST, OPEN_NOTE)
 }
