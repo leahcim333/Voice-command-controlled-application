@@ -1,9 +1,9 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.text_note
 
 import android.os.Bundle
-import android.support.v4.view.GestureDetectorCompat
-import android.support.v7.app.AppCompatActivity
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_text_note.*
 import kotlinx.android.synthetic.main.content_parent.*
 import kotlinx.android.synthetic.main.text_note_view.*

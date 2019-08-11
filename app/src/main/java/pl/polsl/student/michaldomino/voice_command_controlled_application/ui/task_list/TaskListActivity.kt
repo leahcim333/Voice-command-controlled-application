@@ -1,9 +1,9 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list
 
 import android.os.Bundle
-import android.support.v4.view.GestureDetectorCompat
-import android.support.v7.app.AppCompatActivity
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_task_list.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
