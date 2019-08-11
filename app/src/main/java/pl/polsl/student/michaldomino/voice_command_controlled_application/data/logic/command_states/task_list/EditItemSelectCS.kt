@@ -4,7 +4,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.Word
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSNode
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.task_list.model.TaskListCommandsModel
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.task_list.TaskListItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.task_list.TaskListItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list.TaskListPresenter
 
 class EditItemSelectCS(override val presenter: TaskListPresenter) : CSNode(presenter) {

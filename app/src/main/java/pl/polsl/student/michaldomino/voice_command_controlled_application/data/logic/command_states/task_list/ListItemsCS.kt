@@ -2,7 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSLeaf
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.task_list.model.TaskListCommandsModel
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.task_list.TaskListItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.task_list.TaskListItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list.TaskListPresenter
 
 class ListItemsCS(override val presenter: TaskListPresenter) : CSLeaf(presenter) {

@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.note_selection
+package pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.note_selection
 
 import android.view.LayoutInflater
 import android.widget.LinearLayout

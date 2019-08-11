@@ -12,11 +12,11 @@ abstract class CSRoot(override val presenter: BasePresenter) : CSStaticNode(pres
 
     override fun processInput(userInput: String) {
         val command = Word(userInput)
-        val matchingCommandState: BaseCommandState? =
-            availableCommands.firstOrNull { command.similarTo(presenter.getString(it.commandNameId!!)) }
-        if (matchingCommandState != null) {
-            presenter.currentState = matchingCommandState
-            matchingCommandState.initialize()
+        val mostSimilarCommandState: BaseCommandState? =
+            availableCommands.maxBy { command.similarityWith(presenter.getString(it.commandNameId!!)) }
+        if (mostSimilarCommandState != null && command.similarTo(presenter.getString(mostSimilarCommandState.commandNameId!!))) {
+            presenter.currentState = mostSimilarCommandState
+            mostSimilarCommandState.initialize()
         } else {
             presenter.speak(presenter.getString(R.string.command_unrecognized))
         }

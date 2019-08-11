@@ -10,8 +10,8 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.note_selection.NoteSelectionItemsManager
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.note_selection.NoteType
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.note_selection.NoteSelectionItemsManager
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.note_selection.NoteType
 
 class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 

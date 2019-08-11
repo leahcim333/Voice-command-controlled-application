@@ -1,6 +1,6 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list
 
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.task_list.TaskListItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.task_list.TaskListItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
 
