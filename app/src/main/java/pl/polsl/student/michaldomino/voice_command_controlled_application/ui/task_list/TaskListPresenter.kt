@@ -5,8 +5,10 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.data.l
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.task_list.TaskListInitialCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.task_list.TaskListItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 
-class TaskListPresenter(override val view: TaskListContract.View) : TaskListContract.Presenter(view) {
+class TaskListPresenter(override val view: TaskListContract.View) : VoiceCommandsPresenter(view),
+    TaskListContract.Presenter {
 
     override val initialState: CSRoot = TaskListInitialCS(this)
 

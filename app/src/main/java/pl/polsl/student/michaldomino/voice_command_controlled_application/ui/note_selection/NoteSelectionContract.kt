@@ -1,5 +1,6 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
+import android.os.Bundle
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.note_selection.NoteType
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
@@ -10,8 +11,9 @@ interface NoteSelectionContract {
         fun addNote(name: String, type: NoteType)
     }
 
-    abstract class Presenter(override val view: View) : BasePresenter(view) {
-        abstract fun addTaskList(userInput: String)
-        abstract fun openNote(userInput: String)
+    interface Presenter : BasePresenter {
+        fun addTaskList(userInput: String)
+        fun openNote(userInput: String)
+        fun processInput(bundle: Bundle)
     }
 }

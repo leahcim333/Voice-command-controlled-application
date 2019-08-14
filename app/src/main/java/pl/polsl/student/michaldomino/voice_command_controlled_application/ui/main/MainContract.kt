@@ -9,5 +9,5 @@ interface MainContract {
         fun finish()
     }
 
-    abstract class Presenter(view: View) : BasePresenter(view)
+    interface Presenter : BasePresenter
 }
