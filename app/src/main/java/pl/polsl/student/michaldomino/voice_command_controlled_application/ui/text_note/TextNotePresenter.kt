@@ -1,8 +1,8 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.text_note
 
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.text_note.TextNoteInitialCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.text_note.TextNoteInitialCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 
 class TextNotePresenter(override val view: TextNoteContract.View) : VoiceCommandsPresenter(view),

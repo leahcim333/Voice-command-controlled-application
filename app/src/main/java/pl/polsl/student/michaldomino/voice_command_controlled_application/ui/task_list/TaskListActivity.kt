@@ -7,11 +7,11 @@ import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_task_list.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandRecognizer
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.task_list.TaskListItem
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.task_list.TaskListItemsManager
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItemsManager
 
 
 class TaskListActivity : AppCompatActivity(), TaskListContract.View {
@@ -34,7 +34,7 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         setSupportActionBar(toolbar)
 
         presenter = TaskListPresenter(this)
-        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
+        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         taskListItemsManager = TaskListItemsManager(layoutInflater, parentLinearLayout)
         speaker = Speaker(applicationContext)
@@ -55,6 +55,10 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
 
     override fun onCommandRecognizerResults(bundle: Bundle) {
         presenter.processInput(bundle)
+    }
+
+    override fun onDoubleTap() {
+        presenter.onDoubleTap()
     }
 
     override fun speakInForeground(message: String) {

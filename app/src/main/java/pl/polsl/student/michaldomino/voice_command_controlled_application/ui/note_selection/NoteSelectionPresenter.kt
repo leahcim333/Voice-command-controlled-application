@@ -1,11 +1,11 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.note_selection.NoteSelectionInitialCS
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.note_selection.NoteType
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.note_selection.NoteSelectionInitialCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
 class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : VoiceCommandsPresenter(view),
     NoteSelectionContract.Presenter {

@@ -13,5 +13,6 @@ interface TextNoteContract {
     interface Presenter : BasePresenter {
         fun addText(text: String)
         fun processInput(bundle: Bundle)
+        fun onDoubleTap()
     }
 }

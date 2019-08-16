@@ -8,9 +8,9 @@ import kotlinx.android.synthetic.main.activity_text_note.*
 import kotlinx.android.synthetic.main.content_parent.*
 import kotlinx.android.synthetic.main.text_note_view.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandRecognizer
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
 
 class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
@@ -30,7 +30,7 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
         setSupportActionBar(toolbar)
 
         presenter = TextNotePresenter(this)
-        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
+        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         speaker = Speaker(applicationContext)
         commandRecognizer = CommandRecognizer(this)
@@ -48,6 +48,10 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
     override fun onCommandRecognizerResults(bundle: Bundle) {
         presenter.processInput(bundle)
+    }
+
+    override fun onDoubleTap() {
+        presenter.onDoubleTap()
     }
 
     override fun speakInForeground(message: String) {

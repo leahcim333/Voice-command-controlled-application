@@ -1,9 +1,9 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list
 
 import android.os.Bundle
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.view_model.task_list.TaskListItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 
 interface TaskListContract {
 
@@ -18,5 +18,6 @@ interface TaskListContract {
         fun getItems(): MutableList<TaskListItem>
         fun setNewItemName(item: TaskListItem, newName: String)
         fun processInput(bundle: Bundle)
+        fun onDoubleTap()
     }
 }

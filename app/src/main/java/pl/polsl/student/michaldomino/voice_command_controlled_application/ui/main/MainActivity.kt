@@ -72,4 +72,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun speakInForeground(message: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun onDoubleTap() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

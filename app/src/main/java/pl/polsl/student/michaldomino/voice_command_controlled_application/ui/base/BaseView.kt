@@ -17,6 +17,8 @@ interface BaseView {
 
     fun startListening()
 
+    fun onDoubleTap()
+
     fun speakInForeground(message: String)
 
     fun startActivityFromClass(cls: Class<*>) {
