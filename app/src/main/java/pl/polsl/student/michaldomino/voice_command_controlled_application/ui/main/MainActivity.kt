@@ -11,8 +11,14 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.room.Room
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.database.AppDatabase
+import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.Note
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
@@ -23,6 +29,18 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "voice_commands_db")
+            .fallbackToDestructiveMigration().build()
+
+        val dao = db.noteDao()
+        val note = Note("a", NoteType.TASK_LIST)
+
+        try {
+            Observable.just(db).subscribeOn(Schedulers.io())
+                .subscribe { db -> db.noteDao().insert(Note("a", NoteType.TASK_LIST)) }
+        } catch (e: Exception) {
+            val f = 0
+        }
         checkPermission()
 
         presenter = MainPresenter(this)
