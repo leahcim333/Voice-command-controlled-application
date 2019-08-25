@@ -10,11 +10,10 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItemsManager
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
-class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View, VoiceCommandsView {
+class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 
     private lateinit var presenter: NoteSelectionContract.Presenter
 

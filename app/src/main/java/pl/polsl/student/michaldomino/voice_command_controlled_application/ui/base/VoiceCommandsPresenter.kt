@@ -5,7 +5,7 @@ import android.speech.SpeechRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
 
-abstract class VoiceCommandsPresenter(protected open val view: BaseView) {
+abstract class VoiceCommandsPresenter(protected open val view: VoiceCommandsView) {
 
     protected abstract val initialState: CSRoot
 

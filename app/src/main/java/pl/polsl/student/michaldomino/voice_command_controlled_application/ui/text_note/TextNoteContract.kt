@@ -2,11 +2,11 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.te
 
 import android.os.Bundle
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
 
 interface TextNoteContract {
 
-    interface View : BaseView {
+    interface View : VoiceCommandsView {
         fun addText(text: String)
     }
 

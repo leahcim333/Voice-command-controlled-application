@@ -2,12 +2,12 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.ta
 
 import android.os.Bundle
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 
 interface TaskListContract {
 
-    interface View : BaseView {
+    interface View : VoiceCommandsView {
         fun addRow(text: CharSequence)
         fun getItems(): MutableList<TaskListItem>
         fun setNewItemName(item: TaskListItem, newName: String)

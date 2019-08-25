@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
 import java.util.*
 
-class CommandRecognizer(view: BaseView) {
+class CommandRecognizer(view: VoiceCommandsView) {
 
     private val mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(view.getApplicationContext())
 

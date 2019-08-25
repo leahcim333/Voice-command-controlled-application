@@ -11,9 +11,8 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
 
-class TextNoteActivity : AppCompatActivity(), TextNoteContract.View, VoiceCommandsView {
+class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
     private lateinit var presenter: TextNoteContract.Presenter
 
