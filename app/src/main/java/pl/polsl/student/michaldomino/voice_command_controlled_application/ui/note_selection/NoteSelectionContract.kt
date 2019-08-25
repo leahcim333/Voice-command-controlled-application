@@ -1,14 +1,14 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
 import android.os.Bundle
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
 interface NoteSelectionContract {
 
     interface View : VoiceCommandsView {
-        fun addNote(name: String, type: NoteType)
+        fun addNote(note: Note)
     }
 
     interface Presenter : BasePresenter {

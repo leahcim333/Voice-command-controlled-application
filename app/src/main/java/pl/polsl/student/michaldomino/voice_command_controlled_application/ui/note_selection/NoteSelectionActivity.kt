@@ -10,8 +10,8 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItemsManager
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
 class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 
@@ -39,14 +39,7 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         speaker = Speaker(applicationContext)
         commandRecognizer = CommandRecognizer(this)
 
-
-
-        noteSelectionItemsManager.addRow("first list", NoteType.TASK_LIST)
-        noteSelectionItemsManager.addRow("second list", NoteType.TASK_LIST)
-        noteSelectionItemsManager.addRow("note", NoteType.TEXT_NOTE)
-
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
-
     }
 
     override fun onStart() {
@@ -71,8 +64,8 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         speaker.speakInForeground(message)
     }
 
-    override fun addNote(name: String, type: NoteType) {
-        noteSelectionItemsManager.addRow(name, type)
+    override fun addNote(note: Note) {
+        noteSelectionItemsManager.addRow(note)
     }
 
 }

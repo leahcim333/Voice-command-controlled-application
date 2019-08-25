@@ -2,8 +2,12 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.view_
 
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 
-class NoteSelectionItemsManager(private val inflater: LayoutInflater, private val parentLinearLayout: LinearLayout) {
+class NoteSelectionItemsManager(
+    private val inflater: LayoutInflater,
+    private val parentLinearLayout: LinearLayout
+) {
 
     private val container: LinkedHashSet<NoteSelectionItem> = linkedSetOf()
 
@@ -12,8 +16,8 @@ class NoteSelectionItemsManager(private val inflater: LayoutInflater, private va
             return container.toMutableList()
         }
 
-    fun addRow(text: CharSequence, type: NoteType) {
-        val rowItem = NoteSelectionItem(inflater).setText(text).setType(type)
+    fun addRow(note: Note) {
+        val rowItem = NoteSelectionItem(inflater, note)
         container.add(rowItem)
         parentLinearLayout.addView(rowItem.getView(), parentLinearLayout.childCount)
     }

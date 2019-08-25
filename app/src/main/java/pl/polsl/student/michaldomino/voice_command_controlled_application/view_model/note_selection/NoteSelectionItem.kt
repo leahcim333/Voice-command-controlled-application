@@ -5,8 +5,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 
-class NoteSelectionItem(inflater: LayoutInflater) {
+class NoteSelectionItem(inflater: LayoutInflater, val note: Note) {
 
     private val rowView: View = inflater.inflate(R.layout.note_selection_row, null)
 
@@ -14,9 +15,20 @@ class NoteSelectionItem(inflater: LayoutInflater) {
 
     private val noteTypeImageView: ImageView = rowView.findViewById(R.id.note_type)
 
-    val name: String
+    var name: String
         get() {
-            return noteNameTextView.text.toString()
+            return note.name
+        }
+        set(value) {
+            note.name = value
+        }
+
+    var type: NoteType
+        get() {
+            return note.type
+        }
+        set(value) {
+            note.type = value
         }
 
     fun getView(): View {
@@ -24,11 +36,13 @@ class NoteSelectionItem(inflater: LayoutInflater) {
     }
 
     fun setText(value: CharSequence): NoteSelectionItem {
+        name = value.toString()
         this.noteNameTextView.text = value
         return this
     }
 
     fun setType(value: NoteType): NoteSelectionItem {
+        type = value
         this.noteTypeImageView.setImageResource(value.resId)
         return this
     }

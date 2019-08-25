@@ -34,7 +34,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : Vo
     }
 
     private fun addNotes(notes: List<Note>?) {
-        notes?.forEach { view.addNote(it.noteName, it.noteType) }
+        notes?.forEach { view.addNote(it) }
     }
 
     private fun handleError(error: Throwable?) {
@@ -42,7 +42,8 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : Vo
     }
 
     override fun addTaskList(userInput: String) {
-        view.addNote(userInput, NoteType.TASK_LIST)
+        val newNote = Note(userInput, NoteType.TASK_LIST)
+        view.addNote(newNote)
     }
 
     override fun openNote(userInput: String) {
