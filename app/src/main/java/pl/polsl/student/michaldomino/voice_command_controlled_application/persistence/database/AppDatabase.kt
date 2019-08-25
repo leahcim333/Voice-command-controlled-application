@@ -1,13 +1,13 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.database
+package pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.dao.NoteDao
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.Converters
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.Note
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.NoteDao
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Converters
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 
 
 @Database(entities = arrayOf(Note::class), version = 1)

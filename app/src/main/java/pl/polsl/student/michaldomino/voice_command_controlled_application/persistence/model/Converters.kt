@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.model
+package pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model
 
 import androidx.room.TypeConverter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType

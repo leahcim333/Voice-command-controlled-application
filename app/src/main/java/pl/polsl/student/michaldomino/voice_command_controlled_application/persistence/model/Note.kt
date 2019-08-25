@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.model
+package pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

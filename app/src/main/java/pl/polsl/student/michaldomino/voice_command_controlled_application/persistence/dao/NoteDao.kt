@@ -1,9 +1,9 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.data.dao
+package pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao
 
 import androidx.room.*
 import io.reactivex.Completable
 import io.reactivex.Single
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.Note
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 
 @Dao
 interface NoteDao {
