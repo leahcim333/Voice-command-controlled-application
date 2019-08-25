@@ -11,14 +11,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.database.AppDatabase
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.Note
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
@@ -29,33 +23,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val disposable = CompositeDisposable()
-
-        val db = AppDatabase.getInstance(this)
-
-        val dao = db.noteDao()
-        val note = Note("a", NoteType.TASK_LIST)
-        presenter = MainPresenter(this)
-        try {
-            disposable.add(
-                db.noteDao().insert(note)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe()
-            )
-
-            disposable.add(
-                db.noteDao().findAll().subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ presenter.doSth(it) }, { error -> presenter.doElse(error) })
-            )
-            val f = 0
-        } catch (e: Exception) {
-            val f = 0
-        }
         checkPermission()
-
-
+        presenter = MainPresenter(this)
         presenter.start()
     }
 
@@ -89,21 +58,5 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 finish()
             }
         }
-    }
-
-    override fun startListening() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onCommandRecognizerResults(bundle: Bundle) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun speakInForeground(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onDoubleTap() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

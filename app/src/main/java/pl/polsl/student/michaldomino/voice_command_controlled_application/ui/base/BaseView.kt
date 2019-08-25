@@ -2,7 +2,6 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.ba
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.widget.Toast
 
 interface BaseView {
@@ -12,14 +11,6 @@ interface BaseView {
     fun getString(resId: Int): String
 
     fun startActivity(intent: Intent)
-
-    fun onCommandRecognizerResults(bundle: Bundle)
-
-    fun startListening()
-
-    fun onDoubleTap()
-
-    fun speakInForeground(message: String)
 
     fun startActivityFromClass(cls: Class<*>) {
         val intent = Intent(getApplicationContext(), cls)

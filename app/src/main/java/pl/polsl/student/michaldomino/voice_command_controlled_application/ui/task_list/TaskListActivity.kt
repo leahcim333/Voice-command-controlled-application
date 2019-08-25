@@ -10,11 +10,12 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItemsManager
 
 
-class TaskListActivity : AppCompatActivity(), TaskListContract.View {
+class TaskListActivity : AppCompatActivity(), TaskListContract.View, VoiceCommandsView {
 
     private lateinit var presenter: TaskListContract.Presenter
 
