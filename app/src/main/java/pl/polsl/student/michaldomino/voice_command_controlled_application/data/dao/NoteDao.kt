@@ -2,6 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.data.
 
 import androidx.room.*
 import io.reactivex.Completable
+import io.reactivex.Single
 import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.Note
 
 @Dao
@@ -17,5 +18,5 @@ interface NoteDao {
     fun delete(note: Note)
 
     @Query("SELECT * FROM notes")
-    fun findAll(): List<Note>
+    fun findAll(): Single<List<Note>>
 }

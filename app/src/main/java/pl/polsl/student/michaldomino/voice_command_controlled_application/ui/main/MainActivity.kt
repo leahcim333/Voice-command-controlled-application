@@ -11,9 +11,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.room.Room
-import io.reactivex.Observable
-import io.reactivex.observers.ResourceObserver
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
@@ -30,42 +29,33 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val db =
-            Room.databaseBuilder(applicationContext, AppDatabase::class.java, "voice_commands_db")
-                .fallbackToDestructiveMigration().build()
+        val disposable = CompositeDisposable()
+
+        val db = AppDatabase.getInstance(this)
 
         val dao = db.noteDao()
         val note = Note("a", NoteType.TASK_LIST)
-
+        presenter = MainPresenter(this)
         try {
+            disposable.add(
+                db.noteDao().insert(note)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+            )
 
-            val observer = object : ResourceObserver<AppDatabase>() {
-                override fun onComplete() {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onNext(t: AppDatabase) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onError(e: Throwable) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-            }
-            val a = Observable.just(db).subscribeOn(Schedulers.io())
-            val b = a.subscribeWith(observer)
-//            val disposable: Disposable = Single.just(db).subscribeOn(Schedulers.io()).
-            db.noteDao().insert(Note("a", NoteType.TASK_LIST))
-//            Observable.just(db)
-//                .subscribeOn(Schedulers.io())
-//                .subscribe { db -> db.noteDao().insert(Note("a", NoteType.TASK_LIST)) }
+            disposable.add(
+                db.noteDao().findAll().subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ presenter.doSth(it) }, { error -> presenter.doElse(error) })
+            )
+            val f = 0
         } catch (e: Exception) {
             val f = 0
         }
         checkPermission()
 
-        presenter = MainPresenter(this)
+
         presenter.start()
     }
 
