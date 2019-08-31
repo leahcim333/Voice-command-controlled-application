@@ -9,4 +9,8 @@ class MainPresenter(val view: MainContract.View) : MainContract.Presenter {
         view.startActivityFromClass(NoteSelectionActivity::class.java)
         view.finish()
     }
+
+    override fun stop() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

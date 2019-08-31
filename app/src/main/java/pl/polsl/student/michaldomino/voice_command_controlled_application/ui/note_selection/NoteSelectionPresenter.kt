@@ -12,7 +12,8 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
-class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : VoiceCommandsPresenter(view),
+class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
+    VoiceCommandsPresenter(view),
     NoteSelectionContract.Presenter {
 
     override val initialState: CSRoot = NoteSelectionInitialCS(this)
@@ -31,6 +32,10 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) : Vo
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ notes -> addNotes(notes) }, { error -> handleError(error) })
         )
+    }
+
+    override fun stop() {
+        disposable.clear()
     }
 
     private fun addNotes(notes: List<Note>?) {

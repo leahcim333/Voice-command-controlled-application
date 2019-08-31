@@ -17,7 +17,7 @@ data class Note(
     @NonNull
     var name: String,
 
-    @ColumnInfo(name = "note_name")
+    @ColumnInfo(name = "note_type")
     @NonNull
     var type: NoteType
 ) {

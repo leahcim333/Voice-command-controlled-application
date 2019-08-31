@@ -16,6 +16,10 @@ class TextNotePresenter(override val view: TextNoteContract.View) : VoiceCommand
 
     }
 
+    override fun stop() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun speak(message: String) {
         view.speakInForeground(message)
     }

@@ -18,6 +18,10 @@ class TaskListPresenter(override val view: TaskListContract.View) : VoiceCommand
 
     }
 
+    override fun stop() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun addItems(userInput: String) {
         val resourceDelimiter: String = getString(R.string.elements_delimiter)
         val fullDelimiter = " $resourceDelimiter "

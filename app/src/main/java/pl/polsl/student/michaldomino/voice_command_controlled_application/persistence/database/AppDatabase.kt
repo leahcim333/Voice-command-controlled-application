@@ -7,12 +7,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.NoteDao
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.TaskDao
-import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.TextNoteDato
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.TextNoteDao
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Converters
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.TextNote
 
 
-@Database(entities = arrayOf(Note::class), version = 1)
+@Database(entities = arrayOf(Note::class, Task::class, TextNote::class), version = 2)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -20,7 +22,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun taskDao(): TaskDao
 
-    abstract fun textNoteDao(): TextNoteDato
+    abstract fun textNoteDao(): TextNoteDao
 
     companion object {
 

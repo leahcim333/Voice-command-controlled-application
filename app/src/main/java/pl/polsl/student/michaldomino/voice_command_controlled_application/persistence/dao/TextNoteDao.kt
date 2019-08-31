@@ -6,7 +6,7 @@ import io.reactivex.Single
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.TextNote
 
 @Dao
-interface TextNoteDato {
+interface TextNoteDao {
 
     @Insert
     fun insert(note: TextNote): Completable
