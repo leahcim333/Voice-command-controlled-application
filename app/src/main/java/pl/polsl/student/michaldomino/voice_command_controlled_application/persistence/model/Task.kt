@@ -3,9 +3,21 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.persi
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tasks")
+@Entity(
+    tableName = "tasks",
+    foreignKeys = arrayOf(
+        ForeignKey(
+            entity = Note::class,
+            parentColumns = arrayOf("note_id"),
+            childColumns = arrayOf("note_id"),
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
+        )
+    )
+)
 data class Task(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "task_id")
