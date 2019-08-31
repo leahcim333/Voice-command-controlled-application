@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.NoteDao
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.TaskDao
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.TextNoteDato
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Converters
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 
@@ -15,6 +17,10 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
+
+    abstract fun taskDao(): TaskDao
+
+    abstract fun textNoteDao(): TextNoteDato
 
     companion object {
 

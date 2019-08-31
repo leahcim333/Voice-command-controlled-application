@@ -30,7 +30,12 @@ data class Task(
 
     @ColumnInfo(name = "is_checked")
     @NonNull
-    var isChecked: Boolean
+    var isChecked: Boolean,
+
+    @ColumnInfo(name = "note_id")
+    @NonNull
+    val noteId: Long
 ) {
-    constructor(taskName: String, isChecked: Boolean) : this(0, taskName, isChecked)
+    constructor(taskName: String, isChecked: Boolean, noteId: Long) :
+            this(0, taskName, isChecked, noteId)
 }

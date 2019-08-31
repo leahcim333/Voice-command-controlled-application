@@ -26,7 +26,11 @@ data class TextNote(
 
     @ColumnInfo(name = "text")
     @NonNull
-    var text: String
+    var text: String,
+
+    @ColumnInfo(name = "note_id")
+    @NonNull
+    val noteId: Long
 ) {
-    constructor(text: String) : this(0, text)
+    constructor(text: String, noteId: Long) : this(0, text, noteId)
 }
