@@ -1,12 +1,14 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.BaseCommandState
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.base.CSRoot
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.command_states.task_list.TaskListInitialCS
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.task_list.TaskListItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.TaskListInitialCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 
-class TaskListPresenter(override val view: TaskListContract.View) : TaskListContract.Presenter(view) {
+class TaskListPresenter(override val view: TaskListContract.View) : VoiceCommandsPresenter(view),
+    TaskListContract.Presenter {
 
     override val initialState: CSRoot = TaskListInitialCS(this)
 
@@ -14,6 +16,10 @@ class TaskListPresenter(override val view: TaskListContract.View) : TaskListCont
 
     override fun start() {
 
+    }
+
+    override fun stop() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun addItems(userInput: String) {

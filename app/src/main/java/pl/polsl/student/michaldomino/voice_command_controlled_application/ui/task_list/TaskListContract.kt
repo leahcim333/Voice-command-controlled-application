@@ -1,20 +1,23 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list
 
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.task_list.TaskListItem
+import android.os.Bundle
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BasePresenter
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 
 interface TaskListContract {
 
-    interface View : BaseView {
+    interface View : VoiceCommandsView {
         fun addRow(text: CharSequence)
         fun getItems(): MutableList<TaskListItem>
         fun setNewItemName(item: TaskListItem, newName: String)
     }
 
-    abstract class Presenter(override val view: View) : BasePresenter(view) {
-        abstract fun addItems(userInput: String)
-        abstract fun getItems(): MutableList<TaskListItem>
-        abstract fun setNewItemName(item: TaskListItem, newName: String)
+    interface Presenter : BasePresenter {
+        fun addItems(userInput: String)
+        fun getItems(): MutableList<TaskListItem>
+        fun setNewItemName(item: TaskListItem, newName: String)
+        fun processInput(bundle: Bundle)
+        fun onDoubleTap()
     }
 }

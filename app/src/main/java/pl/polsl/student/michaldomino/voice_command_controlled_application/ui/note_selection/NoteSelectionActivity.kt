@@ -1,17 +1,18 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
 import android.os.Bundle
-import android.support.v4.view.GestureDetectorCompat
-import android.support.v7.app.AppCompatActivity
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_note_selection.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandActivatorGestureListener
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.CommandRecognizer
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.logic.activity_actions.Speaker
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.note_selection.NoteSelectionItemsManager
-import pl.polsl.student.michaldomino.voice_command_controlled_application.data.model.note_selection.NoteType
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItemsManager
 
 class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 
@@ -33,18 +34,23 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         setSupportActionBar(toolbar)
 
         presenter = NoteSelectionPresenter(this)
-        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(presenter))
+        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         noteSelectionItemsManager = NoteSelectionItemsManager(layoutInflater, parentLinearLayout)
         speaker = Speaker(applicationContext)
         commandRecognizer = CommandRecognizer(this)
 
-        noteSelectionItemsManager.addRow("first list", NoteType.TASK_LIST)
-        noteSelectionItemsManager.addRow("second list", NoteType.TASK_LIST)
-        noteSelectionItemsManager.addRow("note", NoteType.NOTE)
-
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
+    }
+
+    override fun onStart() {
+        super.onStart()
         presenter.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.stop()
     }
 
     override fun startListening() {
@@ -55,12 +61,19 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         presenter.processInput(bundle)
     }
 
+    override fun onDoubleTap() {
+        presenter.onDoubleTap()
+    }
+
     override fun speakInForeground(message: String) {
         speaker.speakInForeground(message)
     }
 
-    override fun addNote(name: String, type: NoteType) {
-        noteSelectionItemsManager.addRow(name, type)
+    override fun addNote(note: Note) {
+        noteSelectionItemsManager.addRow(note)
     }
 
+    override fun getItems(): MutableList<NoteSelectionItem> {
+        return noteSelectionItemsManager.items
+    }
 }
