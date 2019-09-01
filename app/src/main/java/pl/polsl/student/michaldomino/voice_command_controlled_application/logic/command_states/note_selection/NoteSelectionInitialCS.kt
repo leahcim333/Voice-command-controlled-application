@@ -8,7 +8,10 @@ class NoteSelectionInitialCS(override val presenter: NoteSelectionPresenter) : C
 
     private val CREATE_TASK_LIST = CreateTaskListCS(presenter)
 
+    private val CREATE_TEXT_NOTE = CreateTextNoteCS(presenter)
+
     private val OPEN_NOTE = OpenNoteCS(presenter)
 
-    override val availableCommands: Array<BaseCommandState> = arrayOf(CREATE_TASK_LIST, OPEN_NOTE)
+    override val availableCommands: Array<BaseCommandState> =
+        arrayOf(CREATE_TASK_LIST, CREATE_TEXT_NOTE, OPEN_NOTE)
 }

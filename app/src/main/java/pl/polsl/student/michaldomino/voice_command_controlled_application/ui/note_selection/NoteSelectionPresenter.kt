@@ -3,10 +3,11 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.no
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
+import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.note_selection.NoteSelectionInitialCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.NoteDao
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.database.AppDatabase
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
@@ -20,17 +21,17 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
 
     override var currentState: BaseCommandState = initialState
 
-    private val speaker: Speaker = Speaker(view.getApplicationContext())
-
     private val disposable = CompositeDisposable()
 
+    private lateinit var dao: NoteDao
+
     override fun start() {
-        val db = AppDatabase.getInstance(view.getApplicationContext())
+        dao = AppDatabase.getInstance(view.getApplicationContext()).noteDao()
         disposable.add(
-            db.noteDao().findAll()
+            dao.findAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ notes -> addNotes(notes) }, { error -> handleError(error) })
+                .subscribe({ notes -> addNotesToView(notes) }, { error -> handleError(error) })
         )
     }
 
@@ -38,7 +39,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
         disposable.clear()
     }
 
-    private fun addNotes(notes: List<Note>?) {
+    private fun addNotesToView(notes: List<Note>?) {
         notes?.forEach { view.addNote(it) }
     }
 
@@ -51,11 +52,26 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
         view.addNote(newNote)
     }
 
+    fun addTextNote(userInput: String) {
+        val existingItems: List<String> = view.getItems().map { it.name }
+        if (existingItems.contains(userInput)) {
+            view.speakInForeground(getString(R.string.item_already_exists))
+        } else {
+            val newNote = Note(userInput, NoteType.TEXT_NOTE)
+            disposable.add(
+                dao.insert(newNote)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ view.addNote(newNote) }, { error -> handleError(error) })
+            )
+        }
+    }
+
     override fun openNote(userInput: String) {
 
     }
 
     override fun speak(message: String) {
-        speaker.speakInForeground(message)
+        view.speakInForeground(message)
     }
 }

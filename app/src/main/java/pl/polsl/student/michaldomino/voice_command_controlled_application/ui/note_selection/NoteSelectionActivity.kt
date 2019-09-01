@@ -11,6 +11,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItemsManager
 
 class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
@@ -72,4 +73,7 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         noteSelectionItemsManager.addRow(note)
     }
 
+    override fun getItems(): MutableList<NoteSelectionItem> {
+        return noteSelectionItemsManager.items
+    }
 }

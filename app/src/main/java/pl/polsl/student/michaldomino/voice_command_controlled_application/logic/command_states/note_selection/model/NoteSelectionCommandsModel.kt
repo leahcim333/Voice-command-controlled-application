@@ -6,5 +6,7 @@ object NoteSelectionCommandsModel {
 
     val CREATE_TASK_LIST_COMMAND: Int = R.string.create_task_list
 
+    val CREATE_TEXT_NOTE_COMMAND: Int = R.string.create_text_note
+
     val OPEN_NOTE: Int = R.string.open_note
 }

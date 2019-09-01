@@ -19,4 +19,7 @@ interface NoteDao {
 
     @Query("SELECT * FROM notes")
     fun findAll(): Single<List<Note>>
+
+    @Query("SELECT * FROM notes WHERE note_name = :name LIMIT 1")
+    fun findByName(name: String): Single<Note>
 }

@@ -12,6 +12,8 @@ interface BaseView {
 
     fun startActivity(intent: Intent)
 
+    fun finish()
+
     fun startActivityFromClass(cls: Class<*>) {
         val intent = Intent(getApplicationContext(), cls)
         startActivity(intent)
