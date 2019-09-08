@@ -3,7 +3,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.ba
 import android.os.Bundle
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 
-interface VoiceCommandsPresenterInterface {
+interface VoiceCommandsPresenterInterface : BasePresenter {
 
     var currentState: BaseCommandState
 
