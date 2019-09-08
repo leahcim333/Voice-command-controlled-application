@@ -76,4 +76,8 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
     override fun getItems(): MutableList<NoteSelectionItem> {
         return noteSelectionItemsManager.items
     }
+
+    override fun onSpeechRecognizerServerError() {
+        presenter.handleServerError()
+    }
 }

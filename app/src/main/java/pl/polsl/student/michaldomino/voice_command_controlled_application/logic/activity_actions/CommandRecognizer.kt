@@ -10,13 +10,14 @@ import java.util.*
 
 class CommandRecognizer(view: VoiceCommandsView) {
 
-    private val mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(view.getApplicationContext())
+    private val mSpeechRecognizer: SpeechRecognizer =
+        SpeechRecognizer.createSpeechRecognizer(view.getApplicationContext())
 
     private val mSpeechRecognizerIntent: Intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
 
     init {
         mSpeechRecognizerIntent.putExtra(
-            RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH
         )
         mSpeechRecognizerIntent.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault()
@@ -33,7 +34,12 @@ class CommandRecognizer(view: VoiceCommandsView) {
 
             override fun onEndOfSpeech() {}
 
-            override fun onError(i: Int) {}
+            override fun onError(i: Int) {
+                when (i) {
+                    SpeechRecognizer.ERROR_SERVER -> view.onSpeechRecognizerServerError()
+                }
+                view.showToast(i.toString())
+            }
 
             override fun onResults(bundle: Bundle) {
                 view.onCommandRecognizerResults(bundle)

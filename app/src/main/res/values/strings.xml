@@ -13,6 +13,7 @@
     <string name="available_commands">Available commands</string>
     <string name="available_commands_are">Available commands are</string>
     <string name="command_unrecognized">Command unrecognized</string>
+    <string name="turn_on_internet_connection">Your language is not supported offline. Please turn on Internet connection.</string>
 
     <!--Task list-->
     <string name="add_items">Add items</string>
@@ -29,7 +30,7 @@
     <string name="tell_name_of_the_new_list">Tell name of the new list</string>
     <string name="open_note">Open note</string>
     <string name="tell_note_name">Tell note name</string>
-    <string name="tell_name_of_the_new_text_note">Tell name of the new list</string>
+    <string name="tell_name_of_the_new_text_note">Tell name of the new text note</string>
 
     <!--Note-->
     <string name="add_text">Add text</string>
