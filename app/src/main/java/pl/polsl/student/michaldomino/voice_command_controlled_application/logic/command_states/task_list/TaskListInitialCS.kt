@@ -4,7 +4,8 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.model.TaskListCommandStatesModel
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list.TaskListPresenter
 
-class TaskListInitialCS(override val presenter: TaskListPresenter) : CSRoot(presenter) {
+class TaskListInitialCS(override val presenter: TaskListPresenter) :
+    CSRoot(presenter, TaskListCommandStatesModel(presenter)) {
 
-    override val model = TaskListCommandStatesModel(presenter)
+//    override val model = TaskListCommandStatesModel(presenter)
 }
