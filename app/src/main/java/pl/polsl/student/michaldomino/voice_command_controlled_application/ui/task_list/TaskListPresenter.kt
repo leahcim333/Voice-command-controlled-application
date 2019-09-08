@@ -3,14 +3,14 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.ta
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.TaskListInitialCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.model.TaskListCommandStatesModel
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 
 class TaskListPresenter(override val view: TaskListContract.View) : VoiceCommandsPresenter(view),
     TaskListContract.Presenter {
 
-    override val initialState: CSRoot = TaskListInitialCS(this)
+    override val initialState: CSRoot = CSRoot(this, TaskListCommandStatesModel(this))
 
     override var currentState: BaseCommandState = initialState
 

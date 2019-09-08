@@ -6,7 +6,7 @@ import io.reactivex.schedulers.Schedulers
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.note_selection.NoteSelectionInitialCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.note_selection.model.NoteSelectionCommandStatesModel
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.NoteDao
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.database.AppDatabase
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
@@ -17,7 +17,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
     VoiceCommandsPresenter(view),
     NoteSelectionContract.Presenter {
 
-    override val initialState: CSRoot = NoteSelectionInitialCS(this)
+    override val initialState: CSRoot = CSRoot(this, NoteSelectionCommandStatesModel(this))
 
     override var currentState: BaseCommandState = initialState
 

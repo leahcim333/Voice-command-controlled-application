@@ -4,7 +4,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.Word
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 
-abstract class CSRoot(
+class CSRoot(
     override val presenter: VoiceCommandsPresenter,
     val model: BaseCommandStateModel
 ) : CSStaticNode(presenter) {
