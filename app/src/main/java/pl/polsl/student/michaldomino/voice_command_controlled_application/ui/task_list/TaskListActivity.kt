@@ -76,4 +76,8 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
     override fun setNewItemName(item: TaskListItem, newName: String) {
         item.setText(newName)
     }
+
+    override fun onSpeechRecognizerServerError() {
+        presenter.handleServerError()
+    }
 }

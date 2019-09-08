@@ -65,4 +65,7 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
         text_field.text = textBuilder.toString()
     }
 
+    override fun onSpeechRecognizerServerError() {
+        presenter.handleServerError()
+    }
 }

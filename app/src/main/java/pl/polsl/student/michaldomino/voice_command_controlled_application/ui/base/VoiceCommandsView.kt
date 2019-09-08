@@ -11,4 +11,6 @@ interface VoiceCommandsView : BaseView {
     fun speakInForeground(message: String)
 
     fun onDoubleTap()
+
+    fun onSpeechRecognizerServerError()
 }
