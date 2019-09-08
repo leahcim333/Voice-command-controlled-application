@@ -5,7 +5,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.not
 
 class MainPresenter(val view: MainContract.View) : MainContract.Presenter {
 
-    override fun start() {
+    override fun create() {
         view.startActivityFromClass(NoteSelectionActivity::class.java)
         view.finish()
     }

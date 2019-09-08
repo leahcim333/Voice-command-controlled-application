@@ -36,7 +36,7 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
         commandRecognizer = CommandRecognizer(this)
 
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
-        presenter.start()
+        presenter.create()
 
         val inflater = layoutInflater
         inflater.inflate(R.layout.text_note_view, parentLinearLayout)

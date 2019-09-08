@@ -12,7 +12,7 @@ class TextNotePresenter(override val view: TextNoteContract.View) : VoiceCommand
 
     override var currentState: BaseCommandState = initialState
 
-    override fun start() {
+    override fun create() {
 
     }
 

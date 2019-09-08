@@ -41,11 +41,7 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         commandRecognizer = CommandRecognizer(this)
 
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.start()
+        presenter.create()
     }
 
     override fun onStop() {

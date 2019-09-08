@@ -38,7 +38,6 @@ class CommandRecognizer(view: VoiceCommandsView) {
                 when (i) {
                     SpeechRecognizer.ERROR_SERVER -> view.onSpeechRecognizerServerError()
                 }
-                view.showToast(i.toString())
             }
 
             override fun onResults(bundle: Bundle) {

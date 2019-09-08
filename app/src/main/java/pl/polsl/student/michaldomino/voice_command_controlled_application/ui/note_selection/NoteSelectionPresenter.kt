@@ -25,7 +25,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
 
     private lateinit var dao: NoteDao
 
-    override fun start() {
+    override fun create() {
         dao = AppDatabase.getInstance(view.getApplicationContext()).noteDao()
         disposable.add(
             dao.findAll()
@@ -44,7 +44,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
     }
 
     private fun handleError(error: Throwable?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view.showToast(error?.localizedMessage)
     }
 
     override fun addTaskList(userInput: String) {

@@ -15,6 +15,10 @@ class NoteSelectionItem(inflater: LayoutInflater, val note: Note) {
 
     private val noteTypeImageView: ImageView = rowView.findViewById(R.id.note_type)
 
+    init {
+        setText(note.name).setType(note.type)
+    }
+
     var name: String
         get() {
             return note.name

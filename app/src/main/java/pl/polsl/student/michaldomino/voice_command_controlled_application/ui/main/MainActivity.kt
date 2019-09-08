@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         checkPermission()
         presenter = MainPresenter(this)
-        presenter.start()
+        presenter.create()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

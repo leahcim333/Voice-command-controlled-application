@@ -46,7 +46,7 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         taskListItemsManager.addRow("dog")
 
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
-        presenter.start()
+        presenter.create()
     }
 
     override fun startListening() {

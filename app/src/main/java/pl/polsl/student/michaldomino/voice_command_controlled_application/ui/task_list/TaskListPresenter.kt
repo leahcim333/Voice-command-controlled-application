@@ -14,7 +14,7 @@ class TaskListPresenter(override val view: TaskListContract.View) : VoiceCommand
 
     override var currentState: BaseCommandState = initialState
 
-    override fun start() {
+    override fun create() {
 
     }
 

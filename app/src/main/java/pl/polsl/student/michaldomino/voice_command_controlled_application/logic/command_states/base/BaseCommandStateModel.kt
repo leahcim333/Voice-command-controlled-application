@@ -2,4 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.logic
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 
-abstract class CSStaticNode(override val presenter: VoiceCommandsPresenter) : CSNode(presenter)
+abstract class BaseCommandStateModel(open val presenter: VoiceCommandsPresenter) {
+
+    abstract val availableCommandStates: Array<BaseCommandState>
+}

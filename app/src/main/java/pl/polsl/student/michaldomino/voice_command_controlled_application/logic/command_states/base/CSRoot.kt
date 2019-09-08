@@ -10,10 +10,14 @@ abstract class CSRoot(override val presenter: VoiceCommandsPresenter) : CSStatic
 
     override val messageToSpeakId: Int = R.string.tell_command
 
+    abstract val model: BaseCommandStateModel
+
+//    abstract val availableCommands: Array<BaseCommandState>
+
     override fun processInput(userInput: String) {
         val command = Word(userInput)
         val mostSimilarCommandState: BaseCommandState? =
-            availableCommands.maxBy { command.similarityWith(presenter.getString(it.commandNameId!!)) }
+            model.availableCommandStates.maxBy { command.similarityWith(presenter.getString(it.commandNameId!!)) }
         if (mostSimilarCommandState != null && command.similarTo(presenter.getString(mostSimilarCommandState.commandNameId!!))) {
             presenter.currentState = mostSimilarCommandState
             mostSimilarCommandState.initialize()
