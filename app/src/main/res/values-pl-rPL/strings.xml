@@ -22,4 +22,7 @@
     <string name="turn_on_internet_connection">Ten język nie jest obsługiwany w trybie offline. Proszę połączyć się z internetem.</string>
     <string name="create_text_note">Stwórz notatkę tekstową</string>
     <string name="tell_name_of_the_new_text_note">Podaj nazwę nowej notatki tekstowej</string>
+    <string name="note_already_exists">Notatka już istnieje</string>
+    <string name="note_does_not_exist">Notatka nie istnieje</string>
+    <string name="delete_note">Usuń notatkę</string>
 </resources>

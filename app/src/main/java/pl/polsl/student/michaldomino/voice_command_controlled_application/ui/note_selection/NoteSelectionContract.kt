@@ -10,6 +10,7 @@ interface NoteSelectionContract {
     interface View : VoiceCommandsView {
         fun addNote(note: Note)
         fun getItems(): MutableList<NoteSelectionItem>
+        fun deleteNote(noteSelectionItem: NoteSelectionItem)
     }
 
     interface Presenter : VoiceCommandsPresenterInterface {

@@ -66,11 +66,15 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
     }
 
     override fun addNote(note: Note) {
-        noteSelectionItemsManager.addRow(note)
+        noteSelectionItemsManager.addNote(note)
     }
 
     override fun getItems(): MutableList<NoteSelectionItem> {
         return noteSelectionItemsManager.items
+    }
+
+    override fun deleteNote(noteSelectionItem: NoteSelectionItem) {
+        noteSelectionItemsManager.deleteNote(noteSelectionItem)
     }
 
     override fun onSpeechRecognizerServerError() {

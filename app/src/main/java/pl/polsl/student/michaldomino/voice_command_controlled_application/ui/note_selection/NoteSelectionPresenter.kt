@@ -4,6 +4,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.Word
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.note_selection.model.NoteSelectionCommandStatesModel
@@ -11,6 +12,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.database.AppDatabase
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
+import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
 class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
@@ -55,7 +57,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
     fun addTextNote(userInput: String) {
         val existingItems: List<String> = view.getItems().map { it.name }
         if (existingItems.contains(userInput)) {
-            view.speakInForeground(getString(R.string.item_already_exists))
+            view.speakInForeground(getString(R.string.note_already_exists))
         } else {
             val newNote = Note(userInput, NoteType.TEXT_NOTE)
             disposable.add(
@@ -73,5 +75,24 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
 
     override fun speak(message: String) {
         view.speakInForeground(message)
+    }
+
+    fun deleteNote(userInput: String) {
+        val existingNotes: MutableList<NoteSelectionItem> = view.getItems()
+        val a = Word(userInput)
+        val mostSimilarNote: NoteSelectionItem? = existingNotes.maxBy { a.similarityWith(it.name) }
+        if (mostSimilarNote != null && a.similarTo(mostSimilarNote.name)) {
+            val noteToDelete = mostSimilarNote.note
+            disposable.add(
+                dao.delete(noteToDelete)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { view.deleteNote(mostSimilarNote) },
+                        { error -> handleError(error) })
+            )
+        } else {
+            view.speakInForeground(getString(R.string.note_does_not_exist))
+        }
     }
 }

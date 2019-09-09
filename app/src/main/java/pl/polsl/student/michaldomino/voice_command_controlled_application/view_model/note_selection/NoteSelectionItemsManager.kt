@@ -16,9 +16,14 @@ class NoteSelectionItemsManager(
             return container.toMutableList()
         }
 
-    fun addRow(note: Note) {
+    fun addNote(note: Note) {
         val rowItem = NoteSelectionItem(inflater, note)
         container.add(rowItem)
         parentLinearLayout.addView(rowItem.getView(), parentLinearLayout.childCount)
+    }
+
+    fun deleteNote(noteSelectionItem: NoteSelectionItem) {
+        parentLinearLayout.removeView(noteSelectionItem.getView())
+        container.remove(noteSelectionItem)
     }
 }

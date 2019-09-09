@@ -15,7 +15,7 @@ interface NoteDao {
     fun update(note: Note)
 
     @Delete
-    fun delete(note: Note)
+    fun delete(note: Note): Completable
 
     @Query("SELECT * FROM notes")
     fun findAll(): Single<List<Note>>
