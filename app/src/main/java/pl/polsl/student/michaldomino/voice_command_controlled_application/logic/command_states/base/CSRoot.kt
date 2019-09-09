@@ -15,14 +15,10 @@ class CSRoot(
 
     override fun processInput(userInput: String) {
         val command = Word(userInput)
-        val mostSimilarCommandState: BaseCommandState? =
-            model.availableCommandStates.maxBy { command.similarityWith(presenter.getString(it.commandNameId!!)) }
-        if (mostSimilarCommandState != null && command.similarTo(
-                presenter.getString(
-                    mostSimilarCommandState.commandNameId!!
-                )
-            )
-        ) {
+        val mostSimilarCommandState: BaseCommandState? = command.getMostSimilar(
+            model.availableCommandStates,
+            { presenter.getString(it.commandNameId!!) })
+        if (mostSimilarCommandState != null) {
             presenter.currentState = mostSimilarCommandState
             mostSimilarCommandState.initialize()
         } else {

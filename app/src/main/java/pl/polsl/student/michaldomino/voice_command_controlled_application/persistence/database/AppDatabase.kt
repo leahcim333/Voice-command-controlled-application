@@ -14,7 +14,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.TextNote
 
 
-@Database(entities = arrayOf(Note::class, Task::class, TextNote::class), version = 2)
+@Database(entities = arrayOf(Note::class, Task::class, TextNote::class), version = 3)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

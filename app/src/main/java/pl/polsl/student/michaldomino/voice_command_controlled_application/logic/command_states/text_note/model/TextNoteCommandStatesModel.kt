@@ -10,7 +10,7 @@ class TextNoteCommandStatesModel(override val presenter: TextNotePresenter) :
 
     private val ADD_TEXT = AddTextCS(presenter)
 
-    override val availableCommandStates: Array<BaseCommandState> = arrayOf(
+    override val availableCommandStates: List<BaseCommandState> = listOf(
         ADD_TEXT
     )
 }

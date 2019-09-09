@@ -11,7 +11,7 @@ data class Note(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "note_id")
     @NonNull
-    val id: Long,
+    var id: Long,
 
     @ColumnInfo(name = "note_name")
     @NonNull

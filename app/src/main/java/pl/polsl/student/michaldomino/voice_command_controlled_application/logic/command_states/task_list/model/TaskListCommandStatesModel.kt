@@ -19,7 +19,7 @@ class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
 
     private val LIST_ITEMS = ListItemsCS(presenter)
 
-    override val availableCommandStates: Array<BaseCommandState> = arrayOf(
+    override val availableCommandStates: List<BaseCommandState> = listOf(
         ADD_ITEMS,
         AVAILABLE_COMMANDS,
         EDIT_ITEM_SELECT,

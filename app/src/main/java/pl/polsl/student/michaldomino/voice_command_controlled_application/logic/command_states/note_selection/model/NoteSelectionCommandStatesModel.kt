@@ -19,7 +19,7 @@ class NoteSelectionCommandStatesModel(override val presenter: NoteSelectionPrese
 
     private val DELETE_NOTE = DeleteNoteCS(presenter)
 
-    override val availableCommandStates: Array<BaseCommandState> = arrayOf(
+    override val availableCommandStates: List<BaseCommandState> = listOf(
         CREATE_TASK_LIST,
         CREATE_TEXT_NOTE,
         OPEN_NOTE,

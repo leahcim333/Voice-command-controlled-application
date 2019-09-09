@@ -47,7 +47,11 @@ class NoteSelectionItem(inflater: LayoutInflater, val note: Note) {
 
     fun setType(value: NoteType): NoteSelectionItem {
         type = value
-        this.noteTypeImageView.setImageResource(value.resId)
+        val resId = when (value) {
+            NoteType.TASK_LIST -> android.R.drawable.checkbox_on_background
+            NoteType.TEXT_NOTE -> android.R.drawable.ic_menu_edit
+        }
+        this.noteTypeImageView.setImageResource(resId)
         return this
     }
 }

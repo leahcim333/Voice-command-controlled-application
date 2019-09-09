@@ -9,7 +9,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 interface NoteDao {
 
     @Insert
-    fun insert(note: Note): Completable
+    fun insert(note: Note): Single<Long>
 
     @Update
     fun update(note: Note)

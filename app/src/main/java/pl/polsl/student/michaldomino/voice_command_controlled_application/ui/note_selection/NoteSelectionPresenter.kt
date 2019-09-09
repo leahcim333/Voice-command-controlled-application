@@ -1,5 +1,6 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
+import android.content.Intent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -12,6 +13,8 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.database.AppDatabase
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list.TaskListActivity
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.text_note.TextNoteActivity
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
@@ -49,27 +52,52 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
         view.showToast(error?.localizedMessage)
     }
 
-    override fun addTaskList(userInput: String) {
-        val newNote = Note(userInput, NoteType.TASK_LIST)
-        view.addNote(newNote)
-    }
-
-    fun addTextNote(userInput: String) {
+    private fun addNote(userInput: String, noteType: NoteType) {
         val existingItems: List<String> = view.getItems().map { it.name }
         if (existingItems.contains(userInput)) {
             view.speakInForeground(getString(R.string.note_already_exists))
         } else {
-            val newNote = Note(userInput, NoteType.TEXT_NOTE)
+            val newNote = Note(userInput, noteType)
             disposable.add(
                 dao.insert(newNote)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ view.addNote(newNote) }, { error -> handleError(error) })
+                    .subscribe(
+                        { id -> assignNewIdAndAddToView(newNote, id) },
+                        { error -> handleError(error) })
             )
         }
     }
 
+    private fun assignNewIdAndAddToView(note: Note, assignedId: Long) {
+        note.id = assignedId
+        view.addNote(note)
+    }
+
+    override fun addTaskList(userInput: String) {
+        addNote(userInput, NoteType.TASK_LIST)
+    }
+
+    fun addTextNote(userInput: String) {
+        addNote(userInput, NoteType.TEXT_NOTE)
+    }
+
     override fun openNote(userInput: String) {
+        val selectedNote = Word(userInput)
+        val mostSimilarNote: NoteSelectionItem? =
+            selectedNote.getMostSimilar(view.getItems(), { it.name })
+        if (mostSimilarNote != null) {
+            val note = mostSimilarNote.note
+            val cls: Class<out Any> = when (note.type) {
+                NoteType.TASK_LIST -> TaskListActivity::class.java
+                NoteType.TEXT_NOTE -> TextNoteActivity::class.java
+            }
+            val intent = Intent(view.getApplicationContext(), cls)
+            intent.putExtra("noteId", note.id)
+            view.startActivity(intent)
+        } else {
+            view.speakInForeground(getString(R.string.note_does_not_exist))
+        }
 
     }
 
@@ -78,10 +106,10 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
     }
 
     fun deleteNote(userInput: String) {
-        val existingNotes: MutableList<NoteSelectionItem> = view.getItems()
-        val a = Word(userInput)
-        val mostSimilarNote: NoteSelectionItem? = existingNotes.maxBy { a.similarityWith(it.name) }
-        if (mostSimilarNote != null && a.similarTo(mostSimilarNote.name)) {
+        val selectedNote = Word(userInput)
+        val mostSimilarNote: NoteSelectionItem? =
+            selectedNote.getMostSimilar(view.getItems(), { it.name })
+        if (mostSimilarNote != null) {
             val noteToDelete = mostSimilarNote.note
             disposable.add(
                 dao.delete(noteToDelete)

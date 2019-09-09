@@ -4,5 +4,5 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.bas
 
 abstract class BaseCommandStateModel(open val presenter: VoiceCommandsPresenter) {
 
-    abstract val availableCommandStates: Array<BaseCommandState>
+    abstract val availableCommandStates: List<BaseCommandState>
 }
