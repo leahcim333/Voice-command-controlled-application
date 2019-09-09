@@ -40,7 +40,7 @@ abstract class AppDatabase : RoomDatabase() {
             Room.databaseBuilder(
                 context.applicationContext,
                 AppDatabase::class.java, DATABASE_NAME
-            )
+            ).fallbackToDestructiveMigration() // TODO: Remove when finished.
                 .build()
     }
 }

@@ -7,7 +7,8 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 
-class TaskListPresenter(override val view: TaskListContract.View) : VoiceCommandsPresenter(view),
+class TaskListPresenter(override val view: TaskListContract.View, val noteId: Int) :
+    VoiceCommandsPresenter(view),
     TaskListContract.Presenter {
 
     override val initialState: CSRoot = CSRoot(this, TaskListCommandStatesModel(this))
@@ -15,7 +16,6 @@ class TaskListPresenter(override val view: TaskListContract.View) : VoiceCommand
     override var currentState: BaseCommandState = initialState
 
     override fun create() {
-
     }
 
     override fun stop() {

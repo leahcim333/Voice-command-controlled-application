@@ -33,7 +33,8 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         setContentView(R.layout.activity_task_list)
         setSupportActionBar(toolbar)
 
-        presenter = TaskListPresenter(this)
+        val noteId = intent.getStringExtra("noteId").toInt()
+        presenter = TaskListPresenter(this, noteId)
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         taskListItemsManager = TaskListItemsManager(layoutInflater, parentLinearLayout)

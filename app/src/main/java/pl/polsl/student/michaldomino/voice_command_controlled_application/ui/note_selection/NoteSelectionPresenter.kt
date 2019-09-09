@@ -93,7 +93,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
                 NoteType.TEXT_NOTE -> TextNoteActivity::class.java
             }
             val intent = Intent(view.getApplicationContext(), cls)
-            intent.putExtra("noteId", note.id)
+            intent.putExtra("noteId", note.id.toString())
             view.startActivity(intent)
         } else {
             view.speakInForeground(getString(R.string.note_does_not_exist))
