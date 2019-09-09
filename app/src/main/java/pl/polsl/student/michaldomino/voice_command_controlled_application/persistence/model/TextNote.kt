@@ -1,13 +1,11 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model
 
 import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(
     tableName = "text_notes",
+    indices = arrayOf(Index(value = arrayOf("note_id"), unique = true)),
     foreignKeys = arrayOf(
         ForeignKey(
             entity = Note::class,
