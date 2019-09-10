@@ -7,7 +7,7 @@ import android.widget.TextView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 
-class NoteSelectionItem(inflater: LayoutInflater, val note: Note) {
+class NoteSelectionItem(inflater: LayoutInflater, private val note: Note) {
 
     private val rowView: View = inflater.inflate(R.layout.note_selection_row, null)
 
@@ -16,37 +16,31 @@ class NoteSelectionItem(inflater: LayoutInflater, val note: Note) {
     private val noteTypeImageView: ImageView = rowView.findViewById(R.id.note_type)
 
     init {
-        setText(note.name).setType(note.type)
+        setName(note.name).setType(note.type)
     }
 
-    var name: String
+    val name: String
         get() {
             return note.name
         }
-        set(value) {
-            note.name = value
-        }
 
-    var type: NoteType
+    val type: NoteType
         get() {
             return note.type
-        }
-        set(value) {
-            note.type = value
         }
 
     fun getView(): View {
         return rowView
     }
 
-    fun setText(value: CharSequence): NoteSelectionItem {
-        name = value.toString()
+    fun setName(value: CharSequence): NoteSelectionItem {
+        note.name = value.toString()
         this.noteNameTextView.text = value
         return this
     }
 
     fun setType(value: NoteType): NoteSelectionItem {
-        type = value
+        note.type = value
         val resId = when (value) {
             NoteType.TASK_LIST -> android.R.drawable.checkbox_on_background
             NoteType.TEXT_NOTE -> android.R.drawable.ic_menu_edit

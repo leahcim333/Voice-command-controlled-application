@@ -10,6 +10,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItemsManager
 
@@ -33,19 +34,13 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         setContentView(R.layout.activity_task_list)
         setSupportActionBar(toolbar)
 
-        val noteId = intent.getStringExtra("noteId").toInt()
+        val noteId = intent.getStringExtra("noteId").toLong()
         presenter = TaskListPresenter(this, noteId)
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         taskListItemsManager = TaskListItemsManager(layoutInflater, parentLinearLayout)
         speaker = Speaker(applicationContext)
         commandRecognizer = CommandRecognizer(this)
-
-        taskListItemsManager.addRow("one")
-        taskListItemsManager.addRow("two")
-        taskListItemsManager.addRow("elephant")
-        taskListItemsManager.addRow("dog")
-
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.create()
     }
@@ -66,8 +61,8 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         speaker.speakInForeground(message)
     }
 
-    override fun addRow(text: CharSequence) {
-        taskListItemsManager.addRow(text)
+    override fun addTask(task: Task) {
+        taskListItemsManager.addTask(task)
     }
 
     override fun getItems(): MutableList<TaskListItem> {
@@ -75,7 +70,7 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
     }
 
     override fun setNewItemName(item: TaskListItem, newName: String) {
-        item.setText(newName)
+        item.setName(newName)
     }
 
     override fun onSpeechRecognizerServerError() {

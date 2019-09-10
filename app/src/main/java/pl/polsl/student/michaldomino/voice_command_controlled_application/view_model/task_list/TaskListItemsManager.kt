@@ -2,6 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.view_
 
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
 
 class TaskListItemsManager(private val inflater: LayoutInflater, private val parentLinearLayout: LinearLayout) {
 
@@ -12,8 +13,8 @@ class TaskListItemsManager(private val inflater: LayoutInflater, private val par
             return container.toMutableList()
         }
 
-    fun addRow(text: CharSequence, isChecked: Boolean = false) {
-        val rowItem = TaskListItem(inflater).setText(text).setChecked(isChecked)
+    fun addTask(task: Task) {
+        val rowItem = TaskListItem(inflater, task)
         container.add(rowItem)
         parentLinearLayout.addView(rowItem.getView(), parentLinearLayout.childCount)
     }

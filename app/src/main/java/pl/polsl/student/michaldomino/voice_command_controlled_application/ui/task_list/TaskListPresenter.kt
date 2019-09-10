@@ -1,13 +1,19 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list
 
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.model.TaskListCommandStatesModel
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.TaskDao
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.database.AppDatabase
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 
-class TaskListPresenter(override val view: TaskListContract.View, val noteId: Int) :
+class TaskListPresenter(override val view: TaskListContract.View, val noteId: Long) :
     VoiceCommandsPresenter(view),
     TaskListContract.Presenter {
 
@@ -15,11 +21,30 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: In
 
     override var currentState: BaseCommandState = initialState
 
+    private val disposable = CompositeDisposable()
+
+    private lateinit var dao: TaskDao
+
+    private fun handleError(error: Throwable?) {
+        view.showToast(error?.localizedMessage)
+    }
+
     override fun create() {
+        dao = AppDatabase.getInstance(view.getApplicationContext()).taskDao()
+        disposable.add(
+            dao.findAllByNoteId(noteId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ tasks -> addTasksToView(tasks) }, { error -> handleError(error) })
+        )
+    }
+
+    private fun addTasksToView(tasks: List<Task>?) {
+        tasks?.forEach { view.addTask(it) }
     }
 
     override fun stop() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        disposable.clear()
     }
 
     override fun addItems(userInput: String) {
@@ -27,7 +52,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: In
         val fullDelimiter = " $resourceDelimiter "
         val elements: List<String> = userInput.split(fullDelimiter)
         val existingItems: List<String> = view.getItems().map { it.text }
-        elements.filter { it !in existingItems }.forEach { view.addRow(it) }
+        elements.filter { it !in existingItems }.forEach { view.addTask(Task(it, noteId)) }
     }
 
     override fun getItems(): MutableList<TaskListItem> {

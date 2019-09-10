@@ -19,4 +19,7 @@ interface TaskDao {
 
     @Query("SELECT * FROM tasks")
     fun findAll(): Single<List<Task>>
+
+    @Query("SELECT * FROM tasks WHERE note_id = :noteId")
+    fun findAllByNoteId(noteId: Long): Single<List<Task>>
 }
