@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Aplikacja sterowana komendami głosowymi</string>
-    <string name="edit_item">Edytuj element</string>
+    <string name="edit_task">Edytuj zadanie</string>
     <string name="action_settings">Ustawienia</string>
-    <string name="add_items">Dodaj elementy</string>
+    <string name="add_tasks">Dodaj zadania</string>
     <string name="elements_delimiter">i</string>
-    <string name="list_items">Wymień elementy</string>
-    <string name="select_item">Wybierz element</string>
+    <string name="list_tasks">Wymień zadania</string>
+    <string name="select_task">Wybierz zadanie</string>
     <string name="tell_command">Podaj komendę</string>
     <string name="tell_new_name">Podaj nową nazwę</string>
     <string name="available_commands">Dostępne komendy</string>
@@ -25,4 +25,6 @@
     <string name="note_already_exists">Notatka już istnieje</string>
     <string name="note_does_not_exist">Notatka nie istnieje</string>
     <string name="delete_note">Usuń notatkę</string>
+    <string name="save_changes">Zapisz zmiany</string>
+    <string name="title_activity_note_selection">Notatki</string>
 </resources>
