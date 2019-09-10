@@ -15,6 +15,10 @@ class TaskListItem(inflater: LayoutInflater, val task: Task) {
 
     private var checkBox: CheckBox = rowView.findViewById(R.id.task_checkbox)
 
+    init {
+        setName(task.name).setChecked(task.isChecked)
+    }
+
     val text: String
         get() {
             return task.name

@@ -7,7 +7,7 @@ import android.widget.TextView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 
-class NoteSelectionItem(inflater: LayoutInflater, private val note: Note) {
+class NoteSelectionItem(inflater: LayoutInflater, val note: Note) {
 
     private val rowView: View = inflater.inflate(R.layout.note_selection_row, null)
 

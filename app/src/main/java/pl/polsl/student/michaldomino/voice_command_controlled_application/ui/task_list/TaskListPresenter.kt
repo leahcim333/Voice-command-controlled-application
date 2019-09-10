@@ -1,5 +1,6 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list
 
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -69,5 +70,15 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     override fun speak(message: String) {
         view.speakInForeground(message)
+    }
+
+    fun saveChanges() {
+        val tasks = view.getItems().map { it.task }
+        disposable.add(
+            Completable.fromAction { dao.upsert(tasks) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ speak("ok") }, { error -> handleError(error) })
+        )
     }
 }

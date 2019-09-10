@@ -6,6 +6,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.AddTaskCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.EditTaskSelectCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.ListTaskCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.SaveChangesCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list.TaskListPresenter
 
 class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
@@ -19,10 +20,13 @@ class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
 
     private val LIST_TASKS = ListTaskCS(presenter)
 
+    private val SAVE_CHANGES = SaveChangesCS(presenter)
+
     override val availableCommandStates: List<BaseCommandState> = listOf(
         ADD_TASKS,
         AVAILABLE_COMMANDS,
         EDIT_TASK_SELECT,
-        LIST_TASKS
+        LIST_TASKS,
+        SAVE_CHANGES
     )
 }
