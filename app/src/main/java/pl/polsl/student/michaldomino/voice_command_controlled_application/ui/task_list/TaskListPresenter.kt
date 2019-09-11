@@ -26,12 +26,24 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     private lateinit var dao: TaskDao
 
+    override fun create() {
+        dao = AppDatabase.getInstance(view.getApplicationContext()).taskDao()
+        loadTasksFromDatabase()
+    }
+
+    override fun stop() {
+        disposable.clear()
+    }
+
     private fun handleError(error: Throwable?) {
         view.showToast(error?.localizedMessage)
     }
 
-    override fun create() {
-        dao = AppDatabase.getInstance(view.getApplicationContext()).taskDao()
+    private fun addTasksToView(tasks: List<Task>?) {
+        tasks?.forEach { view.addTask(it) }
+    }
+
+    private fun loadTasksFromDatabase() {
         disposable.add(
             dao.findAllByNoteId(noteId)
                 .subscribeOn(Schedulers.io())
@@ -40,20 +52,16 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
         )
     }
 
-    private fun addTasksToView(tasks: List<Task>?) {
-        tasks?.forEach { view.addTask(it) }
-    }
-
-    override fun stop() {
-        disposable.clear()
+    private fun updateIds(ids: List<Long>) {
+        view.getItems().map { it.task }.forEachIndexed { index, task -> task.id = ids[index] }
     }
 
     override fun addItems(userInput: String) {
         val resourceDelimiter: String = getString(R.string.elements_delimiter)
         val fullDelimiter = " $resourceDelimiter "
-        val elements: List<String> = userInput.split(fullDelimiter)
-        val existingItems: List<String> = view.getItems().map { it.text }
-        elements.filter { it !in existingItems }.forEach { view.addTask(Task(it, noteId)) }
+        val tasks: List<String> = userInput.split(fullDelimiter)
+        val existingTasks: List<String> = view.getItems().map { it.text }
+        tasks.filter { it !in existingTasks }.forEach { view.addTask(Task(it, noteId)) }
     }
 
     override fun getItems(): MutableList<TaskListItem> {
@@ -68,18 +76,26 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
             speak(getString(R.string.item_already_exists))
     }
 
-    override fun speak(message: String) {
-        view.speakInForeground(message)
-    }
-
     fun saveChanges() {
-
         val tasks = view.getItems().map { it.task }
         disposable.add(
             Single.fromCallable { dao.saveChangesByNoteId(tasks, noteId) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ speak("ok") }, { error -> handleError(error) })
+                .subscribe({ ids -> updateIds(ids) }, { error -> handleError(error) })
         )
+    }
+
+    fun clear() {
+        view.clear()
+    }
+
+    fun discardChanges() {
+        view.clear()
+        loadTasksFromDatabase()
+    }
+
+    override fun speak(message: String) {
+        view.speakInForeground(message)
     }
 }

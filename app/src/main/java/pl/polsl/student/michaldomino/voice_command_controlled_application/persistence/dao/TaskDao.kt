@@ -7,9 +7,6 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 @Dao
 interface TaskDao {
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    fun insert(task: Task)
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(task: List<Task>): List<Long>
 
@@ -18,7 +15,6 @@ interface TaskDao {
 
     @Delete
     fun delete(task: Task)
-
 
     @Query("SELECT * FROM tasks")
     fun findAll(): Single<List<Task>>

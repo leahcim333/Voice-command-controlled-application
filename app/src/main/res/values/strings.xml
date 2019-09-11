@@ -23,6 +23,8 @@
     <string name="select_task">Select task</string>
     <string name="tell_new_name">Tell new name</string>
     <string name="item_already_exists">The item already exists</string>
+    <string name="discard_changes">Discard changes</string>
+    <string name="save_changes">Save changes</string>
 
     <!--Note selection-->
     <string name="create_task_list">Create task list</string>
@@ -38,6 +40,6 @@
     <!--Text note-->
     <string name="add_text">Add text</string>
     <string name="tell_text">Tell text</string>
-    <string name="save_changes">Save changes</string>
+    <string name="clear">Clear</string>
     <!--===================================================================-->
 </resources>

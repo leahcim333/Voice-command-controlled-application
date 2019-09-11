@@ -18,4 +18,9 @@ class TaskListItemsManager(private val inflater: LayoutInflater, private val par
         container.add(rowItem)
         parentLinearLayout.addView(rowItem.getView(), parentLinearLayout.childCount)
     }
+
+    fun clear() {
+        parentLinearLayout.removeViews(1, parentLinearLayout.childCount - 1)
+        container.clear()
+    }
 }
