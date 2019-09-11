@@ -7,10 +7,10 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 @Dao
 interface TaskDao {
 
-//    @Insert(onConflict = OnConflictStrategy.IGNORE)
-//    fun insert(task: Task): Completable
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    fun insert(task: Task)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(task: List<Task>): List<Long>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
@@ -19,21 +19,19 @@ interface TaskDao {
     @Delete
     fun delete(task: Task)
 
+
     @Query("SELECT * FROM tasks")
     fun findAll(): Single<List<Task>>
 
     @Query("SELECT * FROM tasks WHERE note_id = :noteId")
     fun findAllByNoteId(noteId: Long): Single<List<Task>>
 
-    @Transaction
-    fun upsert(tasks: List<Task>) {
-        val rowIds = insert(tasks)
-        val tasksToUpdate =
-            rowIds.mapIndexedNotNull { index, rowId -> if (rowId == -1L) null else tasks[index] }
-        tasksToUpdate.forEach { update(it) }
-    }
+    @Query("DELETE FROM tasks WHERE note_id = :noteId")
+    fun deleteAllByNoteId(noteId: Long)
 
-//    fun upsertAsync(tasks: List<Task>): Completable {
-//        return Completable.fromAction { upsert(tasks) }
-//    }
+    @Transaction
+    fun saveChangesByNoteId(tasks: List<Task>, noteId: Long): List<Long> {
+        deleteAllByNoteId(noteId)
+        return insert(tasks)
+    }
 }

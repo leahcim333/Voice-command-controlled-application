@@ -1,6 +1,6 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list
 
-import io.reactivex.Completable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -73,9 +73,10 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
     }
 
     fun saveChanges() {
+
         val tasks = view.getItems().map { it.task }
         disposable.add(
-            Completable.fromAction { dao.upsert(tasks) }
+            Single.fromCallable { dao.saveChangesByNoteId(tasks, noteId) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ speak("ok") }, { error -> handleError(error) })

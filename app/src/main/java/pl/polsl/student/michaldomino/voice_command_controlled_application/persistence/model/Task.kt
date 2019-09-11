@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Entity(
     tableName = "tasks",
-    indices = arrayOf(Index(value = arrayOf("note_id"), unique = true)),
+    indices = arrayOf(Index(value = arrayOf("note_id"), unique = false)),
     foreignKeys = arrayOf(
         ForeignKey(
             entity = Note::class,
