@@ -32,4 +32,6 @@
     <string name="delete_item">Usuń element</string>
     <string name="check_items">Zaznacz elementy</string>
     <string name="uncheck_items">Odznacz elementy</string>
+    <string name="rename_note">Zmień nazwę notatki</string>
+    <string name="select_note">Wybierz notatkę</string>
 </resources>

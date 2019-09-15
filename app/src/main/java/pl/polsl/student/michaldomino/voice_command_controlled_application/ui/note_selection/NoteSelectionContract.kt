@@ -13,8 +13,5 @@ interface NoteSelectionContract {
         fun deleteNote(noteSelectionItem: NoteSelectionItem)
     }
 
-    interface Presenter : VoiceCommandsPresenterInterface {
-        fun addTaskList(userInput: String)
-        fun openNote(userInput: String)
-    }
+    interface Presenter : VoiceCommandsPresenterInterface
 }

@@ -12,7 +12,7 @@ interface NoteDao {
     fun insert(note: Note): Single<Long>
 
     @Update
-    fun update(note: Note)
+    fun update(note: Note): Completable
 
     @Delete
     fun delete(note: Note): Completable

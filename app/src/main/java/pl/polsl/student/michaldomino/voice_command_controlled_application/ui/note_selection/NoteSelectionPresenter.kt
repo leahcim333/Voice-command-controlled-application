@@ -74,7 +74,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
         view.addNote(note)
     }
 
-    override fun addTaskList(userInput: String) {
+    fun addTaskList(userInput: String) {
         addNote(userInput, NoteType.TASK_LIST)
     }
 
@@ -82,7 +82,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
         addNote(userInput, NoteType.TEXT_NOTE)
     }
 
-    override fun openNote(userInput: String) {
+    fun openNote(userInput: String) {
         val selectedNote = Word(userInput)
         val mostSimilarNote: NoteSelectionItem? =
             selectedNote.getMostSimilar(view.getItems(), { it.name })
@@ -122,5 +122,20 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
         } else {
             view.speakInForeground(getString(R.string.note_does_not_exist))
         }
+    }
+
+    fun getItems(): List<NoteSelectionItem> {
+        return view.getItems()
+    }
+
+    fun renameNote(selectedNote: NoteSelectionItem, newName: String) {
+        val noteToChange = selectedNote.note
+        noteToChange.name = newName
+        disposable.add(
+            dao.update(selectedNote.note)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ selectedNote.setName(newName) }, { error -> handleError(error) })
+        )
     }
 }

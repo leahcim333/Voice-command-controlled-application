@@ -14,9 +14,8 @@ class EditItemSelectCS(override val presenter: TaskListPresenter) : CSNode(prese
 
     override fun processInput(userInput: String) {
         val items: List<TaskListItem> = presenter.getItems()
-        val selectedItem = Word(userInput)
-        val mostSimilar = items.maxBy { selectedItem.similarityWith(it.text) }
-        if (mostSimilar != null && selectedItem.similarTo(mostSimilar.text)) {
+        val mostSimilar = Word(userInput).getMostSimilar(items, { it.text })
+        if (mostSimilar != null) {
             val nextState = EditItemChangeCS(presenter, mostSimilar)
             presenter.currentState = nextState
             nextState.initialize()

@@ -28,6 +28,7 @@
     <string name="clear">Clear list</string>
     <string name="delete_item">Delete item</string>
     <string name="check_items">Check items</string>
+    <string name="uncheck_items">Uncheck items</string>
 
     <!--Note selection-->
     <string name="create_task_list">Create task list</string>
@@ -39,10 +40,11 @@
     <string name="delete_note">Delete note</string>
     <string name="note_already_exists">The note already exists</string>
     <string name="note_does_not_exist">The note does not exist</string>
+    <string name="select_note">Select note</string>
+    <string name="rename_note">Rename note</string>
 
     <!--Text note-->
     <string name="add_text">Add text</string>
     <string name="tell_text">Tell text</string>
-    <string name="uncheck_items">Uncheck items</string>
     <!--===================================================================-->
 </resources>
