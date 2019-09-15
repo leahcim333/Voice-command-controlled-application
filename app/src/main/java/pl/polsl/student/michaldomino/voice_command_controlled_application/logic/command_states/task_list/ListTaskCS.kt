@@ -12,9 +12,9 @@ class ListTaskCS(override val presenter: TaskListPresenter) : CSLeaf(presenter) 
     override val commandNameId: Int? = R.string.list_items
 
     override fun initialize() {
-        val itmes: MutableList<TaskListItem> = presenter.getItems()
+        val items: List<TaskListItem> = presenter.getItems()
         val messageBuilder = StringBuilder()
-        itmes.forEach { messageBuilder.append(it.text).append(ITEM_DELIMITER) }
+        items.forEach { messageBuilder.append(it.text).append(ITEM_DELIMITER) }
         presenter.speak(messageBuilder.toString())
     }
 

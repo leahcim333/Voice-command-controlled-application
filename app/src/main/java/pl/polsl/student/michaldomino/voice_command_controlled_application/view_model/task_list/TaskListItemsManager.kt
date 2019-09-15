@@ -8,9 +8,9 @@ class TaskListItemsManager(private val inflater: LayoutInflater, private val par
 
     private val container: LinkedHashSet<TaskListItem> = linkedSetOf()
 
-    val items: MutableList<TaskListItem>
+    val items: List<TaskListItem>
         get() {
-            return container.toMutableList()
+            return container.toList()
         }
 
     fun addTask(task: Task) {

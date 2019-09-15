@@ -11,9 +11,9 @@ class NoteSelectionItemsManager(
 
     private val container: LinkedHashSet<NoteSelectionItem> = linkedSetOf()
 
-    val items: MutableList<NoteSelectionItem>
+    val items: List<NoteSelectionItem>
         get() {
-            return container.toMutableList()
+            return container.toList()
         }
 
     fun addNote(note: Note) {

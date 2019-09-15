@@ -57,19 +57,37 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
         view.getItems().map { it.task }.forEachIndexed { index, task -> task.id = ids[index] }
     }
 
-    override fun addItems(userInput: String) {
+    private fun splitInput(userInput: String): List<String> {
         val resourceDelimiter: String = getString(R.string.elements_delimiter)
         val fullDelimiter = " $resourceDelimiter "
-        val items: List<String> = userInput.split(fullDelimiter)
+        return userInput.split(fullDelimiter)
+    }
+
+    private fun changeChecked(userInput: String, isChecked: Boolean) {
+        val items: List<String> = splitInput(userInput)
+        val existingItems: MutableList<TaskListItem> = view.getItems().toMutableList()
+        val itemsToCheck: MutableList<TaskListItem> = mutableListOf()
+        for (item in items) {
+            val mostSimilarItem = Word(item).getMostSimilar(existingItems, { it.text })
+            if (mostSimilarItem != null && !itemsToCheck.contains(mostSimilarItem)) {
+                existingItems.remove(mostSimilarItem)
+                itemsToCheck.add(mostSimilarItem)
+                mostSimilarItem.setChecked(isChecked)
+            }
+        }
+    }
+
+    fun addItems(userInput: String) {
+        val items: List<String> = splitInput(userInput)
         val existingItems: List<String> = view.getItems().map { it.text }
         items.filter { it !in existingItems }.forEach { view.addTask(Task(it, noteId)) }
     }
 
-    override fun getItems(): MutableList<TaskListItem> {
+    fun getItems(): List<TaskListItem> {
         return view.getItems()
     }
 
-    override fun setNewItemName(item: TaskListItem, newName: String) {
+    fun setNewItemName(item: TaskListItem, newName: String) {
         val existingItems: List<String> = view.getItems().map { it.text }
         if (newName !in existingItems)
             view.setNewItemName(item, newName)
@@ -102,10 +120,18 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     fun deleteItem(userInput: String) {
         val selectedItem = Word(userInput)
-        val items = view.getItems()
-        val a = selectedItem.getMostSimilar(items, { it.text })
-        if (a != null) {
-            view.deleteTask(a)
+        val items: List<TaskListItem> = view.getItems()
+        val mostSimilarItem: TaskListItem? = selectedItem.getMostSimilar(items, { it.text })
+        if (mostSimilarItem != null) {
+            view.deleteTask(mostSimilarItem)
         }
+    }
+
+    fun checkItems(userInput: String) {
+        changeChecked(userInput, true)
+    }
+
+    fun uncheckItems(userInput: String) {
+        changeChecked(userInput, false)
     }
 }

@@ -13,10 +13,9 @@ class AvailableCommandsCS(
     override val commandNameId: Int? = R.string.available_commands
 
     override fun initialize() {
-        val availableCommands: MutableList<Int?> = commandsModel.availableCommandStates
+        val availableCommands: List<Int?> = commandsModel.availableCommandStates
             .map { it.commandNameId }
             .filter { it != commandNameId }
-            .toMutableList()
         val messageBuilder =
             StringBuilder().append(presenter.getString(R.string.available_commands_are))
         availableCommands.forEach {

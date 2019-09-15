@@ -19,6 +19,8 @@ class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
 
     private val LIST_ITEMS = ListTaskCS(presenter)
 
+    private val CHECK_ITEMS = CheckItemsCS(presenter)
+
     private val SAVE_CHANGES = SaveChangesCS(presenter)
 
     private val DISCARD_CHANGES = DiscardChangesCS(presenter)
@@ -31,6 +33,7 @@ class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
         EDIT_ITEM,
         DELETE_ITEM,
         LIST_ITEMS,
+        CHECK_ITEMS,
         SAVE_CHANGES,
         DISCARD_CHANGES,
         CLEAR

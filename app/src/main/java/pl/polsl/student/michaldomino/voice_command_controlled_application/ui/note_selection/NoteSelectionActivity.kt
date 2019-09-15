@@ -69,7 +69,7 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         noteSelectionItemsManager.addNote(note)
     }
 
-    override fun getItems(): MutableList<NoteSelectionItem> {
+    override fun getItems(): List<NoteSelectionItem> {
         return noteSelectionItemsManager.items
     }
 

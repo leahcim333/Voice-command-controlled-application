@@ -73,7 +73,7 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         taskListItemsManager.clear()
     }
 
-    override fun getItems(): MutableList<TaskListItem> {
+    override fun getItems(): List<TaskListItem> {
         return taskListItemsManager.items
     }
 
