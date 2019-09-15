@@ -65,6 +65,10 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         taskListItemsManager.addTask(task)
     }
 
+    override fun deleteTask(taskListItem: TaskListItem) {
+        taskListItemsManager.deleteTaskListItem(taskListItem)
+    }
+
     override fun clear() {
         taskListItemsManager.clear()
     }

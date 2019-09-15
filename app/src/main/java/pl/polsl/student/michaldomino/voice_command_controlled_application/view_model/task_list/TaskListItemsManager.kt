@@ -19,8 +19,13 @@ class TaskListItemsManager(private val inflater: LayoutInflater, private val par
         parentLinearLayout.addView(rowItem.getView(), parentLinearLayout.childCount)
     }
 
+    fun deleteTaskListItem(taskListItem: TaskListItem) {
+        container.remove(taskListItem)
+        parentLinearLayout.removeView(taskListItem.getView())
+    }
+
     fun clear() {
-        parentLinearLayout.removeViews(1, parentLinearLayout.childCount - 1)
         container.clear()
+        parentLinearLayout.removeAllViews()
     }
 }

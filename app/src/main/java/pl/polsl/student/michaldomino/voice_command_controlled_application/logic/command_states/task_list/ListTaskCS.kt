@@ -9,7 +9,7 @@ class ListTaskCS(override val presenter: TaskListPresenter) : CSLeaf(presenter) 
 
     private val ITEM_DELIMITER = ", "
 
-    override val commandNameId: Int? = R.string.list_tasks
+    override val commandNameId: Int? = R.string.list_items
 
     override fun initialize() {
         val itmes: MutableList<TaskListItem> = presenter.getItems()

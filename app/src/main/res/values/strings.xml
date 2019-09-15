@@ -16,11 +16,11 @@
     <string name="turn_on_internet_connection">Your language is not supported offline. Please turn on Internet connection.</string>
 
     <!--Task list-->
-    <string name="add_tasks">Add tasks</string>
-    <string name="edit_task">Edit task</string>
-    <string name="list_tasks">List tasks</string>
+    <string name="add_items">Add items</string>
+    <string name="edit_item">Edit item</string>
+    <string name="list_items">List items</string>
     <string name="elements_delimiter">and</string>
-    <string name="select_task">Select task</string>
+    <string name="select_item">Select item</string>
     <string name="tell_new_name">Tell new name</string>
     <string name="item_already_exists">The item already exists</string>
     <string name="discard_changes">Discard changes</string>
@@ -40,6 +40,7 @@
     <!--Text note-->
     <string name="add_text">Add text</string>
     <string name="tell_text">Tell text</string>
-    <string name="clear">Clear</string>
+    <string name="clear">Clear list</string>
+    <string name="delete_item">Delete item</string>
     <!--===================================================================-->
 </resources>

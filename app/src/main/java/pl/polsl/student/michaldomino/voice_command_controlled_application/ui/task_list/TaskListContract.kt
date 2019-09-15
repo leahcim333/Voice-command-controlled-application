@@ -12,6 +12,7 @@ interface TaskListContract {
         fun getItems(): MutableList<TaskListItem>
         fun setNewItemName(item: TaskListItem, newName: String)
         fun clear()
+        fun deleteTask(taskListItem: TaskListItem)
     }
 
     interface Presenter : VoiceCommandsPresenterInterface {

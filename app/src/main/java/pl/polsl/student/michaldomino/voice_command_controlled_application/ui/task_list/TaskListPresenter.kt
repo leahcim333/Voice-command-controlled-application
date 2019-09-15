@@ -5,6 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.Word
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.model.TaskListCommandStatesModel
@@ -59,9 +60,9 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
     override fun addItems(userInput: String) {
         val resourceDelimiter: String = getString(R.string.elements_delimiter)
         val fullDelimiter = " $resourceDelimiter "
-        val tasks: List<String> = userInput.split(fullDelimiter)
-        val existingTasks: List<String> = view.getItems().map { it.text }
-        tasks.filter { it !in existingTasks }.forEach { view.addTask(Task(it, noteId)) }
+        val items: List<String> = userInput.split(fullDelimiter)
+        val existingItems: List<String> = view.getItems().map { it.text }
+        items.filter { it !in existingItems }.forEach { view.addTask(Task(it, noteId)) }
     }
 
     override fun getItems(): MutableList<TaskListItem> {
@@ -77,9 +78,9 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
     }
 
     fun saveChanges() {
-        val tasks = view.getItems().map { it.task }
+        val items = view.getItems().map { it.task }
         disposable.add(
-            Single.fromCallable { dao.saveChangesByNoteId(tasks, noteId) }
+            Single.fromCallable { dao.saveChangesByNoteId(items, noteId) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ ids -> updateIds(ids) }, { error -> handleError(error) })
@@ -97,5 +98,14 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     override fun speak(message: String) {
         view.speakInForeground(message)
+    }
+
+    fun deleteItem(userInput: String) {
+        val selectedItem = Word(userInput)
+        val items = view.getItems()
+        val a = selectedItem.getMostSimilar(items, { it.text })
+        if (a != null) {
+            view.deleteTask(a)
+        }
     }
 }

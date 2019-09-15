@@ -9,13 +9,15 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.tas
 class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
     BaseCommandStateModel(presenter) {
 
-    private val ADD_TASKS = AddTaskCS(presenter)
-
     private val AVAILABLE_COMMANDS = AvailableCommandsCS(presenter, this)
 
-    private val EDIT_TASK_SELECT = EditTaskSelectCS(presenter)
+    private val ADD_ITEMS = AddItemCS(presenter)
 
-    private val LIST_TASKS = ListTaskCS(presenter)
+    private val DELETE_ITEM = DeleteItemCS(presenter)
+
+    private val EDIT_ITEM = EditItemSelectCS(presenter)
+
+    private val LIST_ITEMS = ListTaskCS(presenter)
 
     private val SAVE_CHANGES = SaveChangesCS(presenter)
 
@@ -24,10 +26,11 @@ class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
     private val CLEAR = ClearCS(presenter)
 
     override val availableCommandStates: List<BaseCommandState> = listOf(
-        ADD_TASKS,
         AVAILABLE_COMMANDS,
-        EDIT_TASK_SELECT,
-        LIST_TASKS,
+        ADD_ITEMS,
+        EDIT_ITEM,
+        DELETE_ITEM,
+        LIST_ITEMS,
         SAVE_CHANGES,
         DISCARD_CHANGES,
         CLEAR
