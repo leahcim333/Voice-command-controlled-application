@@ -19,7 +19,7 @@ class RenameNoteSelectCS(override val presenter: NoteSelectionPresenter) : CSNod
             presenter.currentState = nextState
             nextState.initialize()
         } else {
-            // TODO: unrecognized
+            presenter.speak(presenter.getString(R.string.note_does_not_exist))
         }
     }
 }

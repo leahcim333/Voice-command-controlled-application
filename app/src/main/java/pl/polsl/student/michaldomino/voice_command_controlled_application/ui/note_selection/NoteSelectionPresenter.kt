@@ -55,7 +55,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
     private fun addNote(userInput: String, noteType: NoteType) {
         val existingItems: List<String> = view.getItems().map { it.name }
         if (existingItems.contains(userInput)) {
-            view.speakInForeground(getString(R.string.note_already_exists))
+            speak(getString(R.string.note_already_exists))
         } else {
             val newNote = Note(userInput, noteType)
             disposable.add(
@@ -96,7 +96,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
             intent.putExtra("noteId", note.id.toString())
             view.startActivity(intent)
         } else {
-            view.speakInForeground(getString(R.string.note_does_not_exist))
+            speak(getString(R.string.note_does_not_exist))
         }
 
     }
@@ -120,7 +120,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
                         { error -> handleError(error) })
             )
         } else {
-            view.speakInForeground(getString(R.string.note_does_not_exist))
+            speak(getString(R.string.note_does_not_exist))
         }
     }
 
@@ -129,13 +129,18 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
     }
 
     fun renameNote(selectedNote: NoteSelectionItem, newName: String) {
-        val noteToChange = selectedNote.note
-        noteToChange.name = newName
-        disposable.add(
-            dao.update(selectedNote.note)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ selectedNote.setName(newName) }, { error -> handleError(error) })
-        )
+        val existingNotes = view.getItems().map { it.name }
+        if (newName !in existingNotes) {
+            val noteToChange = selectedNote.note
+            noteToChange.name = newName
+            disposable.add(
+                dao.update(selectedNote.note)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ selectedNote.setName(newName) }, { error -> handleError(error) })
+            )
+        } else {
+            speak(getString(R.string.note_already_exists))
+        }
     }
 }
