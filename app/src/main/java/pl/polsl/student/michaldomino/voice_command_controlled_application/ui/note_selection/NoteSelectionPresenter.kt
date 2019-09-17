@@ -94,6 +94,7 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
             }
             val intent = Intent(view.getApplicationContext(), cls)
             intent.putExtra("noteId", note.id.toString())
+            intent.putExtra("noteName", note.name)
             view.startActivity(intent)
         } else {
             speak(getString(R.string.note_does_not_exist))
