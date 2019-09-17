@@ -63,7 +63,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
         return userInput.split(fullDelimiter)
     }
 
-    private fun changeChecked(userInput: String, isChecked: Boolean) {
+    private fun performActionOnItems(userInput: String, action: (TaskListItem) -> Any) {
         val items: List<String> = splitInput(userInput)
         val existingItems: MutableList<TaskListItem> = view.getItems().toMutableList()
         val itemsToCheck: MutableList<TaskListItem> = mutableListOf()
@@ -72,7 +72,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
             if (mostSimilarItem != null && !itemsToCheck.contains(mostSimilarItem)) {
                 existingItems.remove(mostSimilarItem)
                 itemsToCheck.add(mostSimilarItem)
-                mostSimilarItem.setChecked(isChecked)
+                action(mostSimilarItem)
             }
         }
     }
@@ -118,20 +118,15 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
         view.speakInForeground(message)
     }
 
-    fun deleteItem(userInput: String) {
-        val selectedItem = Word(userInput)
-        val items: List<TaskListItem> = view.getItems()
-        val mostSimilarItem: TaskListItem? = selectedItem.getMostSimilar(items, { it.text })
-        if (mostSimilarItem != null) {
-            view.deleteTask(mostSimilarItem)
-        }
+    fun deleteItems(userInput: String) {
+        performActionOnItems(userInput) { view.deleteTask(it) }
     }
 
     fun checkItems(userInput: String) {
-        changeChecked(userInput, true)
+        performActionOnItems(userInput) { it.setChecked(true) }
     }
 
     fun uncheckItems(userInput: String) {
-        changeChecked(userInput, false)
+        performActionOnItems(userInput) { it.setChecked(false) }
     }
 }

@@ -34,4 +34,5 @@
     <string name="uncheck_items">Odznacz elementy</string>
     <string name="rename_note">Zmień nazwę notatki</string>
     <string name="select_note">Wybierz notatkę</string>
+    <string name="item_does_not_exist">Element nie istnieje</string>
 </resources>

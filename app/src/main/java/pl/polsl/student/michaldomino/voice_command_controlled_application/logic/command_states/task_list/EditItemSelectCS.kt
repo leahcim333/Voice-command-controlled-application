@@ -20,7 +20,7 @@ class EditItemSelectCS(override val presenter: TaskListPresenter) : CSNode(prese
             presenter.currentState = nextState
             nextState.initialize()
         } else {
-            // TODO: unrecognized
+            presenter.speak(presenter.getString(R.string.item_does_not_exist))
         }
     }
 }
