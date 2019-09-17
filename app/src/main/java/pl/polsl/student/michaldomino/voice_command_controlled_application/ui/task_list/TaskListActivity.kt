@@ -45,6 +45,11 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         presenter.create()
     }
 
+    override fun onStop() {
+        super.onStop()
+        presenter.stop()
+    }
+
     override fun startListening() {
         commandRecognizer.startListening()
     }

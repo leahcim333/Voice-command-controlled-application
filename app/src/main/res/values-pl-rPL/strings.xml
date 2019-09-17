@@ -35,4 +35,6 @@
     <string name="rename_note">Zmień nazwę notatki</string>
     <string name="select_note">Wybierz notatkę</string>
     <string name="item_does_not_exist">Element nie istnieje</string>
+    <string name="close_note">Zamknij notatkę</string>
+    <string name="no_changes">Brak zmian</string>
 </resources>

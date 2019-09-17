@@ -27,6 +27,8 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     private lateinit var dao: TaskDao
 
+    private var taskInDatabase: List<Task>? = null
+
     override fun create() {
         dao = AppDatabase.getInstance(view.getApplicationContext()).taskDao()
         loadTasksFromDatabase()
@@ -41,6 +43,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
     }
 
     private fun addTasksToView(tasks: List<Task>?) {
+        taskInDatabase = tasks
         tasks?.forEach { view.addTask(it) }
     }
 
@@ -55,6 +58,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     private fun updateIds(ids: List<Long>) {
         view.getItems().map { it.task }.forEachIndexed { index, task -> task.id = ids[index] }
+        taskInDatabase = view.getItems().map { it.task }
     }
 
     private fun splitInput(userInput: String): List<String> {
@@ -97,12 +101,16 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     fun saveChanges() {
         val items = view.getItems().map { it.task }
-        disposable.add(
-            Single.fromCallable { dao.saveChangesByNoteId(items, noteId) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ ids -> updateIds(ids) }, { error -> handleError(error) })
-        )
+        if (items != taskInDatabase) {
+            disposable.add(
+                Single.fromCallable { dao.saveChangesByNoteId(items, noteId) }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ ids -> updateIds(ids) }, { error -> handleError(error) })
+            )
+        } else {
+            speak(getString(R.string.no_changes))
+        }
     }
 
     fun clear() {
@@ -110,8 +118,13 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
     }
 
     fun discardChanges() {
-        view.clear()
-        loadTasksFromDatabase()
+        val items = view.getItems().map { it.task }
+        if (items != taskInDatabase) {
+            view.clear()
+            loadTasksFromDatabase()
+        } else {
+            speak(getString(R.string.no_changes))
+        }
     }
 
     override fun speak(message: String) {
@@ -128,5 +141,9 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     fun uncheckItems(userInput: String) {
         performActionOnItems(userInput) { it.setChecked(false) }
+    }
+
+    fun closeNote() {
+        view.finish()
     }
 }

@@ -29,6 +29,8 @@ class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
 
     private val CLEAR = ClearCS(presenter)
 
+    private val CLOSE_NOTE = CloseNoteCS(presenter)
+
     override val availableCommandStates: List<BaseCommandState> = listOf(
         AVAILABLE_COMMANDS,
         ADD_ITEMS,
@@ -39,6 +41,7 @@ class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
         UNCHECK_ITEMS,
         SAVE_CHANGES,
         DISCARD_CHANGES,
-        CLEAR
+        CLEAR,
+        CLOSE_NOTE
     )
 }

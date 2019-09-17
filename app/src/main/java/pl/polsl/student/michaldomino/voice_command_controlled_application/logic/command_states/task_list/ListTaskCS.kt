@@ -17,6 +17,4 @@ class ListTaskCS(override val presenter: TaskListPresenter) : CSLeaf(presenter) 
         items.forEach { messageBuilder.append(it.text).append(ITEM_DELIMITER) }
         presenter.speak(messageBuilder.toString())
     }
-
-    override fun processInput(userInput: String) {}
 }

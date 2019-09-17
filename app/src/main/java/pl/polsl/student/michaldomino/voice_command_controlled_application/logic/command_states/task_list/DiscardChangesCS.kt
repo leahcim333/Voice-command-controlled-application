@@ -11,7 +11,4 @@ class DiscardChangesCS(override val presenter: TaskListPresenter) : CSLeaf(prese
     override fun initialize() {
         presenter.discardChanges()
     }
-
-    override fun processInput(userInput: String) {}
-
 }

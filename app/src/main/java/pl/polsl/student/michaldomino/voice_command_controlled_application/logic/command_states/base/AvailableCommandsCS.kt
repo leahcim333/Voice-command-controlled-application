@@ -24,6 +24,4 @@ class AvailableCommandsCS(
         }
         presenter.speak(messageBuilder.toString())
     }
-
-    override fun processInput(userInput: String) {}
 }

@@ -11,6 +11,4 @@ class ClearCS(override val presenter: TaskListPresenter) : CSLeaf(presenter) {
     override fun initialize() {
         presenter.clear()
     }
-
-    override fun processInput(userInput: String) {}
 }
