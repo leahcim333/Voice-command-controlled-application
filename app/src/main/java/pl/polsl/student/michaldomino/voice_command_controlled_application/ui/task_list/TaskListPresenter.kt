@@ -81,6 +81,12 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
         }
     }
 
+    private fun listItems(items: List<TaskListItem>, itemDelimiter: String = "... ") {
+        val messageBuilder = StringBuilder()
+        items.forEach { messageBuilder.append(it.text).append(itemDelimiter) }
+        speak(messageBuilder.toString())
+    }
+
     fun addItems(userInput: String) {
         val items: List<String> = splitInput(userInput)
         val existingItems: List<String> = view.getItems().map { it.text }
@@ -147,6 +153,12 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
         view.finish()
     }
 
+
+    fun listAllItems(itemDelimiter: String = "... ") {
+        val items: List<TaskListItem> = getItems()
+        listItems(items, itemDelimiter)
+    }
+
     fun listCheckedItems(itemDelimiter: String = "... ") {
         val items: List<TaskListItem> = getItems().filter { it.checked }
         listItems(items, itemDelimiter)
@@ -155,16 +167,5 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
     fun listUncheckedItems(itemDelimiter: String = "... ") {
         val items: List<TaskListItem> = getItems().filter { !it.checked }
         listItems(items, itemDelimiter)
-    }
-
-    fun listAllItems(itemDelimiter: String = "... ") {
-        val items: List<TaskListItem> = getItems()
-        listItems(items, itemDelimiter)
-    }
-
-    private fun listItems(items: List<TaskListItem>, itemDelimiter: String = "... ") {
-        val messageBuilder = StringBuilder()
-        items.forEach { messageBuilder.append(it.text).append(itemDelimiter) }
-        speak(messageBuilder.toString())
     }
 }

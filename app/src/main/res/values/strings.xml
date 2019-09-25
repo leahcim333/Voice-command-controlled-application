@@ -48,6 +48,9 @@
     <string name="note_does_not_exist">The note does not exist</string>
     <string name="select_note">Select note</string>
     <string name="rename_note">Rename note</string>
+    <string name="list_all_notes">List all notes</string>
+    <string name="list_task_lists">List task lists</string>
+    <string name="list_text_notes">List text notes</string>
 
     <!--Text note-->
     <string name="add_text">Add text</string>

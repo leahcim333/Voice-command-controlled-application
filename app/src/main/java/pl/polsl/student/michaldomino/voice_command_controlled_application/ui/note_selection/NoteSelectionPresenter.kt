@@ -74,6 +74,12 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
         view.addNote(note)
     }
 
+    private fun listNotes(items: List<NoteSelectionItem>, itemDelimiter: String = "... ") {
+        val messageBuilder = StringBuilder()
+        items.forEach { messageBuilder.append(it.name).append(itemDelimiter) }
+        speak(messageBuilder.toString())
+    }
+
     fun addTaskList(userInput: String) {
         addNote(userInput, NoteType.TASK_LIST)
     }
@@ -143,5 +149,20 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
         } else {
             speak(getString(R.string.note_already_exists))
         }
+    }
+
+    fun listAllNotes(itemDelimiter: String = "... ") {
+        val notes: List<NoteSelectionItem> = getItems()
+        listNotes(notes, itemDelimiter)
+    }
+
+    fun listTaskLists(itemDelimiter: String = "... ") {
+        val notes: List<NoteSelectionItem> = getItems().filter { it.type == NoteType.TASK_LIST }
+        listNotes(notes, itemDelimiter)
+    }
+
+    fun listTextNotes(itemDelimiter: String = "... ") {
+        val notes: List<NoteSelectionItem> = getItems().filter { it.type == NoteType.TEXT_NOTE }
+        listNotes(notes, itemDelimiter)
     }
 }

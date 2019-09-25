@@ -11,6 +11,12 @@ class NoteSelectionCommandStatesModel(override val presenter: NoteSelectionPrese
 
     private val AVAILABLE_COMMANDS = AvailableCommandsCS(presenter, this)
 
+    private val LIST_ALL_NOTES = ListAllNotesCS(presenter)
+
+    private val LIST_TASK_LISTS = ListTaskListsCS(presenter)
+
+    private val LIST_TEXT_NOTES = ListTextNotesCS(presenter)
+
     private val CREATE_TASK_LIST = CreateTaskListCS(presenter)
 
     private val CREATE_TEXT_NOTE = CreateTextNoteCS(presenter)
@@ -23,6 +29,9 @@ class NoteSelectionCommandStatesModel(override val presenter: NoteSelectionPrese
 
     override val availableCommandStates: List<BaseCommandState> = listOf(
         AVAILABLE_COMMANDS,
+        LIST_ALL_NOTES,
+        LIST_TASK_LISTS,
+        LIST_TEXT_NOTES,
         CREATE_TASK_LIST,
         CREATE_TEXT_NOTE,
         OPEN_NOTE,
