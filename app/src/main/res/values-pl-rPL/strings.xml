@@ -37,4 +37,7 @@
     <string name="item_does_not_exist">Element nie istnieje</string>
     <string name="close_note">Zamknij notatkę</string>
     <string name="no_changes">Brak zmian</string>
+    <string name="list_all_items">Wymień wszystkie elementy</string>
+    <string name="list_checked_items">Wymień zaznaczone elementy</string>
+    <string name="list_unchecked_items">Wymień odznaczone elementy</string>
 </resources>

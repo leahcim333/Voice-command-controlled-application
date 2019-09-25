@@ -14,6 +14,7 @@
     <string name="available_commands_are">Available commands are</string>
     <string name="command_unrecognized">Command unrecognized</string>
     <string name="turn_on_internet_connection">Your language is not supported offline. Please turn on Internet connection.</string>
+    <string name="close_note">Close note</string>
 
     <!--Task list-->
     <string name="add_items">Add items</string>
@@ -31,6 +32,9 @@
     <string name="uncheck_items">Uncheck items</string>
     <string name="item_does_not_exist">The item does not exist</string>
     <string name="no_changes">There are no changes</string>
+    <string name="list_all_items">List all items</string>
+    <string name="list_checked_items">List checked items</string>
+    <string name="list_unchecked_items">List unchecked items</string>
 
     <!--Note selection-->
     <string name="create_task_list">Create task list</string>
@@ -48,6 +52,5 @@
     <!--Text note-->
     <string name="add_text">Add text</string>
     <string name="tell_text">Tell text</string>
-    <string name="close_note">Close note</string>
     <!--===================================================================-->
 </resources>

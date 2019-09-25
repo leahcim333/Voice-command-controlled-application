@@ -146,4 +146,25 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
     fun closeNote() {
         view.finish()
     }
+
+    fun listCheckedItems(itemDelimiter: String = "... ") {
+        val items: List<TaskListItem> = getItems().filter { it.checked }
+        listItems(items, itemDelimiter)
+    }
+
+    fun listUncheckedItems(itemDelimiter: String = "... ") {
+        val items: List<TaskListItem> = getItems().filter { !it.checked }
+        listItems(items, itemDelimiter)
+    }
+
+    fun listAllItems(itemDelimiter: String = "... ") {
+        val items: List<TaskListItem> = getItems()
+        listItems(items, itemDelimiter)
+    }
+
+    private fun listItems(items: List<TaskListItem>, itemDelimiter: String = "... ") {
+        val messageBuilder = StringBuilder()
+        items.forEach { messageBuilder.append(it.text).append(itemDelimiter) }
+        speak(messageBuilder.toString())
+    }
 }
