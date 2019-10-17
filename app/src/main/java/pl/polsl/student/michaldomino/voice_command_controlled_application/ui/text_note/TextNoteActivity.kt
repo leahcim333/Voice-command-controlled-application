@@ -24,12 +24,18 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
     private lateinit var commandRecognizer: CommandRecognizer
 
+    private lateinit var text: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_note)
         setSupportActionBar(toolbar)
 
-        presenter = TextNotePresenter(this)
+        val noteId = intent.getStringExtra("noteId").toLong()
+        val noteName = intent.getStringExtra("noteName")
+        title = noteName
+
+        presenter = TextNotePresenter(this, noteId)
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         speaker = Speaker(applicationContext)
@@ -38,8 +44,8 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.create()
 
-        val inflater = layoutInflater
-        inflater.inflate(R.layout.text_note_view, parentLinearLayout)
+//        val inflater = layoutInflater
+//        inflater.inflate(R.layout.text_note_view, parentLinearLayout)
     }
 
     override fun startListening() {
@@ -56,6 +62,10 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
     override fun speakInForeground(message: String) {
         speaker.speakInForeground(message)
+    }
+
+    override fun getText(): String {
+        return text
     }
 
     override fun addText(text: String) {

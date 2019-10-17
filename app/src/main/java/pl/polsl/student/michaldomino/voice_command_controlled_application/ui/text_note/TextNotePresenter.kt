@@ -22,6 +22,8 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
 
     private val disposable = CompositeDisposable()
 
+    private var textInDatabase: String? = null
+
     override fun create() {
         dao = AppDatabase.getInstance(view.getApplicationContext()).textNoteDao()
         loadTextNote()
@@ -31,12 +33,18 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
         disposable.clear()
     }
 
+    private fun handleError(error: Throwable?) {
+        view.showToast(error?.localizedMessage)
+    }
+
     private fun loadTextNote() {
         disposable.add(
             dao.findByNoteId(noteId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ }, { })
+                .subscribe({ textNote ->
+                    view.addText(textNote.text).also { textInDatabase = textNote.text }
+                }, { error -> handleError(error) })
         )
     }
 
@@ -46,6 +54,10 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
 
     override fun addText(text: String) {
         view.addText(text)
+    }
+
+    fun readText() {
+        val text: String = view.getText()
     }
 
 }

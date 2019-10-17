@@ -7,6 +7,7 @@ interface TextNoteContract {
 
     interface View : VoiceCommandsView {
         fun addText(text: String)
+        fun getText(): String
     }
 
     interface Presenter : VoiceCommandsPresenterInterface {

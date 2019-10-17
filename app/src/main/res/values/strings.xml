@@ -55,5 +55,6 @@
     <!--Text note-->
     <string name="add_text">Add text</string>
     <string name="tell_text">Tell text</string>
+    <string name="read_text">Read text</string>
     <!--===================================================================-->
 </resources>

@@ -3,6 +3,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.logic
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandStateModel
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.text_note.AddTextCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.text_note.ReadTextCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.text_note.TextNotePresenter
 
 class TextNoteCommandStatesModel(override val presenter: TextNotePresenter) :
@@ -10,7 +11,10 @@ class TextNoteCommandStatesModel(override val presenter: TextNotePresenter) :
 
     private val ADD_TEXT = AddTextCS(presenter)
 
+    private val READ_TEXT = ReadTextCS(presenter)
+
     override val availableCommandStates: List<BaseCommandState> = listOf(
-        ADD_TEXT
+        ADD_TEXT,
+        READ_TEXT
     )
 }
