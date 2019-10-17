@@ -57,7 +57,15 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
     }
 
     fun readText() {
-        val text: String = view.getText()
+        view.speakInForeground(view.getText())
+    }
+
+    fun saveChanges() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun discardChanges() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }
