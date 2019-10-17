@@ -19,4 +19,7 @@ interface TextNoteDao {
 
     @Query("SELECT * FROM text_notes")
     fun findAll(): Single<List<TextNote>>
+
+    @Query("SELECT * FROM text_notes WHERE note_id = :noteId")
+    fun findByNoteId(noteId: Long): Single<TextNote>
 }
