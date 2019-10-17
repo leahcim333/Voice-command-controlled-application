@@ -27,7 +27,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     private lateinit var dao: TaskDao
 
-    private var taskInDatabase: List<Task>? = null
+    private var tasksInDatabase: List<Task>? = null
 
     override fun create() {
         dao = AppDatabase.getInstance(view.getApplicationContext()).taskDao()
@@ -43,7 +43,6 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
     }
 
     private fun addTasksToView(tasks: List<Task>?) {
-        taskInDatabase = tasks
         tasks?.forEach { view.addTask(it) }
     }
 
@@ -52,13 +51,14 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
             dao.findAllByNoteId(noteId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ tasks -> addTasksToView(tasks) }, { error -> handleError(error) })
+                .subscribe(
+                    { tasks -> addTasksToView(tasks).also { tasksInDatabase = tasks } },
+                    { error -> handleError(error) })
         )
     }
 
     private fun updateIds(ids: List<Long>) {
         view.getItems().map { it.task }.forEachIndexed { index, task -> task.id = ids[index] }
-        taskInDatabase = view.getItems().map { it.task }
     }
 
     private fun splitInput(userInput: String): List<String> {
@@ -107,12 +107,16 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     fun saveChanges() {
         val items = view.getItems().map { it.task }
-        if (items != taskInDatabase) {
+        if (items != tasksInDatabase) {
             disposable.add(
                 Single.fromCallable { dao.saveChangesByNoteId(items, noteId) }
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ ids -> updateIds(ids) }, { error -> handleError(error) })
+                    .subscribe({ ids ->
+                        updateIds(ids).also {
+                            tasksInDatabase = view.getItems().map { it.task }
+                        }
+                    }, { error -> handleError(error) })
             )
         } else {
             speak(getString(R.string.no_changes))
@@ -125,7 +129,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     fun discardChanges() {
         val items = view.getItems().map { it.task }
-        if (items != taskInDatabase) {
+        if (items != tasksInDatabase) {
             view.clear()
             loadTasksFromDatabase()
         } else {
