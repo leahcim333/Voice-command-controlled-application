@@ -1,15 +1,22 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.model
 
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.AvailableCommandsCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandStateModel
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.AvailableCommandsCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.CloseNoteCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.DiscardChangesCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.SaveChangesCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.task_list.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list.TaskListPresenter
 
 class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
     BaseCommandStateModel(presenter) {
 
-    private val AVAILABLE_COMMANDS = AvailableCommandsCS(presenter, this)
+    private val AVAILABLE_COMMANDS =
+        AvailableCommandsCS(
+            presenter,
+            this
+        )
 
     private val ADD_ITEMS = AddItemCS(presenter)
 
@@ -31,7 +38,7 @@ class TaskListCommandStatesModel(override val presenter: TaskListPresenter) :
 
     private val DISCARD_CHANGES = DiscardChangesCS(presenter)
 
-    private val CLEAR = ClearCS(presenter)
+    private val CLEAR = ClearListCS(presenter)
 
     private val CLOSE_NOTE = CloseNoteCS(presenter)
 

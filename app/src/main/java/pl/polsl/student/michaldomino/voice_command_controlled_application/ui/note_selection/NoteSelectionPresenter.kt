@@ -12,14 +12,14 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.NoteDao
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.database.AppDatabase
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenterImpl
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list.TaskListActivity
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.text_note.TextNoteActivity
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
 class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
-    VoiceCommandsPresenter(view),
+    VoiceCommandsPresenterImpl(view),
     NoteSelectionContract.Presenter {
 
     override val initialState: CSRoot = CSRoot(this, NoteSelectionCommandStatesModel(this))

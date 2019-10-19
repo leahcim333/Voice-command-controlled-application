@@ -12,11 +12,11 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.TaskDao
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.database.AppDatabase
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.NotePresenterImpl
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 
 class TaskListPresenter(override val view: TaskListContract.View, val noteId: Long) :
-    VoiceCommandsPresenter(view),
+    NotePresenterImpl(view),
     TaskListContract.Presenter {
 
     override val initialState: CSRoot = CSRoot(this, TaskListCommandStatesModel(this))
@@ -64,7 +64,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
     }
 
     private fun splitInput(userInput: String): List<String> {
-        val resourceDelimiter: String = getString(R.string.elements_delimiter)
+        val resourceDelimiter: String = getString(R.string.items_delimiter)
         val fullDelimiter = " $resourceDelimiter "
         return userInput.split(fullDelimiter)
     }
@@ -107,7 +107,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
             speak(getString(R.string.item_already_exists))
     }
 
-    fun saveChanges() {
+    override fun saveChanges() {
         val items = view.getItems().map { it.task }
         if (items != tasksInDatabase) {
             disposable.add(
@@ -123,14 +123,14 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
         }
     }
 
-    fun clear() {
-        view.clear()
+    fun clearList() {
+        view.clearList()
     }
 
-    fun discardChanges() {
+    override fun discardChanges() {
         val items = view.getItems().map { it.task }
         if (items != tasksInDatabase) {
-            view.clear()
+            view.clearList()
             addTasksToView(tasksInDatabase)
         } else {
             speak(getString(R.string.no_changes))
@@ -147,10 +147,6 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
 
     fun uncheckItems(userInput: String) {
         performActionOnItems(userInput) { it.setChecked(false) }
-    }
-
-    fun closeNote() {
-        view.finish()
     }
 
     fun listAllItems(itemDelimiter: String = "... ") {

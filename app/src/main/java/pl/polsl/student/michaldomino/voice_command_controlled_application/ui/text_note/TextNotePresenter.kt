@@ -10,10 +10,10 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.dao.TextNoteDao
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.database.AppDatabase
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.TextNote
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.NotePresenterImpl
 
 class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Long) :
-    VoiceCommandsPresenter(view),
+    NotePresenterImpl(view),
     TextNoteContract.Presenter {
 
     override val initialState: CSRoot = CSRoot(this, TextNoteCommandStatesModel(this))
@@ -74,7 +74,7 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
         view.speakInForeground(view.textNoteItem().text)
     }
 
-    fun saveChanges() {
+    override fun saveChanges() {
         val textNote = view.textNoteItem().textNote
         if (textNote.text != textInDatabase) {
             disposable.add(
@@ -90,7 +90,7 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
         }
     }
 
-    fun discardChanges() {
+    override fun discardChanges() {
         val textNote = view.textNoteItem()
         if (textNote.text != textInDatabase) {
             view.setText(textInDatabase)
@@ -99,4 +99,7 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
         }
     }
 
+    fun clearText() {
+        view.setText("")
+    }
 }

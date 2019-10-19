@@ -1,7 +1,7 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenterInterface
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItem
 
@@ -13,5 +13,5 @@ interface NoteSelectionContract {
         fun deleteNote(noteSelectionItem: NoteSelectionItem)
     }
 
-    interface Presenter : VoiceCommandsPresenterInterface
+    interface Presenter : VoiceCommandsPresenter
 }

@@ -1,43 +1,21 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base
 
 import android.os.Bundle
-import android.speech.SpeechRecognizer
-import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 
-abstract class VoiceCommandsPresenter(protected open val view: VoiceCommandsView) :
-    VoiceCommandsPresenterInterface {
+interface VoiceCommandsPresenter : BasePresenter {
 
-    protected abstract val initialState: CSRoot
+    var currentState: BaseCommandState
 
-    override fun askForInput(messageId: Int) {
-        val message: String = view.getString(messageId)
-        speak(message)
-        view.startListening()
-    }
+    fun speak(message: String)
 
-    override fun processInput(bundle: Bundle) {
-        val possibleMatches = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-        if (possibleMatches != null) {
-            val userInput = possibleMatches[0]
-            currentState.processInput(userInput)
-        }
-    }
+    fun askForInput(messageId: Int)
 
-    override fun onDoubleTap() {
-        currentState = initialState
-        currentState.initialize()
-    }
+    fun processInput(bundle: Bundle)
 
-    override fun getString(resId: Int): String {
-        return view.getString(resId)
-    }
+    fun onDoubleTap()
 
-    override fun handleServerError() {
-        view.speakInForeground(getString(R.string.turn_on_internet_connection))
-    }
+    fun getString(resId: Int): String
 
-    override fun speak(message: String) {
-        view.speakInForeground(message)
-    }
+    fun handleServerError()
 }

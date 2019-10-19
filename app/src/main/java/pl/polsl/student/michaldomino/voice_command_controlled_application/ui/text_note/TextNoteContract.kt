@@ -1,7 +1,7 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.text_note
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.TextNote
-import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenterInterface
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.text_note.TextNoteItem
 
@@ -14,7 +14,7 @@ interface TextNoteContract {
         fun setText(text: String)
     }
 
-    interface Presenter : VoiceCommandsPresenterInterface {
+    interface Presenter : VoiceCommandsPresenter {
         fun addText(text: String)
     }
 }

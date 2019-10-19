@@ -4,7 +4,7 @@
     <string name="edit_item">Edytuj element</string>
     <string name="action_settings">Ustawienia</string>
     <string name="add_items">Dodaj elementy</string>
-    <string name="elements_delimiter">i</string>
+    <string name="items_delimiter">i</string>
     <string name="list_items">Wymień elementy</string>
     <string name="select_item">Wybierz element</string>
     <string name="tell_command">Podaj komendę</string>
@@ -28,7 +28,7 @@
     <string name="save_changes">Zapisz zmiany</string>
     <string name="title_activity_note_selection">Notatki</string>
     <string name="discard_changes">Odrzuć zmiany</string>
-    <string name="clear">Wyczyść listę</string>
+    <string name="clear_list">Wyczyść listę</string>
     <string name="delete_item">Usuń element</string>
     <string name="check_items">Zaznacz elementy</string>
     <string name="uncheck_items">Odznacz elementy</string>
@@ -44,4 +44,5 @@
     <string name="list_task_lists">Wymień listy zadań</string>
     <string name="list_text_notes">Wymień notatki tekstowe</string>
     <string name="read_text">Odczytaj tekst</string>
+    <string name="clear_text">Wyczyść tekst</string>
 </resources>

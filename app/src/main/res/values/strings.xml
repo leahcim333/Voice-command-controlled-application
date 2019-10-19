@@ -20,13 +20,13 @@
     <string name="add_items">Add items</string>
     <string name="edit_item">Edit item</string>
     <string name="list_items">List items</string>
-    <string name="elements_delimiter">and</string>
+    <string name="items_delimiter">and</string>
     <string name="select_item">Select item</string>
     <string name="tell_new_name">Tell new name</string>
     <string name="item_already_exists">The item already exists</string>
     <string name="discard_changes">Discard changes</string>
     <string name="save_changes">Save changes</string>
-    <string name="clear">Clear list</string>
+    <string name="clear_list">Clear list</string>
     <string name="delete_item">Delete item</string>
     <string name="check_items">Check items</string>
     <string name="uncheck_items">Uncheck items</string>
@@ -56,5 +56,6 @@
     <string name="add_text">Add text</string>
     <string name="tell_text">Tell text</string>
     <string name="read_text">Read text</string>
+    <string name="clear_text">Clear text</string>
     <!--===================================================================-->
 </resources>

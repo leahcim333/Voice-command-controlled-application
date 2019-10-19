@@ -1,15 +1,19 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.note_selection.model
 
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.AvailableCommandsCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandStateModel
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.note_selection.*
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.AvailableCommandsCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection.NoteSelectionPresenter
 
 class NoteSelectionCommandStatesModel(override val presenter: NoteSelectionPresenter) :
     BaseCommandStateModel(presenter) {
 
-    private val AVAILABLE_COMMANDS = AvailableCommandsCS(presenter, this)
+    private val AVAILABLE_COMMANDS =
+        AvailableCommandsCS(
+            presenter,
+            this
+        )
 
     private val LIST_ALL_NOTES = ListAllNotesCS(presenter)
 
