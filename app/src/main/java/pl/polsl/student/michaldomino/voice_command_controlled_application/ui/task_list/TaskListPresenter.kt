@@ -131,7 +131,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
         val items = view.getItems().map { it.task }
         if (items != tasksInDatabase) {
             view.clear()
-            loadTasksFromDatabase()
+            addTasksToView(tasksInDatabase)
         } else {
             speak(getString(R.string.no_changes))
         }

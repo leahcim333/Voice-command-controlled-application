@@ -17,18 +17,20 @@ import androidx.room.*
     )
 )
 data class TextNote(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "text_note_id")
+
+    @PrimaryKey
+    @ColumnInfo(name = "note_id")
     @NonNull
-    val id: Long,
+    val noteId: Long,
+
+//    @PrimaryKey(autoGenerate = true)
+//    @ColumnInfo(name = "text_note_id")
+//    @NonNull
+//    val id: Long,
 
     @ColumnInfo(name = "text")
     @NonNull
-    var text: String,
-
-    @ColumnInfo(name = "note_id")
-    @NonNull
-    val noteId: Long
+    var text: String
 ) {
-    constructor(text: String, noteId: Long) : this(0, text, noteId)
+    constructor(noteId: Long) : this(noteId, "")
 }

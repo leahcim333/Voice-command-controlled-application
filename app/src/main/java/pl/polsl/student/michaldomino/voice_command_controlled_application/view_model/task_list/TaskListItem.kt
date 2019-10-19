@@ -34,14 +34,14 @@ class TaskListItem(inflater: LayoutInflater, val task: Task) {
     }
 
     fun setName(value: CharSequence): TaskListItem {
-        task.name = value.toString()
-        this.textView.text = value
+        task.name = value as String
+        textView.text = value
         return this
     }
 
     fun setChecked(value: Boolean): TaskListItem {
         task.isChecked = value
-        this.checkBox.isChecked = value
+        checkBox.isChecked = value
         return this
     }
 }
