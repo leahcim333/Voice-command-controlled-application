@@ -51,9 +51,11 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
             dao.findAllByNoteId(noteId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { tasks -> addTasksToView(tasks).also { tasksInDatabase = tasks } },
-                    { error -> handleError(error) })
+                .subscribe({ tasks ->
+                    addTasksToView(tasks).also {
+                        tasksInDatabase = tasks.map { it.copy() }
+                    }
+                }, { error -> handleError(error) })
         )
     }
 
@@ -113,9 +115,7 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ ids ->
-                        updateIds(ids).also {
-                            tasksInDatabase = view.getItems().map { it.task }
-                        }
+                        updateIds(ids).also { tasksInDatabase = view.getItems().map { it.task } }
                     }, { error -> handleError(error) })
             )
         } else {
