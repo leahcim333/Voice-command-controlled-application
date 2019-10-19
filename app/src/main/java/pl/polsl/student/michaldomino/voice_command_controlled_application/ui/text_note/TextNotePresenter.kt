@@ -71,7 +71,7 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
     }
 
     fun readText() {
-        view.speakInForeground(view.textNoteItem().text)
+        speak(view.textNoteItem().text)
     }
 
     override fun saveChanges() {
