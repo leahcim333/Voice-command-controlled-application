@@ -43,4 +43,5 @@
     <string name="list_all_notes">Wymień wszystkie notatki</string>
     <string name="list_task_lists">Wymień listy zadań</string>
     <string name="list_text_notes">Wymień notatki tekstowe</string>
+    <string name="read_text">Odczytaj tekst</string>
 </resources>

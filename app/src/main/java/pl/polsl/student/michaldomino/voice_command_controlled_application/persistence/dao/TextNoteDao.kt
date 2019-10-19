@@ -9,7 +9,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 interface TextNoteDao {
 
     @Insert
-    fun insert(note: TextNote): Single<Long>
+    fun insert(note: TextNote): Completable
 
     @Update
     fun update(note: TextNote): Completable
@@ -21,5 +21,5 @@ interface TextNoteDao {
     fun findAll(): Single<List<TextNote>>
 
     @Query("SELECT * FROM text_notes WHERE note_id = :noteId")
-    fun findByNoteId(noteId: Long): Single<TextNote?>
+    fun findByNoteId(noteId: Long): Single<TextNote>
 }

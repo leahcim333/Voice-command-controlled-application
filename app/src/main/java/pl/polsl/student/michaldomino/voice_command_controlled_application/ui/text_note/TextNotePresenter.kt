@@ -24,7 +24,7 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
 
     private val disposable = CompositeDisposable()
 
-    private lateinit var textNoteInDatabase: TextNote
+    private lateinit var textInDatabase: String
 
     override fun create() {
         dao = AppDatabase.getInstance(view.getApplicationContext()).textNoteDao()
@@ -35,39 +35,31 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
         disposable.clear()
     }
 
+    private fun handleError(error: Throwable?) {
+        view.showToast(error?.localizedMessage)
+    }
+
     private fun loadTextNote() {
         disposable.add(
             dao.findByNoteId(noteId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { textNote -> validateTextNote(textNote) },
-                    { error -> handleError(error) })
+                    { textNote -> passToView(textNote).also { textInDatabase = textNote.text } },
+                    { createTextNote(noteId) })
         )
     }
 
-    private fun handleError(error: Throwable?) {
-        view.showToast(error?.localizedMessage)
-    }
-
-    private fun validateTextNote(textNote: TextNote?) {
-        if (textNote != null) {
-            textNoteInDatabase = textNote
-            passToView(textNote)
-        } else {
-            val newTextNote = TextNote(noteId)
-            disposable.add(
-                dao.insert(newTextNote)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ id ->
-                        passToView(newTextNote).also {
-                            textNoteInDatabase = newTextNote
-                        }
-                    }, { error -> handleError(error) })
-            )
-
-        }
+    private fun createTextNote(noteId: Long) {
+        val newTextNote = TextNote(noteId)
+        disposable.add(
+            dao.insert(newTextNote)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { passToView(newTextNote).also { textInDatabase = newTextNote.text } },
+                    { error -> handleError(error) })
+        )
     }
 
     private fun passToView(textNote: TextNote) {
@@ -88,13 +80,13 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
 
     fun saveChanges() {
         val textNote = view.textNoteItem().textNote
-        if (textNote.text != textNoteInDatabase.text) {
+        if (textNote.text != textInDatabase) {
             disposable.add(
-                dao.update(textNoteInDatabase)
+                dao.update(textNote)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                        { textNoteInDatabase.text = textNote.text },
+                        { textInDatabase = textNote.text },
                         { error -> handleError(error) })
             )
         } else {
@@ -104,8 +96,8 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
 
     fun discardChanges() {
         val textNote = view.textNoteItem()
-        if (textNote.text != textNoteInDatabase.text) {
-            view.setText(textNoteInDatabase.text)
+        if (textNote.text != textInDatabase) {
+            view.setText(textInDatabase)
         } else {
             speak(getString(R.string.no_changes))
         }
