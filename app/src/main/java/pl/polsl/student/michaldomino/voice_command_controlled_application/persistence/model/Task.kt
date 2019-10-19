@@ -1,13 +1,11 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model
 
 import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(
     tableName = "tasks",
+    indices = arrayOf(Index(value = arrayOf("note_id"), unique = false)),
     foreignKeys = arrayOf(
         ForeignKey(
             entity = Note::class,
@@ -22,11 +20,11 @@ data class Task(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "task_id")
     @NonNull
-    val taskId: Long,
+    var id: Long,
 
     @ColumnInfo(name = "task_name")
     @NonNull
-    var taskName: String,
+    var name: String,
 
     @ColumnInfo(name = "is_checked")
     @NonNull
@@ -38,4 +36,7 @@ data class Task(
 ) {
     constructor(taskName: String, isChecked: Boolean, noteId: Long) :
             this(0, taskName, isChecked, noteId)
+
+    constructor(taskName: String, noteId: Long) :
+            this(0, taskName, false, noteId)
 }

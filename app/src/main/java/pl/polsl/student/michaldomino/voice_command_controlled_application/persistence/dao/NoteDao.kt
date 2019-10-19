@@ -9,13 +9,13 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 interface NoteDao {
 
     @Insert
-    fun insert(note: Note): Completable
+    fun insert(note: Note): Single<Long>
 
     @Update
-    fun update(note: Note)
+    fun update(note: Note): Completable
 
     @Delete
-    fun delete(note: Note)
+    fun delete(note: Note): Completable
 
     @Query("SELECT * FROM notes")
     fun findAll(): Single<List<Note>>

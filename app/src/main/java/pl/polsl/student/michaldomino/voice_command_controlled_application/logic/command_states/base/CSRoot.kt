@@ -4,7 +4,10 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.Word
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 
-abstract class CSRoot(override val presenter: VoiceCommandsPresenter) : CSStaticNode(presenter) {
+class CSRoot(
+    override val presenter: VoiceCommandsPresenter,
+    val model: BaseCommandStateModel
+) : CSStaticNode(presenter) {
 
     override val commandNameId: Int? = null
 
@@ -12,9 +15,10 @@ abstract class CSRoot(override val presenter: VoiceCommandsPresenter) : CSStatic
 
     override fun processInput(userInput: String) {
         val command = Word(userInput)
-        val mostSimilarCommandState: BaseCommandState? =
-            availableCommands.maxBy { command.similarityWith(presenter.getString(it.commandNameId!!)) }
-        if (mostSimilarCommandState != null && command.similarTo(presenter.getString(mostSimilarCommandState.commandNameId!!))) {
+        val mostSimilarCommandState: BaseCommandState? = command.getMostSimilar(
+            model.availableCommandStates,
+            { presenter.getString(it.commandNameId!!) })
+        if (mostSimilarCommandState != null) {
             presenter.currentState = mostSimilarCommandState
             mostSimilarCommandState.initialize()
         } else {

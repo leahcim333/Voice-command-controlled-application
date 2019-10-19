@@ -10,6 +10,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItemsManager
 
@@ -33,20 +34,23 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         setContentView(R.layout.activity_task_list)
         setSupportActionBar(toolbar)
 
-        presenter = TaskListPresenter(this)
+        val noteId = intent.getStringExtra("noteId").toLong()
+        val noteName = intent.getStringExtra("noteName")
+        title = noteName
+
+        presenter = TaskListPresenter(this, noteId)
         mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         taskListItemsManager = TaskListItemsManager(layoutInflater, parentLinearLayout)
         speaker = Speaker(applicationContext)
         commandRecognizer = CommandRecognizer(this)
-
-        taskListItemsManager.addRow("one")
-        taskListItemsManager.addRow("two")
-        taskListItemsManager.addRow("elephant")
-        taskListItemsManager.addRow("dog")
-
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
-        presenter.start()
+        presenter.create()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.stop()
     }
 
     override fun startListening() {
@@ -65,16 +69,24 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         speaker.speakInForeground(message)
     }
 
-    override fun addRow(text: CharSequence) {
-        taskListItemsManager.addRow(text)
+    override fun addTask(task: Task) {
+        taskListItemsManager.addTask(task)
     }
 
-    override fun getItems(): MutableList<TaskListItem> {
+    override fun deleteTask(taskListItem: TaskListItem) {
+        taskListItemsManager.deleteTaskListItem(taskListItem)
+    }
+
+    override fun clearList() {
+        taskListItemsManager.clear()
+    }
+
+    override fun getItems(): List<TaskListItem> {
         return taskListItemsManager.items
     }
 
     override fun setNewItemName(item: TaskListItem, newName: String) {
-        item.setText(newName)
+        item.setName(newName)
     }
 
     override fun onSpeechRecognizerServerError() {

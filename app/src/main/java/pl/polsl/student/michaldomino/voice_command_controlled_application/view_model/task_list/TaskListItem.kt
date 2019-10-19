@@ -5,36 +5,43 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
 
-class TaskListItem(inflater: LayoutInflater) {
+class TaskListItem(inflater: LayoutInflater, val task: Task) {
 
     private val rowView: View = inflater.inflate(R.layout.task_list_row, null)
 
-    private var textView: TextView = rowView.findViewById(R.id.item_text)
+    private var textView: TextView = rowView.findViewById(R.id.task_text)
 
-    private var checkBox: CheckBox = rowView.findViewById(R.id.row_checkbox)
+    private var checkBox: CheckBox = rowView.findViewById(R.id.task_checkbox)
+
+    init {
+        setName(task.name).setChecked(task.isChecked)
+    }
 
     val text: String
         get() {
-            return textView.text.toString()
+            return task.name
         }
 
     val checked: Boolean
         get() {
-            return checkBox.isChecked
+            return task.isChecked
         }
 
     fun getView(): View {
         return rowView
     }
 
-    fun setText(value: CharSequence): TaskListItem {
-        this.textView.text = value
+    fun setName(value: CharSequence): TaskListItem {
+        task.name = value as String
+        textView.text = value
         return this
     }
 
     fun setChecked(value: Boolean): TaskListItem {
-        this.checkBox.isChecked = value
+        task.isChecked = value
+        checkBox.isChecked = value
         return this
     }
 }

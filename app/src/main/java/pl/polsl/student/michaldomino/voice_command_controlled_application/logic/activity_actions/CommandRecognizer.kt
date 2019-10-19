@@ -8,7 +8,7 @@ import android.speech.SpeechRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
 import java.util.*
 
-class CommandRecognizer(view: VoiceCommandsView) {
+class CommandRecognizer(private val view: VoiceCommandsView) {
 
     private val mSpeechRecognizer: SpeechRecognizer =
         SpeechRecognizer.createSpeechRecognizer(view.getApplicationContext())
@@ -16,6 +16,10 @@ class CommandRecognizer(view: VoiceCommandsView) {
     private val mSpeechRecognizerIntent: Intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
 
     init {
+        create()
+    }
+
+    private fun create() {
         mSpeechRecognizerIntent.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH
         )
@@ -38,7 +42,6 @@ class CommandRecognizer(view: VoiceCommandsView) {
                 when (i) {
                     SpeechRecognizer.ERROR_SERVER -> view.onSpeechRecognizerServerError()
                 }
-                view.showToast(i.toString())
             }
 
             override fun onResults(bundle: Bundle) {

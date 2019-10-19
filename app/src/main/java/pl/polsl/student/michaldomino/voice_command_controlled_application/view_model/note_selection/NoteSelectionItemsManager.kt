@@ -11,14 +11,19 @@ class NoteSelectionItemsManager(
 
     private val container: LinkedHashSet<NoteSelectionItem> = linkedSetOf()
 
-    val items: MutableList<NoteSelectionItem>
+    val items: List<NoteSelectionItem>
         get() {
-            return container.toMutableList()
+            return container.toList()
         }
 
-    fun addRow(note: Note) {
+    fun addNote(note: Note) {
         val rowItem = NoteSelectionItem(inflater, note)
         container.add(rowItem)
         parentLinearLayout.addView(rowItem.getView(), parentLinearLayout.childCount)
+    }
+
+    fun deleteNote(noteSelectionItem: NoteSelectionItem) {
+        parentLinearLayout.removeView(noteSelectionItem.getView())
+        container.remove(noteSelectionItem)
     }
 }

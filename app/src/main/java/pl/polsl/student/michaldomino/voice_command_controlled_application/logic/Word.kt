@@ -4,7 +4,9 @@ import java.util.*
 
 class Word(private val value: String) {
 
-    private val DEFAULT_THRESHOLD = 80.0
+    companion object {
+        private const val DEFAULT_THRESHOLD = 80.0
+    }
 
     // source: https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance
     private fun levenshtein(lhs: CharSequence, rhs: CharSequence): Double {
@@ -36,10 +38,24 @@ class Word(private val value: String) {
     }
 
     fun similarityWith(other: String): Double {
-        return levenshtein(value.toLowerCase(Locale.getDefault()), other.toLowerCase(Locale.getDefault()))
+        return levenshtein(
+            value.toLowerCase(Locale.getDefault()),
+            other.toLowerCase(Locale.getDefault())
+        )
     }
 
     fun similarTo(other: String, threshold: Double = DEFAULT_THRESHOLD): Boolean {
         return similarityWith(other) >= threshold
+    }
+
+    fun <T> getMostSimilar(
+        collection: Collection<T>,
+        accessor: (T) -> String,
+        threshold: Double = DEFAULT_THRESHOLD
+    ): T? {
+        val mostSimilar = collection.maxBy { this.similarityWith(accessor(it)) }
+        if (mostSimilar != null && this.similarTo(accessor(mostSimilar), threshold))
+            return mostSimilar
+        return null
     }
 }

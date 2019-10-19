@@ -15,35 +15,37 @@ class NoteSelectionItem(inflater: LayoutInflater, val note: Note) {
 
     private val noteTypeImageView: ImageView = rowView.findViewById(R.id.note_type)
 
-    var name: String
+    init {
+        setName(note.name).setType(note.type)
+    }
+
+    val name: String
         get() {
             return note.name
         }
-        set(value) {
-            note.name = value
-        }
 
-    var type: NoteType
+    val type: NoteType
         get() {
             return note.type
-        }
-        set(value) {
-            note.type = value
         }
 
     fun getView(): View {
         return rowView
     }
 
-    fun setText(value: CharSequence): NoteSelectionItem {
-        name = value.toString()
+    fun setName(value: CharSequence): NoteSelectionItem {
+        note.name = value.toString()
         this.noteNameTextView.text = value
         return this
     }
 
     fun setType(value: NoteType): NoteSelectionItem {
-        type = value
-        this.noteTypeImageView.setImageResource(value.resId)
+        note.type = value
+        val resId = when (value) {
+            NoteType.TASK_LIST -> android.R.drawable.checkbox_on_background
+            NoteType.TEXT_NOTE -> android.R.drawable.ic_menu_edit
+        }
+        this.noteTypeImageView.setImageResource(resId)
         return this
     }
 }

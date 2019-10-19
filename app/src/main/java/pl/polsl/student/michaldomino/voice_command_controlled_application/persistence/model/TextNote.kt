@@ -1,13 +1,11 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model
 
 import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(
     tableName = "text_notes",
+    indices = arrayOf(Index(value = arrayOf("note_id"), unique = true)),
     foreignKeys = arrayOf(
         ForeignKey(
             entity = Note::class,
@@ -19,18 +17,20 @@ import androidx.room.PrimaryKey
     )
 )
 data class TextNote(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "text_note_id")
+
+    @PrimaryKey
+    @ColumnInfo(name = "note_id")
     @NonNull
-    val id: Long,
+    val noteId: Long,
+
+//    @PrimaryKey(autoGenerate = true)
+//    @ColumnInfo(name = "text_note_id")
+//    @NonNull
+//    val id: Long,
 
     @ColumnInfo(name = "text")
     @NonNull
-    var text: String,
-
-    @ColumnInfo(name = "note_id")
-    @NonNull
-    val noteId: Long
+    var text: String
 ) {
-    constructor(text: String, noteId: Long) : this(0, text, noteId)
+    constructor(noteId: Long) : this(noteId, "")
 }
