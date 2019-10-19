@@ -108,10 +108,6 @@ class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
 
     }
 
-    override fun speak(message: String) {
-        view.speakInForeground(message)
-    }
-
     fun deleteNote(userInput: String) {
         val selectedNote = Word(userInput)
         val mostSimilarNote: NoteSelectionItem? =

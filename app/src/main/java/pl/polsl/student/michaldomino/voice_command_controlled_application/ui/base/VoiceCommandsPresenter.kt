@@ -36,4 +36,8 @@ abstract class VoiceCommandsPresenter(protected open val view: VoiceCommandsView
     override fun handleServerError() {
         view.speakInForeground(getString(R.string.turn_on_internet_connection))
     }
+
+    override fun speak(message: String) {
+        view.speakInForeground(message)
+    }
 }

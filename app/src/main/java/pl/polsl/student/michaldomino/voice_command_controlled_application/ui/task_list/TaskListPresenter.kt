@@ -137,10 +137,6 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
         }
     }
 
-    override fun speak(message: String) {
-        view.speakInForeground(message)
-    }
-
     fun deleteItems(userInput: String) {
         performActionOnItems(userInput) { view.deleteTask(it) }
     }
@@ -156,7 +152,6 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
     fun closeNote() {
         view.finish()
     }
-
 
     fun listAllItems(itemDelimiter: String = "... ") {
         val items: List<TaskListItem> = getItems()

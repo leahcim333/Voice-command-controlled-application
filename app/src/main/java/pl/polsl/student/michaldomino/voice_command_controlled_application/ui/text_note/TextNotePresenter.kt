@@ -66,10 +66,6 @@ class TextNotePresenter(override val view: TextNoteContract.View, val noteId: Lo
         view.setTextNote(textNote)
     }
 
-    override fun speak(message: String) {
-        view.speakInForeground(message)
-    }
-
     override fun addText(text: String) {
         view.addText(text)
     }
