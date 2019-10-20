@@ -115,7 +115,9 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ ids ->
-                        updateIds(ids).also { tasksInDatabase = view.getItems().map { it.task } }
+                        updateIds(ids).also {
+                            tasksInDatabase = view.getItems().map { it.task.copy() }
+                        }
                     }, { error -> handleError(error) })
             )
         } else {
