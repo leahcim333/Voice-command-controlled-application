@@ -44,8 +44,6 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
         speaker = Speaker(applicationContext)
         commandRecognizer = CommandRecognizer(this)
 
-//        val inflater = layoutInflater
-//        inflater.inflate(R.layout.text_note_view, parentLinearLayout)
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.create()
     }
@@ -72,10 +70,6 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
     override fun addText(text: String) {
         textNoteManager.addText(text)
-//        val currentText = text_view.text
-//        val textBuilder = StringBuilder()
-//        textBuilder.append(currentText).append(text)
-//        text_view.text = textBuilder.toString()
     }
 
     override fun setTextNote(textNote: TextNote) {

@@ -7,6 +7,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.DiscardChangesCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.SaveChangesCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.text_note.AddTextCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.text_note.ClearTextCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.text_note.ReadTextCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.text_note.TextNotePresenter
 
@@ -20,6 +21,8 @@ class TextNoteCommandStatesModel(override val presenter: TextNotePresenter) :
 
     private val READ_TEXT = ReadTextCS(presenter)
 
+    private val CLEAR_TEXT = ClearTextCS(presenter)
+
     private val SAVE_CHANGES = SaveChangesCS(presenter)
 
     private val DISCARD_CHANGES = DiscardChangesCS(presenter)
@@ -30,6 +33,7 @@ class TextNoteCommandStatesModel(override val presenter: TextNotePresenter) :
         AVAILABLE_COMMANDS,
         ADD_TEXT,
         READ_TEXT,
+        CLEAR_TEXT,
         SAVE_CHANGES,
         DISCARD_CHANGES,
         CLOSE_NOTE
