@@ -13,7 +13,7 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
     override fun askForInput(messageId: Int) {
         val message: String = view.getString(messageId)
         speak(message)
-        view.startListening()
+//        view.startListening()
     }
 
     override fun processInput(bundle: Bundle) {

@@ -7,8 +7,8 @@ import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_text_note.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.DoubleTapListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.TextNote
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.text_note.TextNoteItem
@@ -39,9 +39,9 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
         val noteName = intent.getStringExtra("noteName")
         title = noteName
         presenter = TextNotePresenter(this, noteId)
-        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(this))
+        mDetector = GestureDetectorCompat(this, DoubleTapListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
-        speaker = Speaker(applicationContext)
+        speaker = Speaker(this)
         commandRecognizer = CommandRecognizer(this)
 
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }

@@ -7,8 +7,8 @@ import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_note_selection.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.DoubleTapListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItem
@@ -34,10 +34,10 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         setSupportActionBar(toolbar)
 
         presenter = NoteSelectionPresenter(this)
-        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(this))
+        mDetector = GestureDetectorCompat(this, DoubleTapListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         noteSelectionItemsManager = NoteSelectionItemsManager(layoutInflater, parentLinearLayout)
-        speaker = Speaker(applicationContext)
+        speaker = Speaker(this)
         commandRecognizer = CommandRecognizer(this)
 
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }

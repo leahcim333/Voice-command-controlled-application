@@ -7,8 +7,8 @@ import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_task_list.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandActivatorGestureListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.DoubleTapListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
@@ -39,10 +39,10 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         title = noteName
 
         presenter = TaskListPresenter(this, noteId)
-        mDetector = GestureDetectorCompat(this, CommandActivatorGestureListener(this))
+        mDetector = GestureDetectorCompat(this, DoubleTapListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         taskListItemsManager = TaskListItemsManager(layoutInflater, parentLinearLayout)
-        speaker = Speaker(applicationContext)
+        speaker = Speaker(this)
         commandRecognizer = CommandRecognizer(this)
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.create()
