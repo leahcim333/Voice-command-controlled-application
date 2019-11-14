@@ -40,4 +40,8 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
     override fun speak(message: String) {
         view.speakInForeground(message)
     }
+
+    override fun closeApplication() {
+        view.finishAffinity()
+    }
 }

@@ -2,10 +2,7 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.logic
 
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandStateModel
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.AvailableCommandsCS
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.CloseNoteCS
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.DiscardChangesCS
-import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.SaveChangesCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.text_note.AddTextCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.text_note.ClearTextCS
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.text_note.ReadTextCS
@@ -29,6 +26,8 @@ class TextNoteCommandStatesModel(override val presenter: TextNotePresenter) :
 
     private val CLOSE_NOTE = CloseNoteCS(presenter)
 
+    private val CLOSE_APPLICATION = CloseApplication(presenter)
+
     override val availableCommandStates: List<BaseCommandState> = listOf(
         AVAILABLE_COMMANDS,
         ADD_TEXT,
@@ -36,6 +35,7 @@ class TextNoteCommandStatesModel(override val presenter: TextNotePresenter) :
         CLEAR_TEXT,
         SAVE_CHANGES,
         DISCARD_CHANGES,
-        CLOSE_NOTE
+        CLOSE_NOTE,
+        CLOSE_APPLICATION
     )
 }

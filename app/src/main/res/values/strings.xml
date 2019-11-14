@@ -15,6 +15,7 @@
     <string name="command_unrecognized">Command unrecognized</string>
     <string name="turn_on_internet_connection">Your language is not supported offline. Please turn on Internet connection.</string>
     <string name="close_note">Close note</string>
+    <string name="close_application">Close application</string>
 
     <!--Task list-->
     <string name="add_items">Add items</string>

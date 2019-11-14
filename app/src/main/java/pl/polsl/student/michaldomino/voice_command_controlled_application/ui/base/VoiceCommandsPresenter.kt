@@ -18,4 +18,6 @@ interface VoiceCommandsPresenter : BasePresenter {
     fun getString(resId: Int): String
 
     fun handleServerError()
+
+    fun closeApplication()
 }

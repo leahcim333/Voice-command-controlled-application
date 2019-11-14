@@ -14,6 +14,8 @@ interface BaseView {
 
     fun finish()
 
+    fun finishAffinity()
+
     fun startActivityFromClass(cls: Class<*>) {
         val intent = Intent(getApplicationContext(), cls)
         startActivity(intent)

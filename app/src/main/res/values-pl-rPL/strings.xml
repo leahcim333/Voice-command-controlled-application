@@ -45,4 +45,5 @@
     <string name="list_text_notes">Wymień notatki tekstowe</string>
     <string name="read_text">Odczytaj tekst</string>
     <string name="clear_text">Wyczyść tekst</string>
+    <string name="close_application">Zamnkij aplikację</string>
 </resources>
