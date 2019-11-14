@@ -1,8 +1,10 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.text_note
 
+import android.Manifest
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_text_note.*
 import kotlinx.android.synthetic.main.content_parent.*
@@ -11,6 +13,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.DoubleTapListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.TextNote
+import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.main.MainActivity
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.text_note.TextNoteItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.text_note.TextNoteManager
 
@@ -28,8 +31,6 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
     private lateinit var commandRecognizer: CommandRecognizer
 
-    private lateinit var text: String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_note)
@@ -46,6 +47,10 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         presenter.create()
+    }
+
+    override fun requestPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 0)
     }
 
     override fun startListening() {

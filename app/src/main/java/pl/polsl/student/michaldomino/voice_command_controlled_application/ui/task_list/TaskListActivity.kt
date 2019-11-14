@@ -1,8 +1,10 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list
 
+import android.Manifest
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_task_list.*
 import kotlinx.android.synthetic.main.content_parent.*
@@ -51,6 +53,10 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
     override fun onStop() {
         super.onStop()
         presenter.stop()
+    }
+
+    override fun requestPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 0)
     }
 
     override fun startListening() {

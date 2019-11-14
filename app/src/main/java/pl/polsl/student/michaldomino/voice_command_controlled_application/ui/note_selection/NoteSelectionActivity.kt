@@ -1,8 +1,10 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
+import android.Manifest
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_note_selection.*
 import kotlinx.android.synthetic.main.content_parent.*
@@ -47,6 +49,10 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
     override fun onStop() {
         super.onStop()
         presenter.stop()
+    }
+
+    override fun requestPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 0)
     }
 
     override fun startListening() {

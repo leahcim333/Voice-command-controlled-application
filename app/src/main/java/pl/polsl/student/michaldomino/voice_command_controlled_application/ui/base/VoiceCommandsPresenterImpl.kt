@@ -11,9 +11,15 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
     protected abstract val initialState: CSRoot
 
     override fun askForInput(messageId: Int) {
-        val message: String = view.getString(messageId)
-        speak(message)
-        view.startListening()
+
+        if (view.isRecordAudioGranted()){
+            val message: String = view.getString(messageId)
+            speak(message)
+            view.startListening()
+        } else {
+            speak("Proszę wyrazić zgodę na")
+            view.requestPermission()
+        }
     }
 
     override fun processInput(bundle: Bundle) {

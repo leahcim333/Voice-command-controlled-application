@@ -6,9 +6,23 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.not
 class MainPresenter(val view: MainContract.View) : MainContract.Presenter {
 
     override fun create() {
-        view.startActivityFromClass(NoteSelectionActivity::class.java)
-        view.finish()
+        if (!view.isRecordAudioGranted())
+            view.requestPermission()
     }
 
     override fun stop() {}
+
+    override fun onPermissionGranted() {
+        startNoteSelection()
+    }
+
+    override fun onPermissionDenied() {
+        view.speakInForeground("Nie")
+        startNoteSelection()
+    }
+
+    private fun startNoteSelection() {
+        view.startActivityFromClass(NoteSelectionActivity::class.java)
+        view.finish()
+    }
 }

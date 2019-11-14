@@ -8,8 +8,6 @@ interface VoiceCommandsView : BaseView {
 
     fun onCommandRecognizerResults(bundle: Bundle)
 
-    fun speakInForeground(message: String)
-
     fun onDoubleTap()
 
     fun onSpeechRecognizerServerError()
