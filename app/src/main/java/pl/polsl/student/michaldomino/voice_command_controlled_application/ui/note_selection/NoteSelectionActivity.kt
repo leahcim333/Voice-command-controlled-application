@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GestureDetectorCompat
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_note_selection.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
@@ -30,6 +31,8 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
     private lateinit var speaker: Speaker
 
     private lateinit var commandRecognizer: CommandRecognizer
+
+    private val disposable = CompositeDisposable()
 
     companion object {
         const val PERMISSIONS_REQUEST_RECORD_AUDIO = 0
@@ -96,7 +99,8 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
     }
 
     override fun speakInForeground(message: String) {
-        speaker.speakInForeground(message)
+        speaker.speak2(message)
+//        speaker.speakInForeground(message)
     }
 
     override fun addNote(note: Note) {

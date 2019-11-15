@@ -9,6 +9,8 @@ class MainPresenter(val view: MainContract.View) : MainContract.Presenter {
     override fun create() {
         if (!view.isRecordAudioGranted())
             view.requestPermission()
+        else
+            onPermissionGranted()
     }
 
     override fun stop() {}

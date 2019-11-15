@@ -1,12 +1,18 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions
 
 import android.speech.tts.TextToSpeech
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.BaseView
 import java.util.*
 
 class Speaker(val view: BaseView) {
 
     private lateinit var mTextToSpeech: TextToSpeech
+
+    private var disposable: Disposable? = null
 
     init {
         create()
@@ -29,5 +35,16 @@ class Speaker(val view: BaseView) {
         }
         while (mTextToSpeech.isSpeaking) {
         }
+    }
+
+    fun speak2(message: CharSequence?) {
+        disposable?.dispose()
+        disposable =
+            Completable.fromCallable { speakInForeground(message) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnDispose { mTextToSpeech.stop() }
+                .subscribe { view.showToast("Done") }
+
     }
 }
