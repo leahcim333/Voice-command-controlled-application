@@ -1,17 +1,12 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.main
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
@@ -39,9 +34,15 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         presenter.create()
     }
 
+    override fun onPause() {
+        super.onPause()
+        stopActivityActions()
+    }
+
     override fun requestPermission() {
-        speakAndRunAction(getString(R.string.record_audio_permission_request)) {}
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 0)
+        speakAndRunAction(getString(R.string.record_audio_permission_request)) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 0)
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -61,6 +62,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
 
+    override fun speakAndRunAction(message: String, function: () -> Unit) {
+        speaker.speakAndRunAction(message, function)
+    }
+
+    override fun stopActivityActions() {
+        speaker.stopSpeaking()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -75,26 +83,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun speakAndRunAction(message: String, function: () -> Unit) {
-        speaker.speakAndRunAction(message) {}
-    }
-
-    private fun checkPermission2() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.RECORD_AUDIO
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                val intent = Intent(
-                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")
-                )
-                startActivity(intent)
-                finish()
-            }
         }
     }
 }

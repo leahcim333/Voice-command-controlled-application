@@ -63,6 +63,11 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         presenter.create()
     }
 
+    override fun onPause() {
+        super.onPause()
+        stopActivityActions()
+    }
+
     override fun requestPermission() {
         ActivityCompat.requestPermissions(
             this,
@@ -128,5 +133,10 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
 
     override fun onSpeechRecognizerServerError() {
         presenter.handleServerError()
+    }
+
+    override fun stopActivityActions() {
+        speaker.stopSpeaking()
+        commandRecognizer.cancelListening()
     }
 }

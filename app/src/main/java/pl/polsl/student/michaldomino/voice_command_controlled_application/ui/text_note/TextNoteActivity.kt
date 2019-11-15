@@ -61,6 +61,11 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
         presenter.stop()
     }
 
+    override fun onPause() {
+        super.onPause()
+        stopActivityActions()
+    }
+
     override fun requestPermission() {
         ActivityCompat.requestPermissions(
             this,
@@ -122,5 +127,10 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
     override fun onSpeechRecognizerServerError() {
         presenter.handleServerError()
+    }
+
+    override fun stopActivityActions() {
+        speaker.stopSpeaking()
+        commandRecognizer.cancelListening()
     }
 }

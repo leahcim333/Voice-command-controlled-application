@@ -31,6 +31,7 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
     }
 
     override fun onDoubleTap() {
+        view.stopActivityActions()
         currentState = initialState
         currentState.initialize()
     }

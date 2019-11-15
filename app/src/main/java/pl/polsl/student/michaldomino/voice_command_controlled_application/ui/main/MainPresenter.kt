@@ -20,8 +20,9 @@ class MainPresenter(val view: MainContract.View) : MainContract.Presenter {
     }
 
     override fun onPermissionDenied() {
-        view.speakAndRunAction(view.getString(R.string.record_audio_permission_denied)) {}
-        startNoteSelection()
+        view.speakAndRunAction(view.getString(R.string.record_audio_permission_denied)) {
+            startNoteSelection()
+        }
     }
 
     private fun startNoteSelection() {

@@ -58,6 +58,12 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         presenter.stop()
     }
 
+    override fun onPause() {
+        super.onPause()
+        speaker.stopSpeaking()
+        commandRecognizer.cancelListening()
+    }
+
     override fun requestPermission() {
         ActivityCompat.requestPermissions(
             this,
@@ -92,8 +98,6 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
     }
 
     override fun onDoubleTap() {
-        speaker.stopSpeaking()
-        commandRecognizer.cancelListening()
         presenter.onDoubleTap()
     }
 
@@ -116,5 +120,10 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 
     override fun onSpeechRecognizerServerError() {
         presenter.handleServerError()
+    }
+
+    override fun stopActivityActions() {
+        speaker.stopSpeaking()
+        commandRecognizer.cancelListening()
     }
 }

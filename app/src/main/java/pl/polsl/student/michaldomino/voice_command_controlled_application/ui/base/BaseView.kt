@@ -25,6 +25,8 @@ interface BaseView {
 
     fun onSpeakerReady()
 
+    fun stopActivityActions()
+
     fun startActivityFromClass(cls: Class<*>) {
         val intent = Intent(getApplicationContext(), cls)
         startActivity(intent)
