@@ -14,8 +14,9 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
 
         if (view.isRecordAudioGranted()){
             val message: String = view.getString(messageId)
-            speak(message)
-            view.startListening()
+            view.speakAndRunAction(message) { view.startListening() }
+//            speak(message)
+
         } else {
             speak(getString(R.string.record_audio_permission_request))
             view.requestPermission()
@@ -44,7 +45,7 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
     }
 
     override fun speak(message: String) {
-        view.speakInForeground(message)
+        view.speakAndRunAction(message) {}
     }
 
     override fun closeApplication() {

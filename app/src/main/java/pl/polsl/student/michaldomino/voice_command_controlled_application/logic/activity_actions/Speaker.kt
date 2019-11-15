@@ -37,14 +37,13 @@ class Speaker(val view: BaseView) {
         }
     }
 
-    fun speak2(message: CharSequence?) {
+    fun speakAndRunAction(message: CharSequence?, function: () -> Unit) {
         disposable?.dispose()
         disposable =
             Completable.fromCallable { speakInForeground(message) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnDispose { mTextToSpeech.stop() }
-                .subscribe { view.showToast("Done") }
-
+                .subscribe { function() }
     }
 }

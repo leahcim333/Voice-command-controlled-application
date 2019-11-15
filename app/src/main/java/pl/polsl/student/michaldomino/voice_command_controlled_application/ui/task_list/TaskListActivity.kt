@@ -100,7 +100,7 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         presenter.onDoubleTap()
     }
 
-    override fun speakInForeground(message: String) {
+    override fun speakAndRunAction(message: String, function: () -> Unit) {
         speaker.speakInForeground(message)
     }
 

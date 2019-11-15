@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
 
-    override fun speakInForeground(message: String) {
+    override fun speakAndRunAction(message: String, function: () -> Unit) {
         speaker.speakInForeground(message)
     }
 
