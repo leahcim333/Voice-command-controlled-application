@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import io.reactivex.disposables.Disposable
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
 import java.util.*
 
@@ -14,6 +15,8 @@ class CommandRecognizer(private val view: VoiceCommandsView) {
         SpeechRecognizer.createSpeechRecognizer(view.getApplicationContext())
 
     private val mSpeechRecognizerIntent: Intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+
+    private var disposable: Disposable? = null
 
     init {
         create()
@@ -58,4 +61,7 @@ class CommandRecognizer(private val view: VoiceCommandsView) {
         mSpeechRecognizer.startListening(mSpeechRecognizerIntent)
     }
 
+    fun cancelListening() {
+        mSpeechRecognizer.stopListening()
+    }
 }

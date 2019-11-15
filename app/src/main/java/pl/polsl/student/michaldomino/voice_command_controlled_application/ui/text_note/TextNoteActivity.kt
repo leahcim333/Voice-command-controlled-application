@@ -95,11 +95,13 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
     }
 
     override fun onDoubleTap() {
+        speaker.stopSpeaking()
+        commandRecognizer.cancelListening()
         presenter.onDoubleTap()
     }
 
     override fun speakAndRunAction(message: String, function: () -> Unit) {
-        speaker.speakInForeground(message)
+        speaker.speakAndRunAction(message, function)
     }
 
     override fun textNoteItem(): TextNoteItem {

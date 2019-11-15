@@ -15,7 +15,6 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
         if (view.isRecordAudioGranted()){
             val message: String = view.getString(messageId)
             view.speakAndRunAction(message) { view.startListening() }
-//            speak(message)
 
         } else {
             speak(getString(R.string.record_audio_permission_request))

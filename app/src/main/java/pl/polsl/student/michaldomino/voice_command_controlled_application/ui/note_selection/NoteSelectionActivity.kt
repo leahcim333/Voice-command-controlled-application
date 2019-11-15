@@ -92,6 +92,8 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
     }
 
     override fun onDoubleTap() {
+        speaker.stopSpeaking()
+        commandRecognizer.cancelListening()
         presenter.onDoubleTap()
     }
 

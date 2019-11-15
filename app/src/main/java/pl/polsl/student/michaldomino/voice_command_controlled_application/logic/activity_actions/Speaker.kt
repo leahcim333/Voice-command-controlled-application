@@ -29,7 +29,7 @@ class Speaker(val view: BaseView) {
             })
     }
 
-    fun speakInForeground(message: CharSequence?) {
+    private fun speakInForeground(message: CharSequence?) {
         mTextToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "a")
         while (!mTextToSpeech.isSpeaking) {
         }
@@ -45,5 +45,9 @@ class Speaker(val view: BaseView) {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnDispose { mTextToSpeech.stop() }
                 .subscribe { function() }
+    }
+
+    fun stopSpeaking() {
+        disposable?.dispose()
     }
 }
