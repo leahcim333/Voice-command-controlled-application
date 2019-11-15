@@ -17,7 +17,7 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
             speak(message)
             view.startListening()
         } else {
-            speak("Proszę wyrazić zgodę na")
+            speak(getString(R.string.record_audio_permission_request))
             view.requestPermission()
         }
     }
@@ -49,5 +49,11 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
 
     override fun closeApplication() {
         view.finishAffinity()
+    }
+
+    override fun onPermissionGranted() {}
+
+    override fun onPermissionDenied() {
+        speak(getString(R.string.record_audio_permission_denied))
     }
 }

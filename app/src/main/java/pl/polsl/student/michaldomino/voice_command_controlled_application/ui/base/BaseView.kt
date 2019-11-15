@@ -21,6 +21,10 @@ interface BaseView {
 
     fun speakInForeground(message: String)
 
+    fun requestPermission()
+
+    fun onSpeakerReady()
+
     fun startActivityFromClass(cls: Class<*>) {
         val intent = Intent(getApplicationContext(), cls)
         startActivity(intent)
@@ -36,6 +40,4 @@ interface BaseView {
             Manifest.permission.RECORD_AUDIO
         ) == PackageManager.PERMISSION_GRANTED
     }
-
-    fun requestPermission()
 }

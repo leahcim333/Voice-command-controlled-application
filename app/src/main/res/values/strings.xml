@@ -16,6 +16,8 @@
     <string name="turn_on_internet_connection">Your language is not supported offline. Please turn on Internet connection.</string>
     <string name="close_note">Close note</string>
     <string name="close_application">Close application</string>
+    <string name="record_audio_permission_denied">Permission to record audio denied. Application will not work properly.</string>
+    <string name="record_audio_permission_request">Please allow application to record audio.</string>
 
     <!--Task list-->
     <string name="add_items">Add items</string>

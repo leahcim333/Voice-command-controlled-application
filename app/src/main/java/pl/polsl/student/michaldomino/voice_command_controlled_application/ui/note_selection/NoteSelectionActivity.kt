@@ -1,6 +1,7 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
 import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,10 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 
     private lateinit var commandRecognizer: CommandRecognizer
 
+    companion object {
+        const val PERMISSIONS_REQUEST_RECORD_AUDIO = 0
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_selection)
@@ -39,10 +44,12 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         mDetector = GestureDetectorCompat(this, DoubleTapListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
         noteSelectionItemsManager = NoteSelectionItemsManager(layoutInflater, parentLinearLayout)
-        speaker = Speaker(this)
         commandRecognizer = CommandRecognizer(this)
-
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
+        speaker = Speaker(this)
+    }
+
+    override fun onSpeakerReady() {
         presenter.create()
     }
 
@@ -52,7 +59,28 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
     }
 
     override fun requestPermission() {
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 0)
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.RECORD_AUDIO),
+            PERMISSIONS_REQUEST_RECORD_AUDIO
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            PERMISSIONS_REQUEST_RECORD_AUDIO -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    presenter.onPermissionGranted()
+                } else {
+                    presenter.onPermissionDenied()
+                }
+                return
+            }
+        }
     }
 
     override fun startListening() {
