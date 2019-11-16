@@ -27,6 +27,10 @@ class CommandRecognizer(private val view: VoiceCommandsView) {
             RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault()
         )
 
+        mSpeechRecognizerIntent.putExtra(
+            RecognizerIntent.EXTRA_PREFER_OFFLINE, false
+        )
+
         mSpeechRecognizer.setRecognitionListener(object : RecognitionListener {
             override fun onReadyForSpeech(bundle: Bundle) {}
 
