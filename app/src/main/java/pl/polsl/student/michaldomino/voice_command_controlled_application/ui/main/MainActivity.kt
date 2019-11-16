@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun requestPermission() {
-        speakAndRunAction(getString(R.string.record_audio_permission_request)) {
+        speakAndRunFunction(getString(R.string.record_audio_permission_request)) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 0)
         }
     }
@@ -62,8 +62,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
 
-    override fun speakAndRunAction(message: String, function: () -> Unit) {
-        speaker.speakAndRunAction(message, function)
+    override fun speakAndRunFunction(message: String, function: () -> Unit) {
+        speaker.speakAndRunFunction(message, function)
     }
 
     override fun stopActivityActions() {

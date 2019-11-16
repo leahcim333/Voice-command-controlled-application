@@ -30,15 +30,15 @@ class Speaker(val view: BaseView) {
     }
 
     private fun speakInForeground(message: CharSequence?) {
-        mTextToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, "a")
+        mTextToSpeech.speak(message, TextToSpeech.QUEUE_FLUSH, null, null)
         while (!mTextToSpeech.isSpeaking) {
         }
         while (mTextToSpeech.isSpeaking) {
         }
     }
 
-    fun speakAndRunAction(message: CharSequence?, function: () -> Unit) {
-        disposable?.dispose()
+    fun speakAndRunFunction(message: CharSequence?, function: () -> Unit) {
+        stopSpeaking()
         disposable =
             Completable.fromCallable { speakInForeground(message) }
                 .subscribeOn(Schedulers.io())

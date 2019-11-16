@@ -7,7 +7,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.bas
 class CSRoot(
     override val presenter: VoiceCommandsPresenter,
     val model: BaseCommandStateModel
-) : CSStaticNode(presenter) {
+) : CSNode(presenter) {
 
     override val commandNameId: Int? = null
 

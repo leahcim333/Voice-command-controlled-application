@@ -19,7 +19,7 @@ interface BaseView {
 
     fun finishAffinity()
 
-    fun speakAndRunAction(message: String, function: () -> Unit)
+    fun speakAndRunFunction(message: String, function: () -> Unit)
 
     fun requestPermission()
 

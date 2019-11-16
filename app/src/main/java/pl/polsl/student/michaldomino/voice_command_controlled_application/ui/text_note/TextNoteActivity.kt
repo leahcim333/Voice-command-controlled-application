@@ -105,8 +105,8 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
         presenter.onDoubleTap()
     }
 
-    override fun speakAndRunAction(message: String, function: () -> Unit) {
-        speaker.speakAndRunAction(message, function)
+    override fun speakAndRunFunction(message: String, function: () -> Unit) {
+        speaker.speakAndRunFunction(message, function)
     }
 
     override fun textNoteItem(): TextNoteItem {

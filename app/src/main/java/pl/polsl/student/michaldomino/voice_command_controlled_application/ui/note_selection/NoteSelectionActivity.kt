@@ -101,9 +101,9 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         presenter.onDoubleTap()
     }
 
-    override fun speakAndRunAction(message: String, function: () -> Unit) {
-        speaker.speakAndRunAction(message, function)
-//        speaker.speakAndRunAction(message)
+    override fun speakAndRunFunction(message: String, function: () -> Unit) {
+        speaker.speakAndRunFunction(message, function)
+//        speaker.speakAndRunFunction(message)
     }
 
     override fun addNote(note: Note) {
