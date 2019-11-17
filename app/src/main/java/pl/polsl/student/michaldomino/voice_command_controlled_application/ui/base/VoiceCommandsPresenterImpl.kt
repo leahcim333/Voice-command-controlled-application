@@ -10,6 +10,10 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
 
     protected abstract val initialState: CSRoot
 
+    override fun speak(message: String) {
+        view.speakAndRunFunction(message) {}
+    }
+
     override fun askForInput(messageId: Int) {
 
         if (view.isRecordAudioGranted()){
@@ -42,10 +46,6 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
 
     override fun handleServerError() {
         speak(getString(R.string.turn_on_internet_connection))
-    }
-
-    override fun speak(message: String) {
-        view.speakAndRunFunction(message) {}
     }
 
     override fun closeApplication() {

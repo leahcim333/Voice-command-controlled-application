@@ -103,7 +103,6 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 
     override fun speakAndRunFunction(message: String, function: () -> Unit) {
         speaker.speakAndRunFunction(message, function)
-//        speaker.speakAndRunFunction(message)
     }
 
     override fun addNote(note: Note) {
