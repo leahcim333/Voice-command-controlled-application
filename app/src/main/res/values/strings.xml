@@ -12,7 +12,7 @@
     <string name="tell_command">Tell command</string>
     <string name="available_commands">Available commands</string>
     <string name="available_commands_are">Available commands are</string>
-    <string name="command_unrecognized">Command unrecognized</string>
+    <string name="command_unrecognized">Command unrecognized. Use \"Available commands\" command.</string>
     <string name="turn_on_internet_connection">Your language is not supported offline. Please turn on Internet connection.</string>
     <string name="close_note">Close note</string>
     <string name="close_application">Close application</string>
