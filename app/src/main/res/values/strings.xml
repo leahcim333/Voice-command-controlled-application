@@ -13,7 +13,7 @@
     <string name="available_commands">Available commands</string>
     <string name="available_commands_are">Available commands are</string>
     <string name="command_unrecognized">Command unrecognized. Use \"Available commands\" command.</string>
-    <string name="turn_on_internet_connection">Your language is not supported offline. Please turn on Internet connection.</string>
+    <string name="turn_on_internet_connection">Your language is not supported offline. Please turn on Internet connection and wait until voice data is downloaded.</string>
     <string name="close_note">Close note</string>
     <string name="close_application">Close application</string>
     <string name="record_audio_permission_denied">Permission to record audio denied. Application will not work properly.</string>

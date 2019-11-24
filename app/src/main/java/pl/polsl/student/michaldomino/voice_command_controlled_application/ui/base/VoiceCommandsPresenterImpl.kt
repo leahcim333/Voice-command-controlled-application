@@ -15,15 +15,18 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
     }
 
     override fun askForInput(messageId: Int) {
-
-        if (view.isRecordAudioGranted()){
-            val message: String = view.getString(messageId)
-            view.speakAndRunFunction(message) { view.startListening() }
+        val message: String
+        val function: () -> Unit
+        if (view.isRecordAudioGranted()) {
+            message = view.getString(messageId)
+            function = { view.startListening() }
 
         } else {
-            speak(getString(R.string.record_audio_permission_request))
-            view.requestPermission()
+            message = getString(R.string.record_audio_permission_request)
+            function = { view.requestPermission() }
+
         }
+        view.speakAndRunFunction(message, function)
     }
 
     override fun processInput(bundle: Bundle) {
