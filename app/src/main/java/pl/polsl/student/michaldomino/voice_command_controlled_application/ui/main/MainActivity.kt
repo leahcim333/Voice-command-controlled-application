@@ -25,8 +25,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
         presenter = MainPresenter(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
         speaker = Speaker(this)
     }
 
