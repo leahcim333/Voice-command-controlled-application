@@ -5,6 +5,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.note_selection.NoteSelectionItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.note_selection.NoteType
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.Word
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
@@ -15,8 +17,6 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenterImpl
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.task_list.TaskListActivity
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.text_note.TextNoteActivity
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItem
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
 
 class NoteSelectionPresenter(override val view: NoteSelectionContract.View) :
     VoiceCommandsPresenterImpl(view),

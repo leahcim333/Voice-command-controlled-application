@@ -22,7 +22,6 @@ class Speaker(val view: BaseView) {
         mTextToSpeech =
             TextToSpeech(view.getApplicationContext(), TextToSpeech.OnInitListener { status ->
                 if (status != TextToSpeech.ERROR) {
-                    //if there is no error then set language
                     mTextToSpeech.language = Locale.getDefault()
                     view.onSpeakerReady()
                 }

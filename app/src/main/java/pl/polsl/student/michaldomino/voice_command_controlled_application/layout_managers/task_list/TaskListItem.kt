@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list
+package pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.task_list
 
 import android.view.LayoutInflater
 import android.view.View

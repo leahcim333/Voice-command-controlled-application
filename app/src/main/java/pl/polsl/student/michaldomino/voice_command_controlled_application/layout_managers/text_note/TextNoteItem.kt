@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.text_note
+package pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.text_note
 
 import android.view.LayoutInflater
 import android.view.View

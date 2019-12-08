@@ -10,12 +10,12 @@ import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_note_selection.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.note_selection.NoteSelectionItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.note_selection.NoteSelectionLayoutManager
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.DoubleTapListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItem
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItemsManager
 
 class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 
@@ -25,7 +25,7 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
 
     private lateinit var parentLinearLayout: LinearLayout
 
-    private lateinit var noteSelectionItemsManager: NoteSelectionItemsManager
+    private lateinit var noteSelectionLayoutManager: NoteSelectionLayoutManager
 
     private lateinit var speaker: Speaker
 
@@ -43,7 +43,7 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
         presenter = NoteSelectionPresenter(this)
         mDetector = GestureDetectorCompat(this, DoubleTapListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
-        noteSelectionItemsManager = NoteSelectionItemsManager(layoutInflater, parentLinearLayout)
+        noteSelectionLayoutManager = NoteSelectionLayoutManager(layoutInflater, parentLinearLayout)
         commandRecognizer = CommandRecognizer(this)
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         speaker = Speaker(this)
@@ -106,15 +106,15 @@ class NoteSelectionActivity : AppCompatActivity(), NoteSelectionContract.View {
     }
 
     override fun addNote(note: Note) {
-        noteSelectionItemsManager.addNote(note)
+        noteSelectionLayoutManager.addNote(note)
     }
 
     override fun getItems(): List<NoteSelectionItem> {
-        return noteSelectionItemsManager.items
+        return noteSelectionLayoutManager.items
     }
 
     override fun deleteNote(noteSelectionItem: NoteSelectionItem) {
-        noteSelectionItemsManager.deleteNote(noteSelectionItem)
+        noteSelectionLayoutManager.deleteNote(noteSelectionItem)
     }
 
     override fun onSpeechRecognizerServerError() {

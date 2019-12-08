@@ -10,12 +10,12 @@ import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_task_list.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.task_list.TaskListItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.task_list.TaskListLayoutManager
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.DoubleTapListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItemsManager
 
 
 class TaskListActivity : AppCompatActivity(), TaskListContract.View {
@@ -26,7 +26,7 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
 
     private lateinit var parentLinearLayout: LinearLayout
 
-    private lateinit var taskListItemsManager: TaskListItemsManager
+    private lateinit var taskListLayoutManager: TaskListLayoutManager
 
     private lateinit var speaker: Speaker
 
@@ -48,7 +48,7 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
         presenter = TaskListPresenter(this, noteId)
         mDetector = GestureDetectorCompat(this, DoubleTapListener(this))
         parentLinearLayout = findViewById(R.id.parent_linear_layout)
-        taskListItemsManager = TaskListItemsManager(layoutInflater, parentLinearLayout)
+        taskListLayoutManager = TaskListLayoutManager(layoutInflater, parentLinearLayout)
         commandRecognizer = CommandRecognizer(this)
         clickableScreenView.setOnTouchListener { _, event -> mDetector.onTouchEvent(event) }
         speaker = Speaker(this)
@@ -112,19 +112,19 @@ class TaskListActivity : AppCompatActivity(), TaskListContract.View {
     }
 
     override fun addTask(task: Task) {
-        taskListItemsManager.addTask(task)
+        taskListLayoutManager.addTask(task)
     }
 
     override fun deleteTask(taskListItem: TaskListItem) {
-        taskListItemsManager.deleteTaskListItem(taskListItem)
+        taskListLayoutManager.deleteTaskListItem(taskListItem)
     }
 
     override fun clearList() {
-        taskListItemsManager.clear()
+        taskListLayoutManager.clear()
     }
 
     override fun getItems(): List<TaskListItem> {
-        return taskListItemsManager.items
+        return taskListLayoutManager.items
     }
 
     override fun setNewItemName(item: TaskListItem, newName: String) {

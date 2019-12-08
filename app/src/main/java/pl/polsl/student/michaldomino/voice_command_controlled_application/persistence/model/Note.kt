@@ -4,7 +4,7 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteType
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.note_selection.NoteType
 
 @Entity(tableName = "notes")
 data class Note(

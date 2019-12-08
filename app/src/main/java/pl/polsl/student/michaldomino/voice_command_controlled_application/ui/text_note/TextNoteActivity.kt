@@ -10,12 +10,12 @@ import androidx.core.view.GestureDetectorCompat
 import kotlinx.android.synthetic.main.activity_text_note.*
 import kotlinx.android.synthetic.main.content_parent.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.text_note.TextNoteItem
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.text_note.TextNoteLayoutManager
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.CommandRecognizer
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.DoubleTapListener
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.activity_actions.Speaker
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.TextNote
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.text_note.TextNoteItem
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.text_note.TextNoteManager
 
 class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
@@ -25,7 +25,7 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
 
     private lateinit var parentLinearLayout: LinearLayout
 
-    private lateinit var textNoteManager: TextNoteManager
+    private lateinit var textNoteLayoutManager: TextNoteLayoutManager
 
     private lateinit var speaker: Speaker
 
@@ -110,19 +110,19 @@ class TextNoteActivity : AppCompatActivity(), TextNoteContract.View {
     }
 
     override fun textNoteItem(): TextNoteItem {
-        return textNoteManager.item
+        return textNoteLayoutManager.item
     }
 
     override fun addText(text: String) {
-        textNoteManager.addText(text)
+        textNoteLayoutManager.addText(text)
     }
 
     override fun setTextNote(textNote: TextNote) {
-        textNoteManager = TextNoteManager(layoutInflater, parentLinearLayout, textNote)
+        textNoteLayoutManager = TextNoteLayoutManager(layoutInflater, parentLinearLayout, textNote)
     }
 
     override fun setText(text: String) {
-        textNoteManager.setText(text)
+        textNoteLayoutManager.setText(text)
     }
 
     override fun onSpeechRecognizerServerError() {
