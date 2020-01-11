@@ -1,9 +1,9 @@
 package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection
 
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.note_selection.NoteSelectionItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsPresenter
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.VoiceCommandsView
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection.NoteSelectionItem
 
 interface NoteSelectionContract {
 

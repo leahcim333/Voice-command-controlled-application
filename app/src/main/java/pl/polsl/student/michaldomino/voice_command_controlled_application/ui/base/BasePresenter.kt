@@ -3,5 +3,10 @@ package pl.polsl.student.michaldomino.voice_command_controlled_application.ui.ba
 interface BasePresenter {
 
     fun create()
+
     fun stop()
+
+    fun onPermissionGranted()
+
+    fun onPermissionDenied()
 }

@@ -1,10 +1,10 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection
+package pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.note_selection
 
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Note
 
-class NoteSelectionItemsManager(
+class NoteSelectionLayoutManager(
     private val inflater: LayoutInflater,
     private val parentLinearLayout: LinearLayout
 ) {

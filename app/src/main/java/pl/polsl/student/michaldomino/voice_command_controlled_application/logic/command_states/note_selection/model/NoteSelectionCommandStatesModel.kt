@@ -4,6 +4,7 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandStateModel
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.note_selection.*
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.AvailableCommandsCS
+import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.shared.CloseApplication
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.note_selection.NoteSelectionPresenter
 
 class NoteSelectionCommandStatesModel(override val presenter: NoteSelectionPresenter) :
@@ -31,6 +32,8 @@ class NoteSelectionCommandStatesModel(override val presenter: NoteSelectionPrese
 
     private val RENAME_NOTE = RenameNoteSelectCS(presenter)
 
+    private val CLOSE_APPLICATION = CloseApplication(presenter)
+
     override val availableCommandStates: List<BaseCommandState> = listOf(
         AVAILABLE_COMMANDS,
         LIST_ALL_NOTES,
@@ -40,7 +43,8 @@ class NoteSelectionCommandStatesModel(override val presenter: NoteSelectionPrese
         CREATE_TEXT_NOTE,
         OPEN_NOTE,
         DELETE_NOTE,
-        RENAME_NOTE
+        RENAME_NOTE,
+        CLOSE_APPLICATION
     )
 
 }

@@ -1,10 +1,13 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list
+package pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.task_list
 
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
 
-class TaskListItemsManager(private val inflater: LayoutInflater, private val parentLinearLayout: LinearLayout) {
+class TaskListLayoutManager(
+    private val inflater: LayoutInflater,
+    private val parentLinearLayout: LinearLayout
+) {
 
     private val container: LinkedHashSet<TaskListItem> = linkedSetOf()
 

@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.note_selection
+package pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.note_selection
 
 import android.view.LayoutInflater
 import android.view.View

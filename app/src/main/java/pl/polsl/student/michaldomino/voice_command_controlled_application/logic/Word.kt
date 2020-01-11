@@ -37,14 +37,14 @@ class Word(private val value: String) {
         return (1.0 - cost[lhsLength].toDouble() / lhsLength.toDouble()) * 100.0
     }
 
-    fun similarityWith(other: String): Double {
+    private fun similarityWith(other: String): Double {
         return levenshtein(
             value.toLowerCase(Locale.getDefault()),
             other.toLowerCase(Locale.getDefault())
         )
     }
 
-    fun similarTo(other: String, threshold: Double = DEFAULT_THRESHOLD): Boolean {
+    private fun similarTo(other: String, threshold: Double = DEFAULT_THRESHOLD): Boolean {
         return similarityWith(other) >= threshold
     }
 

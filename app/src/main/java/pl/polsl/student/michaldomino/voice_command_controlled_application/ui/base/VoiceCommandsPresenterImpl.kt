@@ -10,10 +10,23 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
 
     protected abstract val initialState: CSRoot
 
+    override fun speak(message: String) {
+        view.speakAndRunFunction(message) {}
+    }
+
     override fun askForInput(messageId: Int) {
-        val message: String = view.getString(messageId)
-        speak(message)
-        view.startListening()
+        val message: String
+        val function: () -> Unit
+        if (view.isRecordAudioGranted()) {
+            message = view.getString(messageId)
+            function = { view.startListening() }
+
+        } else {
+            message = getString(R.string.record_audio_permission_request)
+            function = { view.requestPermission() }
+
+        }
+        view.speakAndRunFunction(message, function)
     }
 
     override fun processInput(bundle: Bundle) {
@@ -25,6 +38,7 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
     }
 
     override fun onDoubleTap() {
+        view.stopActivityActions()
         currentState = initialState
         currentState.initialize()
     }
@@ -34,10 +48,16 @@ abstract class VoiceCommandsPresenterImpl(protected open val view: VoiceCommands
     }
 
     override fun handleServerError() {
-        view.speakInForeground(getString(R.string.turn_on_internet_connection))
+        speak(getString(R.string.turn_on_internet_connection))
     }
 
-    override fun speak(message: String) {
-        view.speakInForeground(message)
+    override fun closeApplication() {
+        view.finishAffinity()
+    }
+
+    override fun onPermissionGranted() {}
+
+    override fun onPermissionDenied() {
+        speak(getString(R.string.record_audio_permission_denied))
     }
 }

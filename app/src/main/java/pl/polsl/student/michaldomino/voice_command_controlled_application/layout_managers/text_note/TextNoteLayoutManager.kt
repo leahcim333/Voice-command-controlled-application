@@ -1,10 +1,10 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.text_note
+package pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.text_note
 
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.TextNote
 
-class TextNoteManager(
+class TextNoteLayoutManager(
     inflater: LayoutInflater,
     parentLinearLayout: LinearLayout,
     textNote: TextNote

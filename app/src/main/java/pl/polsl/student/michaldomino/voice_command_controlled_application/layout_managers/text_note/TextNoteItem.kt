@@ -1,4 +1,4 @@
-package pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.text_note
+package pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.text_note
 
 import android.view.LayoutInflater
 import android.view.View
@@ -17,18 +17,21 @@ class TextNoteItem(
 
     private val textView: TextView = view.findViewById(R.id.text_view)
 
+    init {
+        setText(textNote.text)
+    }
+
     val text: String
         get() {
             return textNote.text
         }
 
     fun addText(value: String) {
-        val newText = textNote.text + value
+        val textBuilder = StringBuilder()
+        textBuilder.append(textNote.text).append(" ").append(value)
+        val newText = textBuilder.toString()
         textNote.text = newText
         textView.text = newText
-//        val textBuilder = StringBuilder()
-//        textBuilder.append(currentText).append(text)
-//        text_view.text = textBuilder.toString()
     }
 
     fun setText(value: String) {

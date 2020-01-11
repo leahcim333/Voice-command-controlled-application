@@ -23,11 +23,6 @@ data class TextNote(
     @NonNull
     val noteId: Long,
 
-//    @PrimaryKey(autoGenerate = true)
-//    @ColumnInfo(name = "text_note_id")
-//    @NonNull
-//    val id: Long,
-
     @ColumnInfo(name = "text")
     @NonNull
     var text: String

@@ -12,14 +12,14 @@
     <string name="available_commands">Dostępne komendy</string>
     <string name="available_commands_are">Dostępne komendy to</string>
     <string name="item_already_exists">Element już istnieje</string>
-    <string name="command_unrecognized">Komenda nierozpoznana</string>
+    <string name="command_unrecognized">Komenda nierozpoznana. Użyj komendy \"Dostępne komendy\".</string>
     <string name="create_task_list">Stwórz listę zadań</string>
     <string name="open_note">Otwórz notatkę</string>
     <string name="tell_name_of_the_new_list">Podaj nazwę nowej listy</string>
     <string name="tell_note_name">Podaj nazwę notatki</string>
     <string name="tell_text">Podaj tekst</string>
     <string name="add_text">Dodaj tekst</string>
-    <string name="turn_on_internet_connection">Ten język nie jest obsługiwany w trybie offline. Proszę połączyć się z internetem.</string>
+    <string name="turn_on_internet_connection">Ten język nie jest obsługiwany w trybie offline. Proszę połączyć się z internetem i poczekać na pobranie danych głosowych.</string>
     <string name="create_text_note">Stwórz notatkę tekstową</string>
     <string name="tell_name_of_the_new_text_note">Podaj nazwę nowej notatki tekstowej</string>
     <string name="note_already_exists">Notatka już istnieje</string>
@@ -45,4 +45,7 @@
     <string name="list_text_notes">Wymień notatki tekstowe</string>
     <string name="read_text">Odczytaj tekst</string>
     <string name="clear_text">Wyczyść tekst</string>
+    <string name="close_application">Zamnkij aplikację</string>
+    <string name="record_audio_permission_denied">Nie zezwolono na nagrywanie dźwięku. Aplikacja może działać niepoprawnie.</string>
+    <string name="record_audio_permission_request">Proszę zezwolić aplikacji na nagrywanie dźwięku.</string>
 </resources>

@@ -5,6 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import pl.polsl.student.michaldomino.voice_command_controlled_application.R
+import pl.polsl.student.michaldomino.voice_command_controlled_application.layout_managers.task_list.TaskListItem
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.Word
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.BaseCommandState
 import pl.polsl.student.michaldomino.voice_command_controlled_application.logic.command_states.base.CSRoot
@@ -13,7 +14,6 @@ import pl.polsl.student.michaldomino.voice_command_controlled_application.persis
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.database.AppDatabase
 import pl.polsl.student.michaldomino.voice_command_controlled_application.persistence.model.Task
 import pl.polsl.student.michaldomino.voice_command_controlled_application.ui.base.NotePresenterImpl
-import pl.polsl.student.michaldomino.voice_command_controlled_application.view_model.task_list.TaskListItem
 
 class TaskListPresenter(override val view: TaskListContract.View, val noteId: Long) :
     NotePresenterImpl(view),
@@ -115,7 +115,9 @@ class TaskListPresenter(override val view: TaskListContract.View, val noteId: Lo
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ ids ->
-                        updateIds(ids).also { tasksInDatabase = view.getItems().map { it.task } }
+                        updateIds(ids).also {
+                            tasksInDatabase = view.getItems().map { it.task.copy() }
+                        }
                     }, { error -> handleError(error) })
             )
         } else {
