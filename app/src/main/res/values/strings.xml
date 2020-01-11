@@ -1,4 +1,64 @@
 <resources>
     <string name="app_name">Voice command-controlled application</string>
+    <string name="title_activity_task_list">TaskListActivity</string>
+    <string name="title_activity_note_selection">Notes</string>
+    <string name="title_activity_text_note">TextNoteActivity</string>
     <string name="action_settings">Settings</string>
+
+    <!--Commands-->
+    <!--===================================================================-->
+
+    <!--Shared-->
+    <string name="tell_command">Tell command</string>
+    <string name="available_commands">Available commands</string>
+    <string name="available_commands_are">Available commands are</string>
+    <string name="command_unrecognized">Command unrecognized. Use \"Available commands\" command.</string>
+    <string name="turn_on_internet_connection">Your language is not supported offline. Please turn on Internet connection and wait until voice data is downloaded.</string>
+    <string name="close_note">Close note</string>
+    <string name="close_application">Close application</string>
+    <string name="record_audio_permission_denied">Permission to record audio denied. Application will not work properly.</string>
+    <string name="record_audio_permission_request">Please allow application to record audio.</string>
+
+    <!--Task list-->
+    <string name="add_items">Add items</string>
+    <string name="edit_item">Edit item</string>
+    <string name="list_items">List items</string>
+    <string name="items_delimiter">and</string>
+    <string name="select_item">Select item</string>
+    <string name="tell_new_name">Tell new name</string>
+    <string name="item_already_exists">The item already exists</string>
+    <string name="discard_changes">Discard changes</string>
+    <string name="save_changes">Save changes</string>
+    <string name="clear_list">Clear list</string>
+    <string name="delete_item">Delete item</string>
+    <string name="check_items">Check items</string>
+    <string name="uncheck_items">Uncheck items</string>
+    <string name="item_does_not_exist">The item does not exist</string>
+    <string name="no_changes">There are no changes</string>
+    <string name="list_all_items">List all items</string>
+    <string name="list_checked_items">List checked items</string>
+    <string name="list_unchecked_items">List unchecked items</string>
+
+    <!--Note selection-->
+    <string name="create_task_list">Create task list</string>
+    <string name="create_text_note">Create text note</string>
+    <string name="tell_name_of_the_new_list">Tell name of the new list</string>
+    <string name="open_note">Open note</string>
+    <string name="tell_note_name">Tell note name</string>
+    <string name="tell_name_of_the_new_text_note">Tell name of the new text note</string>
+    <string name="delete_note">Delete note</string>
+    <string name="note_already_exists">The note already exists</string>
+    <string name="note_does_not_exist">The note does not exist</string>
+    <string name="select_note">Select note</string>
+    <string name="rename_note">Rename note</string>
+    <string name="list_all_notes">List all notes</string>
+    <string name="list_task_lists">List task lists</string>
+    <string name="list_text_notes">List text notes</string>
+
+    <!--Text note-->
+    <string name="add_text">Add text</string>
+    <string name="tell_text">Tell text</string>
+    <string name="read_text">Read text</string>
+    <string name="clear_text">Clear text</string>
+    <!--===================================================================-->
 </resources>
