@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Aplikacja sterowana komendami głosowymi</string>
+    <string name="app_name">Aplikacja zarządzana komendami głosowymi</string>
     <string name="edit_item">Edytuj element</string>
     <string name="action_settings">Ustawienia</string>
     <string name="add_items">Dodaj elementy</string>
